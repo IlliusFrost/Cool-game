@@ -18,6 +18,9 @@
       <Filter>Precompiled</Filter>
     </ClInclude>
     <ClInclude Include="Player.hpp" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateStack.h" />
+    <ClInclude Include="StateStackProxy.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -26,5 +29,8 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="StateStack.cpp" />
+    <ClCompile Include="StateStackProxy.cpp" />
   </ItemGroup>
 </Project>

@@ -4,8 +4,8 @@ namespace Tga2D
 {
 	class CSprite;
 }
-
 class InputHandler;
+class StateStack;
 
 class CGameWorld
 {
@@ -18,5 +18,6 @@ public:
 private:
 	Tga2D::CSprite* myTga2dLogoSprite;
 	InputHandler* myInputHandler;
+	StateStack* myStateStack;
 	Player myPlayer;
 };

@@ -6,6 +6,7 @@
 #include <..\CommonUtilities\InputHandler.hpp>
 #include <iostream>
 #include "Player.hpp"
+#include "StateStack.h"
 
 CGameWorld::CGameWorld()
 {
@@ -15,12 +16,13 @@ CGameWorld::CGameWorld()
 
 CGameWorld::~CGameWorld() 
 {
-	delete myTga2dLogoSprite;
-	myTga2dLogoSprite = nullptr;
+	SAFE_DELETE(myTga2dLogoSprite);
+	SAFE_DELETE(myStateStack);
 }
 
 void CGameWorld::Init(InputHandler* aInputHandler)
 {
+	myStateStack = new StateStack();
 	myInputHandler = aInputHandler;
 	myTga2dLogoSprite = new Tga2D::CSprite("sprites/tga_logo.dds");
 	myTga2dLogoSprite->SetPivot({ 0.5f, 0.5f });
