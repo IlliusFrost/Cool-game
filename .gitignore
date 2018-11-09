@@ -45,3 +45,15 @@ TGA2Dfresh/Source/.vs/Application/v15/.suo
 *.log
 *.tlog
 *.res
+*.tlog
+*.log
+*.pdb
+*.ilk
+*.idb
+*.ipch
+*.res
+TGA2Dfresh/Source/.vs/Application/v15/.suo
+*.db
+*.db-shm
+*.opendb
+*.db-wal
