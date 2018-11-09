@@ -7,6 +7,7 @@
 #include "Planet.hpp"
 #include <iostream>
 #include "Player.hpp"
+#include "StateStack.h"
 
 CGameWorld::CGameWorld()
 {
@@ -16,13 +17,14 @@ CGameWorld::CGameWorld()
 
 CGameWorld::~CGameWorld() 
 {
-	delete myTga2dLogoSprite;
-	myTga2dLogoSprite = nullptr;
-	myTestPlanet = nullptr;
+	SAFE_DELETE(myTga2dLogoSprite);
+	SAFE_DELETE(myStateStack);
+	SAFE_DELETE(myTestPlanet);
 }
 
 void CGameWorld::Init(InputHandler* aInputHandler)
 {
+	myStateStack = new StateStack();
 	myInputHandler = aInputHandler;
 	myTga2dLogoSprite = new Tga2D::CSprite("sprites/tga_logo.dds");
 	myTga2dLogoSprite->SetPivot({ 0.5f, 0.5f });
@@ -36,8 +38,7 @@ void CGameWorld::Init(InputHandler* aInputHandler)
 void CGameWorld::Update(float aTimeDelta)
 {
 
-	myPlayer.Update(myInputHandler);
-	myPlayer.Draw();
+
 	aTimeDelta;
 	if (myInputHandler->IsKeyDown(InputHandler::Mouse::LeftMouseButton))
 	{
@@ -56,6 +57,9 @@ void CGameWorld::Update(float aTimeDelta)
 	{
 		Tga2D::CEngine::Shutdown();
 	}
-	myTestPlanet->Render();
+	myTga2dLogoSprite->Render();
+	myPlayer.Update(myInputHandler);
+	myPlayer.Draw();
+	//myTestPlanet->Render();
 	//myTga2dLogoSprite->Render();
 }

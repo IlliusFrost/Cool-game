@@ -16,5 +16,7 @@ public:
 	void Draw();
 private:
 	Vector2f myPosition = { 0, 0 };
+	Vector2f myVelocity = { 0,0 };
 	Tga2D::CSprite* mySprite;
+	int mySize;
 };

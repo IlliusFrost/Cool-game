@@ -6,6 +6,7 @@ namespace Tga2D
 }
 class Planet;
 class InputHandler;
+class StateStack;
 
 class CGameWorld
 {
@@ -18,6 +19,7 @@ public:
 private:
 	Tga2D::CSprite* myTga2dLogoSprite;
 	InputHandler* myInputHandler;
+	StateStack* myStateStack;
 	Planet* myTestPlanet;
 	Player myPlayer;
 };
