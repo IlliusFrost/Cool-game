@@ -7,7 +7,7 @@ public:
 	~Planet();
 	void Update();
 	void Render();
-
+	Vector2f GetPos();
 
 private:
 	Vector2f myPos;

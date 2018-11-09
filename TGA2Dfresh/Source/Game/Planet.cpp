@@ -7,12 +7,15 @@ Planet::Planet(Vector2f aPos, Sprite aSprite)
 	myCollider = new CircleCollider();
 	mySprite = aSprite;
 	myPos = aPos;
+	mySprite->SetPivot({ 0.5f, 0.5f });
+	mySprite->SetPosition({ myPos.x, myPos.y });
 }
 
 
 Planet::~Planet()
 {
 	SAFE_DELETE(myCollider);
+	SAFE_DELETE(mySprite);
 }
 
 void Planet::Update()
@@ -23,5 +26,10 @@ void Planet::Update()
 void Planet::Render()
 {
 	mySprite->Render();
+}
+
+Vector2f Planet::GetPos()
+{
+	return myPos;
 }
 

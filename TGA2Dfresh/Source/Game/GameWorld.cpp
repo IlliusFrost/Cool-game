@@ -11,7 +11,6 @@
 CGameWorld::CGameWorld()
 {
 	myTga2dLogoSprite = nullptr;
-	myTestPlanet = new Planet();
 }
 
 
@@ -29,9 +28,7 @@ void CGameWorld::Init(InputHandler* aInputHandler)
 	myTga2dLogoSprite->SetPivot({ 0.5f, 0.5f });
 	myTga2dLogoSprite->SetPosition({ 0.5f, 0.5f });
 
-	myTestPlanet->mySprite = new Tga2D::CSprite("sprites/PlanetRed.dds");
-	myTestPlanet->mySprite->SetPivot({ 0.5f, 0.5f });
-	myTestPlanet->mySprite->SetPosition({ 0.5f, 0.5f });
+	myTestPlanet = new Planet(Vector2f(0.25f, 0.25f), new Tga2D::CSprite("sprites/PlanetRed.dds"));
 	myPlayer = Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));
 }
 
@@ -53,7 +50,7 @@ void CGameWorld::Update(float aTimeDelta)
 	leftstickVal += {myTga2dLogoSprite->GetPosition().x, myTga2dLogoSprite->GetPosition().y};
 	myTga2dLogoSprite->SetPosition({ leftstickVal.x, leftstickVal.y });*/
 
-	std::cout << myInputHandler->GetXboxLeftStick(0).x << " : " << myInputHandler->GetXboxLeftStick(0).y << std::endl;
+	//std::cout << myInputHandler->GetXboxLeftStick(0).x << " : " << myInputHandler->GetXboxLeftStick(0).y << std::endl;
 
 	if (GetAsyncKeyState(VK_ESCAPE))
 	{
