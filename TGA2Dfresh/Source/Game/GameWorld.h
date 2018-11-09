@@ -4,7 +4,7 @@ namespace Tga2D
 {
 	class CSprite;
 }
-
+class Planet;
 class InputHandler;
 
 class CGameWorld
@@ -18,4 +18,5 @@ public:
 private:
 	Tga2D::CSprite* myTga2dLogoSprite;
 	InputHandler* myInputHandler;
+	Planet* myTestPlanet;
 };

@@ -17,6 +17,8 @@
     <ClInclude Include="resource.h">
       <Filter>Precompiled</Filter>
     </ClInclude>
+    <ClInclude Include="Planet.hpp" />
+    <ClInclude Include="CircleCollider.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -24,5 +26,7 @@
     </ClCompile>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameWorld.cpp" />
+    <ClCompile Include="Planet.cpp" />
+    <ClCompile Include="CircleCollider.cpp" />
   </ItemGroup>
 </Project>
