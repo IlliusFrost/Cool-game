@@ -4,6 +4,7 @@
 #include <tga2d/error/error_manager.h>
 #include <tga2d/engine.h>
 #include <..\CommonUtilities\InputHandler.hpp>
+#include <iostream>
 
 CGameWorld::CGameWorld()
 {
@@ -35,6 +36,12 @@ void CGameWorld::Update(float aTimeDelta)
 		float mousePosY = static_cast<float>(myInputHandler->GetMousePosY()) / Tga2D::CEngine::GetInstance()->GetWindowSize().y;
 		myTga2dLogoSprite->SetPosition({ mousePosX, mousePosY });
 	}
+
+	/*Vector2f leftstickVal = myInputHandler->GetXboxLeftStick(0);
+	leftstickVal += {myTga2dLogoSprite->GetPosition().x, myTga2dLogoSprite->GetPosition().y};
+	myTga2dLogoSprite->SetPosition({ leftstickVal.x, leftstickVal.y });*/
+
+	std::cout << myInputHandler->GetXboxLeftStick(0).x << " : " << myInputHandler->GetXboxLeftStick(0).y << std::endl;
 
 	if (GetAsyncKeyState(VK_ESCAPE))
 	{
