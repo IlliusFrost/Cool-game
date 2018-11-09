@@ -32,8 +32,7 @@ void CGameWorld::Init(InputHandler* aInputHandler)
 void CGameWorld::Update(float aTimeDelta)
 {
 
-	myPlayer.Update(myInputHandler);
-	myPlayer.Draw();
+
 	aTimeDelta;
 	if (myInputHandler->IsKeyDown(InputHandler::Mouse::LeftMouseButton))
 	{
@@ -53,4 +52,6 @@ void CGameWorld::Update(float aTimeDelta)
 		Tga2D::CEngine::Shutdown();
 	}
 	myTga2dLogoSprite->Render();
+	myPlayer.Update(myInputHandler);
+	myPlayer.Draw();
 }

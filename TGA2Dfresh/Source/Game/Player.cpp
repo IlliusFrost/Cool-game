@@ -17,16 +17,50 @@ Player::Player()
 
 void Player::Update(InputHandler* anInputHandler)
 {
+	//myVelocity.x = anInputHandler->GetXboxLeftStick(0).x;
 	if (anInputHandler->IsKeyDown(InputHandler::Keys::Left_Arrow))
 	{
-		myPosition.x -= 0.001f;
+		myVelocity.x -= 0.001f;
 
 	}
 	else if (anInputHandler->IsKeyDown(InputHandler::Keys::Right_Arrow))
 	{
-		myPosition.x += 0.001f;
+		myVelocity.x += 0.001f;
 	}
+
+	if (anInputHandler->IsKeyDown(InputHandler::Keys::Spacebar))
+	{
+		myVelocity.y = 10;
+	}
+
+	//myVelocity.y -= 0.5f;
+	myPosition += myVelocity;
 	mySprite->SetPosition({ myPosition.x, myPosition.y });
+
+	/*if (myVelocity.x >= 1)
+	{
+		myVelocity.x -= 0.001;
+	}
+	else if (myVelocity.x > 0 || myVelocity.x <0 && myVelocity.x > -1)
+	{
+		myVelocity.x = 0;
+	}
+	else if (myVelocity.x <= -1)
+	{
+		myVelocity.x += 0.001;
+	}
+	if (myVelocity.y >= 1)
+	{
+		myVelocity.y -= 0.001;
+	}
+	else if (myVelocity.y > 0 || myVelocity.y <0 && myVelocity.y > -1)
+	{
+		myVelocity.y = 0;
+	}
+	else if (myVelocity.y <= -1)
+	{
+		myVelocity.y += 0.001;
+	}*/
 }
 void Player::Draw()
 {
