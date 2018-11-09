@@ -60,3 +60,8 @@ TGA2Dfresh/Source/.vs/Application/v15/.suo
 *.tlog
 *.pdb
 *.pdb
+*.log
+*.idb
+TGA2Dfresh/Source/CommonUtilities/Intermediate/CommonUtilities.log
+*.tlog
+*.idb

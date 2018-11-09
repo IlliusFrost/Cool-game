@@ -131,6 +131,8 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CircleCollider.hpp" />
+    <ClInclude Include="Planet.hpp" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameWorld.h" />
     <ClInclude Include="Player.hpp" />
@@ -142,6 +144,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CircleCollider.cpp" />
+    <ClCompile Include="Planet.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="Player.cpp" />

@@ -17,6 +17,8 @@
     <ClInclude Include="resource.h">
       <Filter>Precompiled</Filter>
     </ClInclude>
+    <ClInclude Include="Planet.hpp" />
+    <ClInclude Include="CircleCollider.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateStack.h" />
@@ -28,6 +30,8 @@
     </ClCompile>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameWorld.cpp" />
+    <ClCompile Include="Planet.cpp" />
+    <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateStack.cpp" />
