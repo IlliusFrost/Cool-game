@@ -4,12 +4,14 @@
 #include <tga2d/error/error_manager.h>
 #include <tga2d/engine.h>
 #include <..\CommonUtilities\InputHandler.hpp>
+#include "Planet.hpp"
 #include <iostream>
 #include "Player.hpp"
 
 CGameWorld::CGameWorld()
 {
 	myTga2dLogoSprite = nullptr;
+	myTestPlanet = new Planet();
 }
 
 
@@ -17,6 +19,7 @@ CGameWorld::~CGameWorld()
 {
 	delete myTga2dLogoSprite;
 	myTga2dLogoSprite = nullptr;
+	myTestPlanet = nullptr;
 }
 
 void CGameWorld::Init(InputHandler* aInputHandler)
@@ -25,6 +28,10 @@ void CGameWorld::Init(InputHandler* aInputHandler)
 	myTga2dLogoSprite = new Tga2D::CSprite("sprites/tga_logo.dds");
 	myTga2dLogoSprite->SetPivot({ 0.5f, 0.5f });
 	myTga2dLogoSprite->SetPosition({ 0.5f, 0.5f });
+
+	myTestPlanet->mySprite = new Tga2D::CSprite("sprites/PlanetRed.dds");
+	myTestPlanet->mySprite->SetPivot({ 0.5f, 0.5f });
+	myTestPlanet->mySprite->SetPosition({ 0.5f, 0.5f });
 	myPlayer = Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));
 }
 
@@ -51,7 +58,12 @@ void CGameWorld::Update(float aTimeDelta)
 	{
 		Tga2D::CEngine::Shutdown();
 	}
+<<<<<<< HEAD
 	myTga2dLogoSprite->Render();
 	myPlayer.Update(myInputHandler);
 	myPlayer.Draw();
+=======
+	myTestPlanet->Render();
+	//myTga2dLogoSprite->Render();
+>>>>>>> 5ea04527740653cfcf39dc856936068156eab059
 }
