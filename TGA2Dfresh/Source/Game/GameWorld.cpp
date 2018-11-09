@@ -5,6 +5,8 @@
 #include <tga2d/engine.h>
 #include <..\CommonUtilities\InputHandler.hpp>
 #include "Planet.hpp"
+#include <iostream>
+#include "Player.hpp"
 
 CGameWorld::CGameWorld()
 {
@@ -30,11 +32,15 @@ void CGameWorld::Init(InputHandler* aInputHandler)
 	myTestPlanet->mySprite = new Tga2D::CSprite("sprites/PlanetRed.dds");
 	myTestPlanet->mySprite->SetPivot({ 0.5f, 0.5f });
 	myTestPlanet->mySprite->SetPosition({ 0.5f, 0.5f });
+	myPlayer = Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));
 }
 
 
 void CGameWorld::Update(float aTimeDelta)
 {
+
+	myPlayer.Update(myInputHandler);
+	myPlayer.Draw();
 	aTimeDelta;
 	if (myInputHandler->IsKeyDown(InputHandler::Mouse::LeftMouseButton))
 	{
@@ -42,6 +48,12 @@ void CGameWorld::Update(float aTimeDelta)
 		float mousePosY = static_cast<float>(myInputHandler->GetMousePosY()) / Tga2D::CEngine::GetInstance()->GetWindowSize().y;
 		myTga2dLogoSprite->SetPosition({ mousePosX, mousePosY });
 	}
+
+	/*Vector2f leftstickVal = myInputHandler->GetXboxLeftStick(0);
+	leftstickVal += {myTga2dLogoSprite->GetPosition().x, myTga2dLogoSprite->GetPosition().y};
+	myTga2dLogoSprite->SetPosition({ leftstickVal.x, leftstickVal.y });*/
+
+	std::cout << myInputHandler->GetXboxLeftStick(0).x << " : " << myInputHandler->GetXboxLeftStick(0).y << std::endl;
 
 	if (GetAsyncKeyState(VK_ESCAPE))
 	{

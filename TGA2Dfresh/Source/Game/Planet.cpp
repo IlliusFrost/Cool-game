@@ -2,10 +2,11 @@
 #include "Planet.hpp"
 #include "CircleCollider.hpp"
 
-Planet::Planet()
+Planet::Planet(Vector2f aPos, Sprite aSprite)
 {
 	myCollider = new CircleCollider();
-	mySprite = nullptr;
+	mySprite = aSprite;
+	myPos = aPos;
 }
 
 

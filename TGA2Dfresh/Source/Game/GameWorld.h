@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Player.hpp"
 namespace Tga2D
 {
 	class CSprite;
@@ -19,4 +19,5 @@ private:
 	Tga2D::CSprite* myTga2dLogoSprite;
 	InputHandler* myInputHandler;
 	Planet* myTestPlanet;
+	Player myPlayer;
 };

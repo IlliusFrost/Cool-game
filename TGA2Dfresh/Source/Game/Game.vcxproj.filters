@@ -19,6 +19,7 @@
     </ClInclude>
     <ClInclude Include="Planet.hpp" />
     <ClInclude Include="CircleCollider.hpp" />
+    <ClInclude Include="Player.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -28,5 +29,6 @@
     <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="Planet.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
 </Project>

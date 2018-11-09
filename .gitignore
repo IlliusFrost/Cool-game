@@ -57,3 +57,8 @@ TGA2Dfresh/Source/.vs/Application/v15/.suo
 *.db-shm
 *.opendb
 *.db-wal
+*.tlog
+*.pdb
+*.pdb
+*.log
+*.idb

@@ -140,6 +140,161 @@ void InputHandler::UpdateMouseAbsolutePos()
 	GetCursorPos(&myMouseAbsolutePos);
 }
 
+void InputHandler::UpdateInputs()
+{
+	DWORD dwResult;
+	for (DWORD i = 0; i < XUSER_MAX_COUNT; i++)
+	{
+		if (myConnectedControllers[i])
+		{
+			XINPUT_STATE state;
+			ZeroMemory(&state, sizeof(XINPUT_STATE));
+
+			dwResult = XInputGetState(i, &state);
+
+			if (dwResult == ERROR_SUCCESS)
+			{
+				//if (state.dwPacketNumber != myControllerStates[i].dwPacketNumber)
+				//{
+				myPreviousControllerStates[i] = myControllerStates[i];
+				myControllerStates[i] = state;
+				//}
+			}
+			else
+			{
+				myConnectedControllers[i] = false;
+			}
+		}
+	}
+}
+
+void InputHandler::CheckForControllers()
+{
+	DWORD dwResult;
+	for (DWORD i = 0; i < XUSER_MAX_COUNT; i++)
+	{
+		XINPUT_STATE state;
+		ZeroMemory(&state, sizeof(XINPUT_STATE));
+
+		dwResult = XInputGetState(i, &state);
+
+		if (dwResult == ERROR_SUCCESS)
+		{
+			//Controller is connected
+			myConnectedControllers[i] = true;
+			myControllerStates[i] = state;
+		}
+		else
+		{
+			myConnectedControllers[i] = false;
+		}
+	}
+}
+
+bool InputHandler::XboxControllerIsConnected(int aController) const
+{
+	return myConnectedControllers[aController];
+}
+
+int InputHandler::GetConnectedXboxControllers() const
+{
+	return static_cast<int>(myConnectedControllers.count());
+}
+
+void InputHandler::VibrateXboxController(float aAmount, int aController)
+{
+	VibrateXboxController(aAmount, aAmount, aController);
+}
+
+void InputHandler::VibrateXboxController(float aLeftAmount, float aRightAmount, int aController)
+{
+	assert(aController >= 0 && aController < XUSER_MAX_COUNT && "Controller index out of bounds.");
+	if (XboxControllerIsConnected(aController))
+	{
+		aLeftAmount = __min(1.0f, __max(0.0f, aLeftAmount));
+		aRightAmount = __min(1.0f, __max(0.0f, aRightAmount));
+		XINPUT_VIBRATION vibration;
+		ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
+		vibration.wLeftMotorSpeed = static_cast<WORD>(65535.0f * aLeftAmount);
+		vibration.wRightMotorSpeed = static_cast<WORD>(65535.0f * aRightAmount);
+		XInputSetState(aController, &vibration);
+	}
+}
+
+bool InputHandler::XboxDown(XboxButton aXboxButton, int aController) const
+{
+	assert(aController >= 0 && aController < XUSER_MAX_COUNT && "Controller index out of bounds.");
+	return XboxControllerIsConnected(aController) &&
+		myControllerStates[aController].Gamepad.wButtons & static_cast<WORD>(aXboxButton);
+}
+
+bool InputHandler::XboxPressed(XboxButton aXboxButton, int aController) const
+{
+	assert(aController >= 0 && aController < XUSER_MAX_COUNT && "Controller index out of bounds.");
+	return XboxControllerIsConnected(aController) &&
+		myControllerStates[aController].Gamepad.wButtons & static_cast<WORD>(aXboxButton) &&
+		!(myPreviousControllerStates[aController].Gamepad.wButtons & static_cast<WORD>(aXboxButton));
+}
+
+bool InputHandler::XboxReleased(XboxButton aXboxButton, int aController) const
+{
+	assert(aController >= 0 && aController < XUSER_MAX_COUNT && "Controller index out of bounds.");
+	return XboxControllerIsConnected(aController) &&
+		!(myControllerStates[aController].Gamepad.wButtons & static_cast<WORD>(aXboxButton)) &&
+		myPreviousControllerStates[aController].Gamepad.wButtons & static_cast<WORD>(aXboxButton);
+}
+
+CommonUtilities::Vector2<float> InputHandler::GetXboxLeftStick(int aController) const
+{
+	CommonUtilities::Vector2<float> result;
+	if (XboxControllerIsConnected(aController))
+	{
+		result = { static_cast<float>(myControllerStates[aController].Gamepad.sThumbLX / 32757.0f),
+			static_cast<float>(myControllerStates[aController].Gamepad.sThumbLY / 32757.0f) };
+
+		if (result.x != 0.0f)
+			result.x = (result.x / abs(result.x)) * (__min(1.0f, __max(0.0f, abs(result.x) - myXboxDeadzone) / (1.0f - myXboxDeadzone)));
+		if (result.y != 0.0f)
+			result.y = -(result.y / abs(result.y)) * (__min(1.0f, __max(0.0f, abs(result.y) - myXboxDeadzone) / (1.0f - myXboxDeadzone)));
+	}
+	return result;
+}
+
+CommonUtilities::Vector2<float> InputHandler::GetXboxRightStick(int aController) const
+{
+	CommonUtilities::Vector2<float> result;
+	if (XboxControllerIsConnected(aController))
+	{
+		result = { static_cast<float>(myControllerStates[aController].Gamepad.sThumbRX / 32757.0f),
+			static_cast<float>(myControllerStates[aController].Gamepad.sThumbRY / 32757.0f) };
+		result.x = (result.x / abs(result.x)) * (__min(1.0f, __max(0.0f, abs(result.x) - myXboxDeadzone) / (1.0f - myXboxDeadzone)));
+		result.y = -(result.y / abs(result.y)) * (__min(1.0f, __max(0.0f, abs(result.y) - myXboxDeadzone) / (1.0f - myXboxDeadzone)));
+	}
+	return result;
+}
+
+float InputHandler::GetXboxLeftTrigger(int aController) const
+{
+	if (!XboxControllerIsConnected(aController)) { return 0.0f; }
+	return static_cast<float>(myControllerStates[aController].Gamepad.bLeftTrigger) / 255.0f;
+}
+
+float InputHandler::GetXboxRightTrigger(int aController) const
+{
+	if (!XboxControllerIsConnected(aController)) { return 0.0f; }
+	return static_cast<float>(myControllerStates[aController].Gamepad.bRightTrigger) / 255.0f;
+}
+
+float InputHandler::GetXboxDeadzone() const
+{
+	return myXboxDeadzone;
+}
+
+void InputHandler::SetXboxDeadzone(float aDeadzone)
+{
+	myXboxDeadzone = aDeadzone;
+}
+
 POINT InputHandler::GetMouseAbsolutePos() const
 {
 	return myMouseAbsolutePos;

@@ -3,6 +3,8 @@
 #include <Windowsx.h>
 #include <WinUser.h>
 #include <bitset>
+#include <Xinput.h>
+#include "Math/Vector2.hpp"
 class InputHandler
 {
 public:
@@ -249,8 +251,46 @@ public:
 		PA1 = VK_PA1,
 		Clear_Key = VK_OEM_CLEAR,
 	};
+	enum class XboxButton
+	{
+		DPadUp = 0x0001,
+		DPadDown = 0x0002,
+		DPadLeft = 0x0004,
+		DPadRight = 0x0008,
+		Start = 0x0010,
+		Back = 0x0020,
+		LeftThumb = 0x0040,
+		RightThumb = 0x0080,
+		LeftShoulder = 0x0100,
+		RightShoulder = 0x0200,
+		A = 0x1000,
+		B = 0x2000,
+		X = 0x4000,
+		Y = 0x8000
+	};
 
 	bool UpdateEvents(UINT aMessage, WPARAM aWParam, LPARAM aLParam);
+	void UpdateInputs();
+
+	void CheckForControllers();
+
+	bool XboxControllerIsConnected(int aController) const;
+	int GetConnectedXboxControllers() const;
+
+	void VibrateXboxController(float aAmount, int aController);
+	void VibrateXboxController(float aLeftAmount, float aRightAmount, int aController);
+
+	bool XboxDown(XboxButton aXboxButton, int aController) const;
+	bool XboxPressed(XboxButton aXboxButton, int aController) const;
+	bool XboxReleased(XboxButton aXboxButton, int aController) const;
+
+	CommonUtilities::Vector2<float> GetXboxLeftStick(int aController) const;
+	CommonUtilities::Vector2<float> GetXboxRightStick(int aController) const;
+	float GetXboxLeftTrigger(int aController) const;
+	float GetXboxRightTrigger(int aController) const;
+
+	float GetXboxDeadzone() const;
+	void SetXboxDeadzone(float aDeadzone);
 
 	//Returns once if a keyboard or mouse key is pressed
 	bool IsKeyPressed(Keys aKey);
@@ -283,4 +323,8 @@ private:
 	POINT myMouseAbsolutePos;
 	int myMouseWheelMovement;
 	POINT p;
+	std::bitset<XUSER_MAX_COUNT> myConnectedControllers;
+	XINPUT_STATE myPreviousControllerStates[XUSER_MAX_COUNT];
+	XINPUT_STATE myControllerStates[XUSER_MAX_COUNT];
+	float myXboxDeadzone;
 };
