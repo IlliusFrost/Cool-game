@@ -12,8 +12,11 @@
 
 #include "../CommonUtilities/Macro.hpp"
 #include "../CommonUtilities/Math/Vector.hpp"
+#include <tga2d/sprite/sprite.h>
 
 typedef CommonUtilities::Vector2<float> Vector2f;
 typedef CommonUtilities::Vector3<float> Vector3f;
+
+typedef Tga2D::CSprite* Sprite;
 
 // TODO: reference additional headers your program requires here
