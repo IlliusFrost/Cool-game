@@ -1,6 +1,7 @@
 #pragma once
 #include <tga2d/sprite/sprite.h>
 #include "CircleCollider.hpp"
+#include "GameObjectData.h"
 namespace Tga2D
 {
 	class CSprite;
@@ -14,8 +15,8 @@ public:
 	~PickUp();
 	bool GetIfIsRemoved();
 private:
-	Vector2f myPosition;
 	CircleCollider* myCircleCollider;
 	Sprite mySprite;
 	bool isRemoved = false; 
+	ObjectData myData;
 };

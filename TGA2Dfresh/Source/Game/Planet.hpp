@@ -1,4 +1,5 @@
 #pragma once
+#include "GameObjectData.h"
 class CircleCollider;
 
 class Planet
@@ -13,9 +14,8 @@ public:
 	Vector2f GetPos();
 
 private:
-	Vector2f myPos;
+	ObjectData myPlanetData;
 	CircleCollider* myCollider;
-	int myMass;
-	float myGravitationalPull;
-	Sprite mySprite;
+	ObjectData myFieldData;
+	CircleCollider* myGravityCollider;
 };

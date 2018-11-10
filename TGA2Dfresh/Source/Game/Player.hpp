@@ -3,6 +3,7 @@
 #include <..\CommonUtilities\InputHandler.hpp>
 #include "CircleCollider.hpp"
 #include "stdafx.h"
+#include "GameObjectData.h"
 namespace Tga2D
 {
 	class CSprite;
@@ -25,4 +26,5 @@ private:
 	int myMass = 0;
 	bool isGrounded = false;
 	CircleCollider* myCircleCollider;
+	ObjectData myData;
 };

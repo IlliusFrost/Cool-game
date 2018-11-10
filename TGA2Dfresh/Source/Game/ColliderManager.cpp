@@ -37,7 +37,7 @@ void ColliderManager::Init()
 #ifdef _DEBUG
 	myShouldRenderColliders = true;
 #else
-	myShouldRenderColliders = false;
+	myShouldRenderColliders = true;
 #endif // _DEBUG
 }
 
@@ -56,8 +56,22 @@ void ColliderManager::Update(float aDt)
 				{
 					for (int a = 0; a < myColliders[i]->myCanCollideWith.size(); a++)
 						if (myColliders[i]->myCanCollideWith[a] == myColliders[j]->myFlag)
+						{
 							myColliders[i]->CollisionEvent(myColliders[j]->myFlag);
-
+							if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
+								myColliders[j]->myFlag == CollisionFlag::eGravitationField)
+							{
+								Vector2f fieldPos = myColliders[j]->myPos;
+								Vector2f playerPos = myColliders[i]->myPos;
+								Vector2f delta = playerPos - fieldPos;
+								myColliders[i]->myObjectData->myVelocity -= delta * (aDt / 100.f);
+							}
+							if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
+								myColliders[j]->myFlag == CollisionFlag::ePlanet)
+							{
+								myColliders[i]->myObjectData->myVelocity = { 0.f, 0.f };
+							}
+						}
 					for (int a = 0; a < myColliders[j]->myCanCollideWith.size(); a++)
 						if (myColliders[j]->myCanCollideWith[a] == myColliders[i]->myFlag)
 							myColliders[j]->CollisionEvent(myColliders[i]->myFlag);

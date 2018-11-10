@@ -135,6 +135,7 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="ColliderManager.h" />
     <ClInclude Include="CollisionFlagEnum.h" />
+    <ClInclude Include="GameObjectData.h" />
     <ClInclude Include="Pickup.h" />
     <ClInclude Include="PickUpManager.h" />
     <ClInclude Include="Planet.hpp" />
