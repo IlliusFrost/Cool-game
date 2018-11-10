@@ -24,7 +24,7 @@ CGameWorld::CGameWorld()
 CGameWorld::~CGameWorld() 
 {
 	SAFE_DELETE(myTga2dLogoSprite);
-	SAFE_DELETE(myStateStack);
+	//SAFE_DELETE(myStateStack);
 	ColliderManager::Destroy();
 	SAFE_DELETE(myTestPickUp);
 	SAFE_DELETE(myPlanetManager);
@@ -79,6 +79,7 @@ void CGameWorld::Init(InputHandler* aInputHandler)
 void CGameWorld::Update(float aTimeDelta)
 {
 	aTimeDelta;
+	myStateStack->Update(aTimeDelta);
 	if (myInputHandler->IsKeyDown(InputHandler::Mouse::LeftMouseButton))
 	{
 		float mousePosX = static_cast<float>(myInputHandler->GetMousePosX()) / Tga2D::CEngine::GetInstance()->GetWindowSize().x;

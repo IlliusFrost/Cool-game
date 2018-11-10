@@ -141,6 +141,7 @@
     <ClInclude Include="GameWorld.h" />
     <ClInclude Include="PlanetManager.hpp" />
     <ClInclude Include="Player.hpp" />
+    <ClInclude Include="PlayingState.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateStack.h" />
@@ -159,6 +160,7 @@
     <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="PlanetManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayingState.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="StateStackProxy.cpp" />

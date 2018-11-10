@@ -16,6 +16,7 @@
 #include <tga2d/sprite/sprite.h>
 #include <assert.h>
 #include <functional>
+#include <iostream>
 
 typedef CommonUtilities::Vector2<float> Vector2f;
 typedef CommonUtilities::Vector3<float> Vector3f;
