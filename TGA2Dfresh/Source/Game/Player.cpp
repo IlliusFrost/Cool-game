@@ -36,6 +36,7 @@ Player::Player(Vector2f aPosition, Sprite aSprite)
 	myCircleCollider->SetCollisionEvent([this]()
 	{
 		std::cout << "Player Collided with planet!" << std::endl;
+
 		isGrounded = true;
 	}, CollisionFlag::ePlanet);
 	myCircleCollider->AddFlag(CollisionFlag::ePickup);
@@ -91,7 +92,10 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 
 		if (anInputHandler->XboxPressed(InputHandler::XboxButton::A,0) && isGrounded == true)
 		{
-			myData.myVelocity += Vector2f{0.01f,0.01f};
+			Vector2f jumpVector = (myData.myPosition - myData.latestCollideObjectPosition);
+			jumpVector = jumpVector.GetNormalized();
+			jumpVector = { jumpVector.x / 2,jumpVector.y / 5 };
+			myData.myVelocity += jumpVector;
 			isGrounded = false;
 		}
 	}
@@ -126,6 +130,11 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 	myData.myPosition += myData.myGravityVelocity;
 	myData.mySprite->SetPosition({ myData.myPosition.x, myData.myPosition.y });
 	myCircleCollider->SetPosition({ myData.myPosition.x, myData.myPosition.y});
+	if (isGrounded == true)
+	{
+		myData.myVelocity = { 0,0 };
+		myData.myGravityVelocity = { 0,0 };
+	}
 }
 void Player::Draw()
 {
