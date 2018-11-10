@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ColliderManager.h"
 #include "CircleCollider.hpp"
+#include <tga2d/drawers/debug_drawer.h>
 
 ColliderManager* ColliderManager::ourInstance = nullptr;
 
@@ -33,6 +34,11 @@ ColliderManager* ColliderManager::GetInstance()
 void ColliderManager::Init()
 {
 	myColliders.Init(50);
+#ifdef _DEBUG
+	myShouldRenderColliders = true;
+#else
+	myShouldRenderColliders = false;
+#endif // _DEBUG
 }
 
 void ColliderManager::Update(float aDt)
@@ -40,6 +46,8 @@ void ColliderManager::Update(float aDt)
 	aDt;
 	for (unsigned short i = 0; i < myColliders.Size(); i++)
 	{
+		if (myShouldRenderColliders)
+			Tga2D::CDebugDrawer::DrawCircle({ myColliders[i]->myPos.x, myColliders[i]->myPos.y }, myColliders[i]->myRadius);
 		for (unsigned short j = 0; j < myColliders.Size(); j++)
 		{
 			if (myColliders[i] != myColliders[j])

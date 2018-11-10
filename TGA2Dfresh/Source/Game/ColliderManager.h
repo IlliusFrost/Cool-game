@@ -18,6 +18,7 @@ private:
 
 	static ColliderManager* ourInstance;
 
+	bool myShouldRenderColliders;
 	GrowingArray<CircleCollider*> myColliders;
 };
 
