@@ -40,8 +40,8 @@ void CGameWorld::Init(InputHandler* aInputHandler)
 	collider1->SetCollisionEvent([]() { std::cout << "<collider1> collided with <collider2>!" << std::endl; });
 	collider2->SetCollisionEvent([]() { std::cout << "<collider1> collided with <collider2>!" << std::endl; });
 
-	ColliderManager::GetInstance()->RegisterCollider(collider1);
-	ColliderManager::GetInstance()->RegisterCollider(collider2);
+	//ColliderManager::GetInstance()->RegisterCollider(collider1);
+	//ColliderManager::GetInstance()->RegisterCollider(collider2);
 
 	myStateStack = new StateStack();
 

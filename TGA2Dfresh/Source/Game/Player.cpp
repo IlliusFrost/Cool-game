@@ -1,6 +1,8 @@
 
 #include <..\CommonUtilities\InputHandler.hpp>
 #include "stdafx.h"
+#include <iostream>
+#include "ColliderManager.h"
 #include "Player.hpp"
 
 
@@ -8,7 +10,12 @@ Player::Player(Vector2f aPosition, Sprite aSprite)
 {
 	myPosition = aPosition;
 	mySprite = aSprite;
-
+	myCircleCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.01f);
+	myCircleCollider->SetCollisionEvent([]()
+	{
+		std::cout << "Player Collider!" << std::endl;
+	});
+	ColliderManager::GetInstance()->RegisterCollider(myCircleCollider);
 }
 
 Player::Player()

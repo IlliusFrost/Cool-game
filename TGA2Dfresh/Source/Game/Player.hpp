@@ -24,5 +24,5 @@ private:
 	Sprite mySprite;
 	int myMass;
 	bool isGrounded;
-	CircleCollider* myCollider;
+	CircleCollider* myCircleCollider;
 };
