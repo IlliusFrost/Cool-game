@@ -52,20 +52,10 @@ void CGameWorld::Init(InputHandler* aInputHandler)
 	myTga2dLogoSprite->SetPivot({ 0.5f, 0.5f });
 	myTga2dLogoSprite->SetPosition({ 0.5f, 0.5f });
 
-	//myTestPlanet = new Planet(Vector2f(0.25f, 0.25f), new Tga2D::CSprite("sprites/PlanetRed.dds"));
 	myPlayer = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));
 	myTestPickUp = new PickUpManager();
 	myPlayer = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));
 	myTestPickUp->SpawnPickUp();
-
-	/*myTestPlanet->mySprite = new Tga2D::CSprite("sprites/PlanetRed.dds");
-	myTestPlanet->mySprite->SetPivot({ 0.5f, 0.5f });
-	myTestPlanet->mySprite->SetPosition({ 0.5f, 0.5f });
-	myPlayer = Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));*/
-	/*myTestPlanet = new Planet(Vector2f(0.25f, 0.25f), new Tga2D::CSprite("sprites/PlanetRed.dds"));
-	myPlayer = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));
-	myTestPickUp =new PickUp(Vector2f(0.5f, 0.5f), new Tga2D::CSprite("sprites/power.png"));
-	myPlayer = Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));*/
 
 
 	myPlayer = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));
@@ -95,8 +85,6 @@ void CGameWorld::Update(float aTimeDelta)
 	}
 	myTga2dLogoSprite->Render();
 
-	//myTestPlanet->Render();
-	//myTga2dLogoSprite->Render();
 	myPlayer->Update(myInputHandler, aTimeDelta);
 	myPlayer->Draw();
 	myPlanetManager->Update();
