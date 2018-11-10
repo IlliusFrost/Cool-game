@@ -92,6 +92,10 @@ void ColliderManager::Update(float aDt)
 						if (myColliders[j]->myCanCollideWith[a] == myColliders[i]->myFlag)
 						{
 							myColliders[j]->CollisionEvent(myColliders[i]->myFlag);
+							myColliders[j]->myObjectData->latestCollideObjectPosition = myColliders[i]->myPos;
+							myColliders[i]->myObjectData->latestCollideObjectPosition = myColliders[j]->myPos;
+
+
 						}
 				}
 			}
