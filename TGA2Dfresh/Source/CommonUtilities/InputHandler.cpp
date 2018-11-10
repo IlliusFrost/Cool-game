@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "InputHandler.hpp"
 
-InputHandler::InputHandler()
+InputHandler::InputHandler() :
+	myXboxDeadzone(10000.0f / 32757.0f)
 {
 }
 
