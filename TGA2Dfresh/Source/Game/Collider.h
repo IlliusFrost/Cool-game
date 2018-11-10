@@ -7,10 +7,10 @@ public:
 	Collider();
 	~Collider();
 
-	virtual bool CollidesWith(CircleCollider aCircle);
-	virtual bool CollidesWith(Vector2f aPoint);
+	virtual bool CollidesWith(CircleCollider aCircle) = 0;
+	virtual bool CollidesWith(Vector2f aPoint) = 0;
 
-	virtual void CollisionEvent();
+	virtual void CollisionEvent() = 0;
 
 private:
 };

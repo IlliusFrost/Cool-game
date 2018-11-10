@@ -12,6 +12,7 @@
 #include "CircleCollider.hpp"
 #include "Pickup.h"
 #include "Planet.hpp"
+#include "PlayingState.h"
 #include "PickUpManager.h"
 
 CGameWorld::CGameWorld()
@@ -38,12 +39,14 @@ void CGameWorld::Init(InputHandler* aInputHandler)
 	CircleCollider* collider2 = new CircleCollider(Vector2f(0.3f, 0.5f), 0.1f);
 
 	collider1->SetCollisionEvent([]() { std::cout << "<collider1> collided with <collider2>!" << std::endl; });
-	collider2->SetCollisionEvent([]() { std::cout << "<collider1> collided with <collider2>!" << std::endl; });
+	collider2->SetCollisionEvent([]() { std::cout << "<collider2> collided with <collider1>!" << std::endl; });
 
 	//ColliderManager::GetInstance()->RegisterCollider(collider1);
 	//ColliderManager::GetInstance()->RegisterCollider(collider2);
 
 	myStateStack = new StateStack();
+	myStateStack->AddState(new PlayState(myStateStack), "Play");
+	myStateStack->PushState("Play");
 
 	myPlanetManager = new PlanetManager();
 	myPlanetManager->InitPlanets();
