@@ -53,3 +53,7 @@ TGA2Dfresh/Source/.vs/Application/v15/.suo
 *.idb
 *.pdb
 *.tlog
+*.tlog
+*.lastbuildstate
+*.log
+*.idb

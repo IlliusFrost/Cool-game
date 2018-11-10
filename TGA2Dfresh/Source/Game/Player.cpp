@@ -8,6 +8,7 @@ Player::Player(Vector2f aPosition, Sprite aSprite)
 {
 	myPosition = aPosition;
 	mySprite = aSprite;
+
 }
 
 Player::Player()
@@ -22,6 +23,11 @@ int Player::GetMass()
 Vector2f Player::GetPosition()
 {
 	return myPosition;
+}
+
+void Player::ModifyMass(int anAmountToModify)
+{
+	myMass += anAmountToModify;
 }
 
 void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
