@@ -5,9 +5,10 @@ namespace Tga2D
 }
 class InputHandler;
 class StateStack;
-class PickUp;
+class PickUpManager;
 class Player;
 class PlanetManager;
+class Planet;
 class CGameWorld
 {
 public:
@@ -22,7 +23,6 @@ private:
 	StateStack* myStateStack;
 	Planet* myTestPlanet;
 	Player* myPlayer;
-	PickUp* myTestPickUp;
+	PickUpManager* myTestPickUp;
 	PlanetManager* myPlanetManager;
-	Player myPlayer;
 };

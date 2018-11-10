@@ -24,6 +24,8 @@
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="StateStackProxy.h" />
     <ClInclude Include="Pickup.h" />
+    <ClInclude Include="PlanetManager.hpp" />
+    <ClInclude Include="PickUpManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -38,5 +40,7 @@
     <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="StateStackProxy.cpp" />
     <ClCompile Include="Pickup.cpp" />
+    <ClCompile Include="PlanetManager.cpp" />
+    <ClCompile Include="PickUpManager.cpp" />
   </ItemGroup>
 </Project>

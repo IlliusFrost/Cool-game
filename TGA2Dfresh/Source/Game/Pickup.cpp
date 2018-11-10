@@ -19,5 +19,5 @@ PickUp::PickUp(Vector2f aPosition, Sprite aSprite)
 void PickUp::OnPickUp(Player* aPlayerPickingUp)
 {
 	aPlayerPickingUp->ModifyMass(5);
-	//Remove pickup
+	
 }
