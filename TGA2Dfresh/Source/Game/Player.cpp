@@ -17,11 +17,13 @@ Player::Player(Vector2f aPosition, Sprite aSprite)
 	myData.mySprite->SetPivot({ 0.5f,0.5f });
 
 	myData.myGravityVelocity = { 0.f, 0.f };
+	myData.myGravityVelocityCap = 0.1f;
+	myData.myGravityVelocityIncrement = 0.01f;
 
 	myData.myVelocityCap = 0.1f;
 	myData.myVelocityIncrement = 0.01f;
 
-	myCircleCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.1f, CollisionFlag::ePlayer, &myData);
+	myCircleCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.03f, CollisionFlag::ePlayer, &myData);
 	myCircleCollider->SetCollisionEvent([this]()
 	{
 		std::cout << "Player Collided with pickup and gained 5 mass! Player now has " << myMass << " mass." << std::endl;
@@ -74,17 +76,17 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 			myData.myVelocity.x -= myData.myVelocityIncrement * aTimeDelta / 3;
 
 		}
-		else if (anInputHandler->IsKeyDown(InputHandler::Keys::D))
+		if (anInputHandler->IsKeyDown(InputHandler::Keys::D))
 		{
 			myData.myVelocity.x += myData.myVelocityIncrement * aTimeDelta / 3;
 		}
 
-		else if (anInputHandler->IsKeyDown(InputHandler::Keys::S))
+		if (anInputHandler->IsKeyDown(InputHandler::Keys::S))
 		{
 			myData.myVelocity.y += myData.myVelocityIncrement * aTimeDelta / 3;
 		}
 
-		else if (anInputHandler->IsKeyDown(InputHandler::Keys::W))
+		if (anInputHandler->IsKeyDown(InputHandler::Keys::W))
 		{
 			myData.myVelocity.y -= myData.myVelocityIncrement * aTimeDelta / 3;
 		}
@@ -96,10 +98,12 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 		float mousePosY = static_cast<float>(anInputHandler->GetMousePosY()) / Tga2D::CEngine::GetInstance()->GetWindowSize().y;
 		myData.myPosition = { mousePosX, mousePosY };
 		myData.myVelocity = { 0.f, 0.f };
+		myData.myGravityVelocity = { 0.f, 0.f };
 	}
 
 	//myVelocity.y -= 0.5f;
 	myData.myPosition += myData.myVelocity;
+	myData.myPosition += myData.myGravityVelocity;
 	myData.mySprite->SetPosition({ myData.myPosition.x, myData.myPosition.y });
 	myCircleCollider->SetPosition({ myData.myPosition.x, myData.myPosition.y});
 

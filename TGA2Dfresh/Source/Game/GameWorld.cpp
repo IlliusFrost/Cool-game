@@ -25,9 +25,9 @@ CGameWorld::~CGameWorld()
 {
 	ColliderManager::Destroy();
 	SAFE_DELETE(myTga2dLogoSprite);
-	SAFE_DELETE(myStateStack);
-	SAFE_DELETE(myTestPickUp);
-	SAFE_DELETE(myPlanetManager);
+	//SAFE_DELETE(myStateStack);
+	//SAFE_DELETE(myTestPickUp);
+	//SAFE_DELETE(myPlanetManager);
 }
 
 void CGameWorld::Init(InputHandler* aInputHandler)

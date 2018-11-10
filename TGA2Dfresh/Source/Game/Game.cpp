@@ -32,11 +32,18 @@ CGame::~CGame()
 bool CGame::Init(const std::wstring& aVersion, HWND /*aHWND*/)
 {
     Tga2D::SEngineCreateParameters createParameters;
-    
+ 
+	unsigned int resX = 1600;
+	unsigned int resY = 900;
+
     createParameters.myInitFunctionToCall = std::bind( &CGame::InitCallBack, this );
     createParameters.myUpdateFunctionToCall = std::bind( &CGame::UpdateCallBack, this );
 	createParameters.myWinProcCallback = std::bind(&CGame::WinProc, this, _1, _2, _3, _4);
     createParameters.myApplicationName = L"Awesome to" + BUILD_NAME + L"[" + aVersion + L"] ";
+	createParameters.myWindowWidth = resX;
+	createParameters.myWindowHeight = resY;
+	createParameters.myTargetWidth = resX;
+	createParameters.myTargetHeight = resY;
 	createParameters.myActivateDebugSystems = Tga2D::eDebugFeature_Fps |
 		Tga2D::eDebugFeature_Mem |
 		Tga2D::eDebugFeature_Drawcalls |

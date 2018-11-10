@@ -7,6 +7,8 @@ struct ObjectData
 	CommonUtilities::Vector2<float> myVelocity;
 	CommonUtilities::Vector2<float> myGravityVelocity;
 	Sprite mySprite;
+	float myGravityVelocityCap;
+	float myGravityVelocityIncrement;
 	float myVelocityIncrement;
 	float myVelocityCap;
 	float myRadius;
