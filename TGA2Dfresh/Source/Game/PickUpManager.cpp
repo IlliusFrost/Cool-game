@@ -17,7 +17,6 @@ void PickUpManager::Update()
 			if (myPickUps[i]->GetIfIsRemoved())
 			{
 				ColliderManager::GetInstance()->RemoveCollider(myPickUps[i]->GetCollider());
-				//ColliderManager::RemoveCollider();
 				myPickUps.erase(myPickUps.begin() + i);
 				myPickUps.shrink_to_fit();
 				i--;

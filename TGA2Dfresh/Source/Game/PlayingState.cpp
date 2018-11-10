@@ -37,7 +37,7 @@ void PlayState::Init()
 	myTga2dLogoSprite->SetPivot({ 0.5f, 0.5f });
 	myTga2dLogoSprite->SetPosition({ 0.5f, 0.5f });
 
-	myPlayer = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));
+	myPlayer = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/PlayerOne.png"));
 	myTestPickUp = new PickUpManager();
 	myTestPickUp->SpawnPickUp();
 }
