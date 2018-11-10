@@ -59,23 +59,43 @@ void ColliderManager::Update(float aDt)
 						{
 							myColliders[i]->CollisionEvent(myColliders[j]->myFlag);
 
-							if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
+							/*if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
 								myColliders[j]->myFlag == CollisionFlag::ePlanet)
 							{
 								myColliders[i]->myObjectData->myVelocity = { 0.f, 0.f };
 								myColliders[i]->myObjectData->isGrounded = true;
 							}
-							else if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
+							else */if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
 								myColliders[j]->myFlag == CollisionFlag::eGravitationField)
 							{
 								Vector2f fieldPos = myColliders[j]->myPos;
 								Vector2f playerPos = myColliders[i]->myPos;
 								Vector2f delta = playerPos - fieldPos;
-								myColliders[i]->myObjectData->myGravityVelocity -= delta * (aDt / 100.f);
+								delta.Normalize();
+
+								if (myColliders[i]->myObjectData->myGravityVelocity.x < myColliders[i]->myObjectData->myGravityVelocityCap)
+								{
+									myColliders[i]->myObjectData->myGravityVelocity.x -= (delta.x * aDt) / 30.f;
+									myColliders[i]->myObjectData->myVelocity *= .95f;
+								}
+								else
+								{
+									myColliders[i]->myObjectData->myGravityVelocity.x = myColliders[i]->myObjectData->myGravityVelocityCap;
+								}
+
+								if (myColliders[i]->myObjectData->myGravityVelocity.y < myColliders[i]->myObjectData->myGravityVelocityCap)
+								{
+									myColliders[i]->myObjectData->myGravityVelocity.y -= (delta.y * aDt) / 30.f;
+									myColliders[i]->myObjectData->myVelocity *= .95f;
+								}
+								else
+								{
+									myColliders[i]->myObjectData->myGravityVelocity.y = myColliders[i]->myObjectData->myGravityVelocityCap;
+								}
 							}
 							else
 							{
-
+								myColliders[i]->myObjectData->myGravityVelocity = { 0.f, 0.f };
 							}
 						}
 					for (int a = 0; a < myColliders[j]->myCanCollideWith.size(); a++)
