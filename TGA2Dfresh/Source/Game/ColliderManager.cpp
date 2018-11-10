@@ -59,18 +59,24 @@ void ColliderManager::Update(float aDt)
 						{
 							myColliders[i]->CollisionEvent(myColliders[j]->myFlag);
 
+
 							if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
+								myColliders[j]->myFlag == CollisionFlag::ePlanet)
+							{
+								myColliders[i]->myObjectData->myVelocity = { 0.f, 0.f };
+								myColliders[i]->myObjectData->isGrounded = true;
+							}
+							else if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
 								myColliders[j]->myFlag == CollisionFlag::eGravitationField)
 							{
 								Vector2f fieldPos = myColliders[j]->myPos;
 								Vector2f playerPos = myColliders[i]->myPos;
 								Vector2f delta = playerPos - fieldPos;
-								myColliders[i]->myObjectData->myVelocity -= delta * (aDt / 100.f);
+								myColliders[i]->myObjectData->myGravityVelocity -= delta * (aDt / 100.f);
 							}
-							if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
-								myColliders[j]->myFlag == CollisionFlag::ePlanet)
+							else
 							{
-								myColliders[i]->myObjectData->myVelocity = { 0.f, 0.f };
+
 							}
 						}
 
@@ -86,4 +92,9 @@ void ColliderManager::Update(float aDt)
 void ColliderManager::RegisterCollider(CircleCollider * aCollider)
 {
 	myColliders.Add(aCollider);
+}
+
+void ColliderManager::RemoveCollider(CircleCollider * aCollider)
+{
+	myColliders.DeleteCyclic(aCollider);
 }

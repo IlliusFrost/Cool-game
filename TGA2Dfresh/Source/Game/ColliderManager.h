@@ -11,6 +11,7 @@ public:
 	void Update(float aDt);
 
 	void RegisterCollider(CircleCollider* aCollider);
+	void RemoveCollider(CircleCollider* aCollider);
 
 private:
 	ColliderManager();

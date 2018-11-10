@@ -5,9 +5,11 @@ struct ObjectData
 {
 	CommonUtilities::Vector2<float> myPosition;
 	CommonUtilities::Vector2<float> myVelocity;
+	CommonUtilities::Vector2<float> myGravityVelocity;
 	Sprite mySprite;
+	float myVelocityIncrement;
+	float myVelocityCap;
 	float myRadius;
-	float myGravitationalPull;
 	int myMass;
 	bool isGrounded;
 };

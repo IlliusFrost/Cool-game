@@ -13,6 +13,11 @@ Player::Player(Vector2f aPosition, Sprite aSprite)
 	myData.mySprite = aSprite;
 	myData.mySprite->SetPivot({ 0.5f,0.5f });
 
+	myData.myGravityVelocity = { 0.f, 0.f };
+
+	myData.myVelocityCap = 0.1f;
+	myData.myVelocityIncrement = 0.01f;
+
 	myCircleCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.1f, CollisionFlag::ePlayer, &myData);
 	myCircleCollider->SetCollisionEvent([]()
 	{
@@ -62,28 +67,23 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 	{
 		if (anInputHandler->IsKeyDown(InputHandler::Keys::A))
 		{
-			myData.myVelocity.x -= 0.1f * aTimeDelta / 3;
+			myData.myVelocity.x -= myData.myVelocityIncrement * aTimeDelta / 3;
 
 		}
 		else if (anInputHandler->IsKeyDown(InputHandler::Keys::D))
 		{
-			myData.myVelocity.x += 0.1f * aTimeDelta / 3;
+			myData.myVelocity.x += myData.myVelocityIncrement * aTimeDelta / 3;
 		}
 
 		else if (anInputHandler->IsKeyDown(InputHandler::Keys::S))
 		{
-			myData.myVelocity.y += 0.1f * aTimeDelta / 3;
+			myData.myVelocity.y += myData.myVelocityIncrement * aTimeDelta / 3;
 		}
 
 		else if (anInputHandler->IsKeyDown(InputHandler::Keys::W))
 		{
-			myData.myVelocity.y -= 0.1f * aTimeDelta / 3;
+			myData.myVelocity.y -= myData.myVelocityIncrement * aTimeDelta / 3;
 		}
-	}
-
-	if (anInputHandler->IsKeyDown(InputHandler::Keys::Spacebar))
-	{
-		myData.myPosition = { 0.5f, 0.5f };
 	}
 
 	if (anInputHandler->IsKeyDown(InputHandler::Mouse::LeftMouseButton))
