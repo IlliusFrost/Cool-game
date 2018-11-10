@@ -4,7 +4,7 @@
 
 Planet::Planet(Vector2f aPos, Sprite aSprite)
 {
-	myCollider = new CircleCollider();
+	//myCollider = new CircleCollider(aPos, 0.1f);
 	mySprite = aSprite;
 	myPos = aPos;
 }
@@ -12,7 +12,7 @@ Planet::Planet(Vector2f aPos, Sprite aSprite)
 
 Planet::~Planet()
 {
-	SAFE_DELETE(myCollider);
+	//SAFE_DELETE(myCollider);
 }
 
 void Planet::Update()
@@ -24,4 +24,3 @@ void Planet::Render()
 {
 	mySprite->Render();
 }
-

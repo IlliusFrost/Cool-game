@@ -132,6 +132,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CircleCollider.hpp" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="ColliderManager.h" />
     <ClInclude Include="Planet.hpp" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameWorld.h" />
@@ -145,6 +147,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CircleCollider.cpp" />
+    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="ColliderManager.cpp" />
     <ClCompile Include="Planet.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameWorld.cpp" />
