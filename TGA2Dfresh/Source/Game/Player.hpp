@@ -1,6 +1,7 @@
 #pragma once
 #include <tga2d/sprite/sprite.h>
 #include <..\CommonUtilities\InputHandler.hpp>
+#include "CircleCollider.hpp"
 #include "stdafx.h"
 namespace Tga2D
 {
@@ -10,13 +11,18 @@ namespace Tga2D
 class Player
 {
 public:
-	Player(Vector2f aPosition, Tga2D::CSprite* aSprite);
+	Player(Vector2f aPosition, Sprite aSprite);
 	Player();
-	void Update(InputHandler* anInputHandler);
+	void Update(InputHandler* anInputHandler, float aTimeDelta);
 	void Draw();
+	int GetMass();
+	void ModifyMass(int anAmountToModify);
+	Vector2f GetPosition();
 private:
 	Vector2f myPosition = { 0, 0 };
 	Vector2f myVelocity = { 0,0 };
-	Tga2D::CSprite* mySprite;
-	int mySize;
+	Sprite mySprite;
+	int myMass;
+	bool isGrounded;
+	CircleCollider* myCollider;
 };

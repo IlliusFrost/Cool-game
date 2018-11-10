@@ -4,28 +4,44 @@
 #include "Player.hpp"
 
 
-Player::Player(Vector2f aPosition, Tga2D::CSprite* aSprite)
+Player::Player(Vector2f aPosition, Sprite aSprite)
 {
 	myPosition = aPosition;
 	mySprite = aSprite;
+
 }
 
 Player::Player()
 {
 
 }
-
-void Player::Update(InputHandler* anInputHandler)
+int Player::GetMass()
 {
-	//myVelocity.x = anInputHandler->GetXboxLeftStick(0).x;
+	return myMass;
+}
+
+Vector2f Player::GetPosition()
+{
+	return myPosition;
+}
+
+void Player::ModifyMass(int anAmountToModify)
+{
+	myMass += anAmountToModify;
+}
+
+void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
+{
+	
+	myVelocity.x = anInputHandler->GetXboxLeftStick(0).x * aTimeDelta;
 	if (anInputHandler->IsKeyDown(InputHandler::Keys::Left_Arrow))
 	{
-		myVelocity.x -= 0.001f;
+		myVelocity.x -= 0.1f * aTimeDelta;
 
 	}
 	else if (anInputHandler->IsKeyDown(InputHandler::Keys::Right_Arrow))
 	{
-		myVelocity.x += 0.001f;
+		myVelocity.x += 0.1f * aTimeDelta;
 	}
 
 	if (anInputHandler->IsKeyDown(InputHandler::Keys::Spacebar))

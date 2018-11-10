@@ -1,13 +1,16 @@
 #pragma once
 class CircleCollider;
+
 class Planet
 {
 public:
-	Planet(Vector2f aPos, Sprite aSprite);
+	friend class PlanetManager;
+	Planet();
 	~Planet();
+	void Init(const char* aString, Vector2f aPos);
 	void Update();
-	void Render();
-
+	void Draw();
+	Vector2f GetPos();
 
 private:
 	Vector2f myPos;

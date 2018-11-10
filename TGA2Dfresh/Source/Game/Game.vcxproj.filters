@@ -58,6 +58,14 @@
     <ClInclude Include="GameWorld.h">
       <Filter>States</Filter>
     </ClInclude>
+    <ClInclude Include="Planet.hpp" />
+    <ClInclude Include="CircleCollider.hpp" />
+    <ClInclude Include="Player.hpp" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateStack.h" />
+    <ClInclude Include="StateStackProxy.h" />
+    <ClInclude Include="Pickup.h" />
+    <ClInclude Include="PlanetManager.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -88,6 +96,15 @@
     <ClCompile Include="ColliderManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
+    <ClCompile Include="GameWorld.cpp" />
+    <ClCompile Include="Planet.cpp" />
+    <ClCompile Include="CircleCollider.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="StateStack.cpp" />
+    <ClCompile Include="StateStackProxy.cpp" />
+    <ClCompile Include="Pickup.cpp" />
+    <ClCompile Include="PlanetManager.cpp" />
     <ClCompile Include="GameWorld.cpp">
       <Filter>States</Filter>
     </ClCompile>

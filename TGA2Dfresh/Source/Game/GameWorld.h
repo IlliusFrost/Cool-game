@@ -1,13 +1,13 @@
 #pragma once
-#include "Player.hpp"
 namespace Tga2D
 {
 	class CSprite;
 }
-class Planet;
 class InputHandler;
 class StateStack;
-
+class PickUp;
+class Player;
+class PlanetManager;
 class CGameWorld
 {
 public:
@@ -20,6 +20,8 @@ private:
 	Tga2D::CSprite* myTga2dLogoSprite;
 	InputHandler* myInputHandler;
 	StateStack* myStateStack;
-	Planet* myTestPlanet;
-	Player myPlayer;
+	//Planet* myTestPlanet;
+	Player* myPlayer;
+	PickUp* myTestPickUp;
+	PlanetManager* myPlanetManager;
 };
