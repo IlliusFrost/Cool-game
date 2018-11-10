@@ -101,7 +101,9 @@ void ColliderManager::Update(float aDt)
 						}
 					for (int a = 0; a < myColliders[j]->myCanCollideWith.size(); a++)
 						if (myColliders[j]->myCanCollideWith[a] == myColliders[i]->myFlag)
+						{
 							myColliders[j]->CollisionEvent(myColliders[i]->myFlag);
+						}
 				}
 			}
 		}
