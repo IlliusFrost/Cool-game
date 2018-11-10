@@ -20,10 +20,10 @@ Planet::~Planet()
 
 void Planet::Update()
 {
-	Render();
+	Draw();
 }
 
-void Planet::Render()
+void Planet::Draw()
 {
 	mySprite->Render();
 }

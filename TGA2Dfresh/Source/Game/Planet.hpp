@@ -1,12 +1,13 @@
 #pragma once
 class CircleCollider;
+
 class Planet
 {
 public:
 	Planet(Vector2f aPos, Sprite aSprite);
 	~Planet();
 	void Update();
-	void Render();
+	void Draw();
 	Vector2f GetPos();
 
 private:
