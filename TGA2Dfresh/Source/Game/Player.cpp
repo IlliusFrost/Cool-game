@@ -62,10 +62,11 @@ void Player::ModifyMass(int anAmountToModify)
 	myData.myMass += anAmountToModify;
 }
 
+
 void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 {
 
-	//myData.myVelocity += (anInputHandler->GetXboxLeftStick(0) / 100.0f) * aTimeDelta;
+	myData.myVelocity += (anInputHandler->GetXboxLeftStick(0) / 10.0f) * aTimeDelta;
 	Vector2f delta = myData.myPosition - myData.myVelocity;
 
 	if (myData.myVelocity.Length() < 0.1f)

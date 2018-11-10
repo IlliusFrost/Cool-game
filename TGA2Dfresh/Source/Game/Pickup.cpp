@@ -16,6 +16,11 @@ PickUp::~PickUp()
 	SAFE_DELETE(myCircleCollider);
 	SAFE_DELETE(mySprite);
 }
+CircleCollider* PickUp::GetCollider()
+{
+	return myCircleCollider;
+}
+
 PickUp::PickUp(Vector2f aPosition, Sprite aSprite)
 {
 	myData.myPosition = aPosition;
