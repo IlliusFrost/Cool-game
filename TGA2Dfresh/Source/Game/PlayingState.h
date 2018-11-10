@@ -1,28 +1,14 @@
 #pragma once
 #include "State.h"
 
+class InputHandler;
 class StateStack;
+class PickUpManager;
 class Player;
-
-enum class Level
-{
-	Level1,
-	Level2,
-	Level3
-};
-
 class PlayState : public State
 {
 public:
-	enum class Level
-	{
-		Level0,
-		Level1,
-		Level2,
-		Level3
-	};
-public:
-	PlayState(StateStack* aStateStack);
+	PlayState(StateStack* aStateStack, InputHandler* aInputHandler);
 	~PlayState();
 
 	void Init() override;
@@ -32,10 +18,14 @@ public:
 	bool PassThroughRender() const override;
 	bool PassThroughUpdate() const override;
 private:
+	Tga2D::CSprite* myTga2dLogoSprite;
+	InputHandler* myInputHandler;
 	StateStack* myStateStack;
+	Player* myPlayer;
+	PickUpManager* myTestPickUp;
+	PlanetManager* myPlanetManager;
 
-	Level myLevel;
+	Player* myPlayer;
 
-	int myStartSplineIndex;
 };
 

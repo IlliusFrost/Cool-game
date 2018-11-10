@@ -14,13 +14,11 @@ PickUp::PickUp(Vector2f aPosition, Sprite aSprite)
 	mySprite = aSprite;
 	mySprite->SetPivot({ 0.5f, 0.5f });
 	mySprite->SetPosition({ myPosition.x,myPosition.y });
-	myCircleCollider = new CircleCollider(Vector2f(myPosition.x, myPosition.y), 0.1f,CollisionFlag::ePlayer);
 	myCircleCollider = new CircleCollider(Vector2f(myPosition.x, myPosition.y), 0.1f, CollisionFlag::ePickup);
 	myCircleCollider->SetCollisionEvent([this]() 
 	{ 
 		std::cout << "Pickup Collided with player!" << std::endl; 
 		// ta bort pickup
-		
 	}, CollisionFlag::ePlayer);
 	ColliderManager::GetInstance()->RegisterCollider(myCircleCollider);
 }
