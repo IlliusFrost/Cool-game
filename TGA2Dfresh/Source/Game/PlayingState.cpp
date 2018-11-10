@@ -39,7 +39,7 @@ void PlayState::Init()
 
 	myPlayer = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));
 	myTestPickUp = new PickUpManager();
-	//myTestPickUp->SpawnPickUp();
+	myTestPickUp->SpawnPickUp();
 }
 
 bool PlayState::Update(float aDeltaTime)

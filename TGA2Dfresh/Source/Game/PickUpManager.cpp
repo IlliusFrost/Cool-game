@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "PickUpManager.h"
 #include "Pickup.h"
+#include "ColliderManager.h"
+#include "CircleCollider.hpp"
 PickUpManager::PickUpManager()
 {
 
@@ -14,7 +16,8 @@ void PickUpManager::Update()
 			std::cout << myPickUps.size() << " " << i << std::endl;
 			if (myPickUps[i]->GetIfIsRemoved())
 			{
-				std::cout << "This Happens!" << std::endl;
+				ColliderManager::GetInstance()->RemoveCollider(myPickUps[i]->GetCollider());
+				//ColliderManager::RemoveCollider();
 				myPickUps.erase(myPickUps.begin() + i);
 				myPickUps.shrink_to_fit();
 				i--;

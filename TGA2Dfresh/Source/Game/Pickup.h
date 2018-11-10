@@ -14,6 +14,7 @@ public:
 	PickUp(Vector2f aPosition, Sprite aSprite);
 	~PickUp();
 	bool GetIfIsRemoved();
+	CircleCollider* GetCollider();
 private:
 	CircleCollider* myCircleCollider;
 	Sprite mySprite;
