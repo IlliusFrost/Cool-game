@@ -23,7 +23,7 @@ Player::Player(Vector2f aPosition, Sprite aSprite)
 	myData.myVelocityCap = 0.025f;
 	myData.myVelocityIncrement = 0.001f;
 
-	myCircleCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.03f, CollisionFlag::ePlayer, &myData);
+	myCircleCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.020f, CollisionFlag::ePlayer, &myData);
 	myCircleCollider->SetCollisionEvent([this]()
 	{
 		//std::cout << "Player Collided with pickup and gained 5 mass! Player now has " << myMass << " mass." << std::endl;
@@ -35,7 +35,9 @@ Player::Player(Vector2f aPosition, Sprite aSprite)
 	}, CollisionFlag::eGravitationField);
 	myCircleCollider->SetCollisionEvent([this]()
 	{
+		//std::cout << "Player Collided with planet!" << std::endl;
 		std::cout << "Player Collided with planet!" << std::endl;
+
 		isGrounded = true;
 	}, CollisionFlag::ePlanet);
 	myCircleCollider->AddFlag(CollisionFlag::ePickup);
@@ -82,7 +84,6 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 	#ifndef _DEBUG
 		myData.myVelocity += (anInputHandler->GetXboxLeftStick(0) / 10.0f) * aTimeDelta / 100.f;
 	#endif
-
 		Vector2f delta = myData.myPosition - myData.myVelocity;
 
 		if (myData.myVelocity.Length() < 0.1f)
@@ -133,7 +134,6 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 			myData.mySprite->SetPosition({ myData.myPosition.x, myData.myPosition.y });
 			myCircleCollider->SetPosition({ myData.myPosition.x, myData.myPosition.y });
 	}
-	if ()
 }
 void Player::Draw()
 {
