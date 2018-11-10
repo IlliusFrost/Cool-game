@@ -3,11 +3,11 @@ namespace Tga2D
 {
 	class CSprite;
 }
-class Planet;
 class InputHandler;
 class StateStack;
 class PickUp;
 class Player;
+class PlanetManager;
 class CGameWorld
 {
 public:
@@ -23,4 +23,6 @@ private:
 	Planet* myTestPlanet;
 	Player* myPlayer;
 	PickUp* myTestPickUp;
+	PlanetManager* myPlanetManager;
+	Player myPlayer;
 };
