@@ -110,37 +110,36 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 		float mousePosX = static_cast<float>(anInputHandler->GetMousePosX()) / Tga2D::CEngine::GetInstance()->GetWindowSize().x;
 		float mousePosY = static_cast<float>(anInputHandler->GetMousePosY()) / Tga2D::CEngine::GetInstance()->GetWindowSize().y;
 		myData.myPosition = { mousePosX, mousePosY };
+		myData.mySprite->SetPosition({ myData.myPosition.x, myData.myPosition.y });
+		myCircleCollider->SetPosition({ myData.myPosition.x, myData.myPosition.y });
 		myData.myVelocity = { 0.f, 0.f };
 		myData.myGravityVelocity = { 0.f, 0.f };
-		isGrounded = false;
+		myData.isGrounded = false;
 	}
+	
 
-	if (myData.myVelocity.x > myData.myVelocityCap)
-		myData.myVelocity.x = myData.myVelocityCap;
-	if (myData.myVelocity.y > myData.myVelocityCap)
-		myData.myVelocity.y = myData.myVelocityCap;
-	if (myData.myGravityVelocity.x > myData.myVelocityCap)
-		myData.myGravityVelocity.x = myData.myVelocityCap;
-	if (myData.myGravityVelocity.y > myData.myVelocityCap)
-		myData.myGravityVelocity.y = myData.myVelocityCap;
-	if (myData.myVelocity.x < -myData.myVelocityCap)
-		myData.myVelocity.x = -myData.myVelocityCap;
-	if (myData.myVelocity.y < -myData.myVelocityCap)
-		myData.myVelocity.y = -myData.myVelocityCap;
-	if (myData.myGravityVelocity.x < -myData.myVelocityCap)
-		myData.myGravityVelocity.x = -myData.myVelocityCap;
-	if (myData.myGravityVelocity.y < -myData.myVelocityCap)
-		myData.myGravityVelocity.y = -myData.myVelocityCap;
+		if (myData.myVelocity.x > myData.myVelocityCap)
+			myData.myVelocity.x = myData.myVelocityCap;
+		if (myData.myVelocity.y > myData.myVelocityCap)
+			myData.myVelocity.y = myData.myVelocityCap;
+		if (myData.myGravityVelocity.x > myData.myVelocityCap)
+			myData.myGravityVelocity.x = myData.myVelocityCap;
+		if (myData.myGravityVelocity.y > myData.myVelocityCap)
+			myData.myGravityVelocity.y = myData.myVelocityCap;
+		if (myData.myVelocity.x < -myData.myVelocityCap)
+			myData.myVelocity.x = -myData.myVelocityCap;
+		if (myData.myVelocity.y < -myData.myVelocityCap)
+			myData.myVelocity.y = -myData.myVelocityCap;
+		if (myData.myGravityVelocity.x < -myData.myVelocityCap)
+			myData.myGravityVelocity.x = -myData.myVelocityCap;
+		if (myData.myGravityVelocity.y < -myData.myVelocityCap)
+			myData.myGravityVelocity.y = -myData.myVelocityCap;
 
-	myData.myPosition += myData.myVelocity;
-	myData.myPosition += myData.myGravityVelocity;
-	myData.mySprite->SetPosition({ myData.myPosition.x, myData.myPosition.y });
-	myCircleCollider->SetPosition({ myData.myPosition.x, myData.myPosition.y});
-	if (isGrounded == true)
-	{
-		myData.myVelocity = { 0,0 };
-		myData.myGravityVelocity = { 0,0 };
-	}
+			myData.myPosition += myData.myVelocity;
+			myData.myPosition += myData.myGravityVelocity;
+			myData.mySprite->SetPosition({ myData.myPosition.x, myData.myPosition.y });
+			myCircleCollider->SetPosition({ myData.myPosition.x, myData.myPosition.y });
+	
 }
 void Player::Draw()
 {
