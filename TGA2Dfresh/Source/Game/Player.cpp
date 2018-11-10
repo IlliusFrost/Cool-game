@@ -9,6 +9,9 @@
 
 Player::Player(Vector2f aPosition, Sprite aSprite)
 {
+	myPosition = aPosition;
+	mySprite = aSprite;
+	mySprite->SetPivot({ 0.5f,0.5f });
 	myData.myPosition = aPosition;
 	myData.mySprite = aSprite;
 	myData.mySprite->SetPivot({ 0.5f,0.5f });
@@ -19,10 +22,10 @@ Player::Player(Vector2f aPosition, Sprite aSprite)
 	myData.myVelocityIncrement = 0.01f;
 
 	myCircleCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.1f, CollisionFlag::ePlayer, &myData);
-	myCircleCollider->SetCollisionEvent([]()
+	myCircleCollider->SetCollisionEvent([this]()
 	{
-		std::cout << "Player Collided with pickup!" << std::endl;
-		// myscore ++
+		std::cout << "Player Collided with pickup and gained 5 mass! Player now has " << myMass << " mass." << std::endl;
+		myMass += 5;
 	}, CollisionFlag::ePickup);
 	myCircleCollider->SetCollisionEvent([]()
 	{

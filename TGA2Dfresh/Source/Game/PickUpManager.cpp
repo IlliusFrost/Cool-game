@@ -7,10 +7,22 @@ PickUpManager::PickUpManager()
 }
 void PickUpManager::Update()
 {
-	for (int i = 0; i < myPickUps.size(); ++i)
-	{
-		//myPickUps[i]->Update();
-	}
+	
+
+		for (int i = 0; i < myPickUps.size(); ++i)
+		{
+			std::cout << myPickUps.size() << " " << i << std::endl;
+			if (myPickUps[i]->GetIfIsRemoved())
+			{
+				std::cout << "This Happens!" << std::endl;
+				myPickUps.erase(myPickUps.begin() + i);
+				myPickUps.shrink_to_fit();
+				i--;
+			}
+			//myPickUps[i]->Update();
+		}
+
+
 }
 void PickUpManager::Draw()
 {

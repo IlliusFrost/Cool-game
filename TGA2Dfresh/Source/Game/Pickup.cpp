@@ -7,7 +7,15 @@ void PickUp::Draw()
 {
 	myData.mySprite->Render();
 }
-
+bool PickUp::GetIfIsRemoved()
+{
+	return isRemoved;
+}
+PickUp::~PickUp()
+{
+	SAFE_DELETE(myCircleCollider);
+	SAFE_DELETE(mySprite);
+}
 PickUp::PickUp(Vector2f aPosition, Sprite aSprite)
 {
 	myData.myPosition = aPosition;
@@ -17,14 +25,9 @@ PickUp::PickUp(Vector2f aPosition, Sprite aSprite)
 	myCircleCollider = new CircleCollider(Vector2f(myData.myPosition.x, myData.myPosition.y), 0.1f, CollisionFlag::ePickup, &myData);
 	myCircleCollider->SetCollisionEvent([this]() 
 	{ 
-		std::cout << "Pickup Collided with player!" << std::endl; 
-		// ta bort pickup
+		std::cout << "Pickup Collided with player, it was removed!" << std::endl; 
+		isRemoved = true;
 	}, CollisionFlag::ePlayer);
+	myCircleCollider->AddFlag(CollisionFlag::ePlayer);
 	ColliderManager::GetInstance()->RegisterCollider(myCircleCollider);
-}
-
-void PickUp::OnPickUp(Player* aPlayerPickingUp)
-{
-	aPlayerPickingUp->ModifyMass(5);
-	
 }

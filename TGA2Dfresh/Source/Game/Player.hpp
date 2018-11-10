@@ -20,6 +20,11 @@ public:
 	void ModifyMass(int anAmountToModify);
 	Vector2f GetPosition();
 private:
+	Vector2f myPosition = { 0, 0 };
+	Vector2f myVelocity = { 0,0 };
+	Sprite mySprite;
+	int myMass = 0;
+	bool isGrounded = false;
 	CircleCollider* myCircleCollider;
 	ObjectData myData;
 };

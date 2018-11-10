@@ -65,3 +65,6 @@ TGA2Dfresh/Source/Game/Game.vcxproj.filters
 *.idb
 *.log
 *.pdb
+TGA2Dfresh/Source/CommonUtilities/Intermediate/CommonUtilities.idb
+*.idb
+*.pdb

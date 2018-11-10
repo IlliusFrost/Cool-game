@@ -59,7 +59,6 @@ void ColliderManager::Update(float aDt)
 						{
 							myColliders[i]->CollisionEvent(myColliders[j]->myFlag);
 
-
 							if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
 								myColliders[j]->myFlag == CollisionFlag::ePlanet)
 							{
@@ -79,7 +78,6 @@ void ColliderManager::Update(float aDt)
 
 							}
 						}
-
 					for (int a = 0; a < myColliders[j]->myCanCollideWith.size(); a++)
 						if (myColliders[j]->myCanCollideWith[a] == myColliders[i]->myFlag)
 							myColliders[j]->CollisionEvent(myColliders[i]->myFlag);

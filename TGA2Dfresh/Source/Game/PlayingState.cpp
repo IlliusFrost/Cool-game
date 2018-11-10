@@ -67,6 +67,7 @@ bool PlayState::Update(float aDeltaTime)
 	myPlayer->Draw();
 	myPlanetManager->Update();
 	//myPlanetManager->PrintPlanetsData();
+	myTestPickUp->Update();
 	myTestPickUp->Draw();
 	ColliderManager::GetInstance()->Update(aDeltaTime);
 	return true;

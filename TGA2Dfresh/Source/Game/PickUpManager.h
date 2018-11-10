@@ -13,4 +13,5 @@ public:
 	PickUpManager();
 private:
 	std::vector<PickUp*> myPickUps = {};
+	bool isDoneLooping = false;
 };
