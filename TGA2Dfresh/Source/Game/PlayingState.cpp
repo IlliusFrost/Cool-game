@@ -44,7 +44,7 @@ void PlayState::Init()
 
 bool PlayState::Update(float aDeltaTime)
 {
-	if (myInputHandler->IsKeyDown(InputHandler::Mouse::LeftMouseButton))
+	/*if (myInputHandler->IsKeyDown(InputHandler::Mouse::LeftMouseButton))
 	{
 		float mousePosX = static_cast<float>(myInputHandler->GetMousePosX()) / Tga2D::CEngine::GetInstance()->GetWindowSize().x;
 		float mousePosY = static_cast<float>(myInputHandler->GetMousePosY()) / Tga2D::CEngine::GetInstance()->GetWindowSize().y;
@@ -53,7 +53,7 @@ bool PlayState::Update(float aDeltaTime)
 
 	Vector2f leftstickVal = myInputHandler->GetXboxLeftStick(0) * aDeltaTime;
 	leftstickVal += {myTga2dLogoSprite->GetPosition().x, myTga2dLogoSprite->GetPosition().y};
-	myTga2dLogoSprite->SetPosition({ leftstickVal.x, leftstickVal.y });
+	myTga2dLogoSprite->SetPosition({ leftstickVal.x, leftstickVal.y });*/
 
 	//std::cout << myInputHandler->GetXboxLeftStick(0).x << " : " << myInputHandler->GetXboxLeftStick(0).y << std::endl;
 
