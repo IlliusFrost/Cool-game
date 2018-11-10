@@ -18,7 +18,7 @@ void Planet::Init(const char* aString, Vector2f aPos)
 	myPlanetData.mySprite->SetPivot({ 0.5f, 0.5f });
 	myPlanetData.myRadius = .041f;
 	myPlanetData.myPosition = aPos;
-	myFieldData.mySprite = new Tga2D::CSprite(aString);
+	myFieldData.mySprite = new Tga2D::CSprite("sprites/GravityField.png");
 	myFieldData.mySprite->SetPivot({ 0.5f, 0.5f });
 	myFieldData.myRadius = .18f;
 	myFieldData.myPosition = aPos;
@@ -28,6 +28,7 @@ void Planet::Init(const char* aString, Vector2f aPos)
 	ColliderManager::GetInstance()->RegisterCollider(myCollider);
 	ColliderManager::GetInstance()->RegisterCollider(myGravityCollider);
 	myPlanetData.mySprite->SetPosition({ myPlanetData.myPosition.x,myPlanetData.myPosition.y });
+	myFieldData.mySprite->SetPosition({ myFieldData.myPosition.x, myFieldData.myPosition.y });
 }
 void Planet::Update()
 {
@@ -36,6 +37,7 @@ void Planet::Update()
 
 void Planet::Draw()
 {
+	myFieldData.mySprite->Render();
 	myPlanetData.mySprite->Render();
 }
 
