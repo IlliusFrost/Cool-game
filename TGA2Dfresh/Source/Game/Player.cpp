@@ -80,5 +80,5 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 }
 void Player::Draw()
 {
-	//mySprite->Render();
+	mySprite->Render();
 }

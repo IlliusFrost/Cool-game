@@ -13,6 +13,7 @@
 #include "Pickup.h"
 #include "Planet.hpp"
 #include "PlayingState.h"
+#include "PickUpManager.h"
 
 CGameWorld::CGameWorld()
 {
@@ -25,7 +26,6 @@ CGameWorld::~CGameWorld()
 	SAFE_DELETE(myTga2dLogoSprite);
 	SAFE_DELETE(myStateStack);
 	ColliderManager::Destroy();
-	//SAFE_DELETE(myTestPlanet);
 	SAFE_DELETE(myTestPickUp);
 	SAFE_DELETE(myPlanetManager);
 }
@@ -35,7 +35,7 @@ void CGameWorld::Init(InputHandler* aInputHandler)
 	ColliderManager::Create();
 	ColliderManager::GetInstance()->Init();
 
-	CircleCollider* collider1 = new CircleCollider(Vector2f( 0.5f, 0.5f ), 0.1f);
+	CircleCollider* collider1 = new CircleCollider(Vector2f(0.5f, 0.5f), 0.1f);
 	CircleCollider* collider2 = new CircleCollider(Vector2f(0.3f, 0.5f), 0.1f);
 
 	collider1->SetCollisionEvent([]() { std::cout << "<collider1> collided with <collider2>!" << std::endl; });
@@ -55,6 +55,12 @@ void CGameWorld::Init(InputHandler* aInputHandler)
 	myTga2dLogoSprite->SetPivot({ 0.5f, 0.5f });
 	myTga2dLogoSprite->SetPosition({ 0.5f, 0.5f });
 
+	//myTestPlanet = new Planet(Vector2f(0.25f, 0.25f), new Tga2D::CSprite("sprites/PlanetRed.dds"));
+	myPlayer = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));
+	myTestPickUp = new PickUpManager();
+	myPlayer = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));
+	myTestPickUp->SpawnPickUp();
+
 	/*myTestPlanet->mySprite = new Tga2D::CSprite("sprites/PlanetRed.dds");
 	myTestPlanet->mySprite->SetPivot({ 0.5f, 0.5f });
 	myTestPlanet->mySprite->SetPosition({ 0.5f, 0.5f });
@@ -63,8 +69,12 @@ void CGameWorld::Init(InputHandler* aInputHandler)
 	myPlayer = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));
 	myTestPickUp =new PickUp(Vector2f(0.5f, 0.5f), new Tga2D::CSprite("sprites/power.png"));
 	myPlayer = Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));*/
-}
 
+
+	myPlayer = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));
+	myTestPickUp = new PickUpManager();
+	myTestPickUp->SpawnPickUp();
+}
 
 void CGameWorld::Update(float aTimeDelta)
 {
@@ -87,11 +97,13 @@ void CGameWorld::Update(float aTimeDelta)
 		Tga2D::CEngine::Shutdown();
 	}
 	myTga2dLogoSprite->Render();
-	/*myPlayer->Update(myInputHandler, aTimeDelta);
-	myPlayer->Draw();*/
-	myTestPickUp->Draw();
+
 	//myTestPlanet->Render();
 	//myTga2dLogoSprite->Render();
+	myPlayer->Update(myInputHandler, aTimeDelta);
+	myPlayer->Draw();
 	myPlanetManager->Update();
+	//myPlanetManager->PrintPlanetsData();
+	myTestPickUp->Draw();
 	ColliderManager::GetInstance()->Update(aTimeDelta);
 }

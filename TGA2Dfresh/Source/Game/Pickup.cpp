@@ -2,10 +2,10 @@
 #include <iostream>
 #include "Pickup.h"
 #include "Player.hpp"
-
+#include "ColliderManager.h"
 void PickUp::Draw()
 {
-	//mySprite->Render();
+	mySprite->Render();
 }
 
 PickUp::PickUp(Vector2f aPosition, Sprite aSprite)
@@ -14,10 +14,16 @@ PickUp::PickUp(Vector2f aPosition, Sprite aSprite)
 	mySprite = aSprite;
 	mySprite->SetPivot({ 0.5f, 0.5f });
 	mySprite->SetPosition({ myPosition.x,myPosition.y });
+	myCircleCollider = new CircleCollider(Vector2f(0.5f, 0.5f), 0.1f);
+	myCircleCollider->SetCollisionEvent([]() 
+	{ 
+		std::cout << "Pickup Collider!" << std::endl; 
+	});
+	ColliderManager::GetInstance()->RegisterCollider(myCircleCollider);
 }
 
 void PickUp::OnPickUp(Player* aPlayerPickingUp)
 {
 	aPlayerPickingUp->ModifyMass(5);
-	//Remove pickup
+	
 }

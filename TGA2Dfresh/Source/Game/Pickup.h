@@ -15,6 +15,6 @@ public:
 	PickUp();
 private:
 	Vector2f myPosition;
-	CircleCollider* myCollider;
+	CircleCollider* myCircleCollider;
 	Sprite mySprite;
 };

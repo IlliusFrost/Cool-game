@@ -135,6 +135,7 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="ColliderManager.h" />
     <ClInclude Include="Pickup.h" />
+    <ClInclude Include="PickUpManager.h" />
     <ClInclude Include="Planet.hpp" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameWorld.h" />
@@ -152,6 +153,7 @@
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="ColliderManager.cpp" />
     <ClCompile Include="Pickup.cpp" />
+    <ClCompile Include="PickUpManager.cpp" />
     <ClCompile Include="Planet.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameWorld.cpp" />

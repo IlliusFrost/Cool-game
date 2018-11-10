@@ -66,6 +66,10 @@
     <ClInclude Include="StateStackProxy.h" />
     <ClInclude Include="Pickup.h" />
     <ClInclude Include="PlanetManager.hpp" />
+<<<<<<< HEAD
+    <ClInclude Include="PickUpManager.h" />
+=======
+>>>>>>> 9f726603876e219f39bbcaf5b5737cb1e22f1cd4
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -105,8 +109,12 @@
     <ClCompile Include="StateStackProxy.cpp" />
     <ClCompile Include="Pickup.cpp" />
     <ClCompile Include="PlanetManager.cpp" />
+<<<<<<< HEAD
+    <ClCompile Include="PickUpManager.cpp" />
+=======
     <ClCompile Include="GameWorld.cpp">
       <Filter>States</Filter>
     </ClCompile>
+>>>>>>> 9f726603876e219f39bbcaf5b5737cb1e22f1cd4
   </ItemGroup>
 </Project>
