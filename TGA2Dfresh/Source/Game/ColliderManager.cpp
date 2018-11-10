@@ -54,8 +54,13 @@ void ColliderManager::Update(float aDt)
 			{
 				if (myColliders[i]->CollidesWith(*myColliders[j]))
 				{
-					myColliders[i]->CollisionEvent();
-					myColliders[j]->CollisionEvent();
+					for (int a = 0; a < myColliders[i]->myCanCollideWith.size(); a++)
+						if (myColliders[i]->myCanCollideWith[a] == myColliders[i]->myFlag)
+							myColliders[i]->CollisionEvent();
+
+					for (int a = 0; a < myColliders[i]->myCanCollideWith.size(); a++)
+						if (myColliders[i]->myCanCollideWith[a] == myColliders[i]->myFlag)
+							myColliders[j]->CollisionEvent();
 				}
 			}
 		}

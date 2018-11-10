@@ -12,10 +12,12 @@ Player::Player(Vector2f aPosition, Sprite aSprite)
 	mySprite = aSprite;
 	mySprite->SetPivot({ 0.5f,0.5f });
 	myCircleCollider = new CircleCollider(Vector2f(myPosition.x, myPosition.y), 0.01f);
+	myCircleCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.01f, CollisionFlag::ePlayer);
 	myCircleCollider->SetCollisionEvent([]()
 	{
 		std::cout << "Player Collider!" << std::endl;
 	});
+	myCircleCollider->AddFlag(CollisionFlag::ePickup);
 	ColliderManager::GetInstance()->RegisterCollider(myCircleCollider);
 }
 
