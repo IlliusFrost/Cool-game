@@ -3,6 +3,7 @@
 #include "Player.hpp"
 #include "Planet.hpp"
 #include "Pickup.h"
+#include <tga2d/engine.h>
 
 CircleCollider::CircleCollider(Vector2f aPos, float aRadius, CollisionFlag aFlag, ObjectData* myData) :
 	myPos	 (aPos),
@@ -19,13 +20,17 @@ CircleCollider::~CircleCollider()
 bool CircleCollider::CollidesWith(Vector2f aPoint)
 {
 	Vector2f delta = myPos - aPoint;
+	delta.x /= Tga2D::CEngine::GetInstance()->GetWindowRatio() / 2;
+	delta.y *= Tga2D::CEngine::GetInstance()->GetWindowRatioInversed();
 	return delta.Length() < myRadius;
 }
 
 bool CircleCollider::CollidesWith(CircleCollider aCircle)
 {
 	Vector2f delta = myPos - aCircle.myPos;
-	return delta.Length() < myRadius + aCircle.myRadius;
+	delta.x /= Tga2D::CEngine::GetInstance()->GetWindowRatio() / 2;
+	delta.y *= Tga2D::CEngine::GetInstance()->GetWindowRatioInversed();
+	return delta.Length() < (myRadius + aCircle.myRadius);
 }
 
 void CircleCollider::SetCollisionEvent(std::function<void()> aFunc, CollisionFlag aFlag)
