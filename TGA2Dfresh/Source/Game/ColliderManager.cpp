@@ -59,13 +59,12 @@ void ColliderManager::Update(float aDt)
 						{
 							myColliders[i]->CollisionEvent(myColliders[j]->myFlag);
 
-							/*if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
+							if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
 								myColliders[j]->myFlag == CollisionFlag::ePlanet)
 							{
-								myColliders[i]->myObjectData->myVelocity = { 0.f, 0.f };
 								myColliders[i]->myObjectData->isGrounded = true;
 							}
-							else */if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
+							else if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
 								myColliders[j]->myFlag == CollisionFlag::eGravitationField)
 							{
 								Vector2f fieldPos = myColliders[j]->myObjectData->myPosition;
