@@ -66,7 +66,7 @@ void Player::ModifyMass(int anAmountToModify)
 void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 {
 #ifndef _DEBUG
-	myData.myVelocity += (anInputHandler->GetXboxLeftStick(0) / 10.0f) * aTimeDelta;
+	myData.myVelocity += (anInputHandler->GetXboxLeftStick(0) / 10.0f) * aTimeDelta / 100.f;
 #endif
 	Vector2f delta = myData.myPosition - myData.myVelocity;
 
