@@ -58,7 +58,7 @@ void CGameWorld::Update(float aTimeDelta)
 		Tga2D::CEngine::Shutdown();
 	}
 	myTga2dLogoSprite->Render();
-	myPlayer.Update(myInputHandler);
+	myPlayer.Update(myInputHandler, aTimeDelta);
 	myPlayer.Draw();
 	//myTestPlanet->Render();
 	//myTga2dLogoSprite->Render();
