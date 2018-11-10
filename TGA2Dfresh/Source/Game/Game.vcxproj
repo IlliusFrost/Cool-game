@@ -132,6 +132,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CircleCollider.hpp" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="ColliderManager.h" />
     <ClInclude Include="Pickup.h" />
     <ClInclude Include="PickUpManager.h" />
     <ClInclude Include="Planet.hpp" />
@@ -148,6 +150,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CircleCollider.cpp" />
+    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="ColliderManager.cpp" />
     <ClCompile Include="Pickup.cpp" />
     <ClCompile Include="PickUpManager.cpp" />
     <ClCompile Include="Planet.cpp" />

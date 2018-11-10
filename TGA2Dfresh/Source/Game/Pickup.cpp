@@ -5,7 +5,7 @@
 
 void PickUp::Draw()
 {
-	mySprite->Render();
+	//mySprite->Render();
 }
 
 PickUp::PickUp(Vector2f aPosition, Sprite aSprite)

@@ -14,6 +14,8 @@
 #include "../CommonUtilities/Math/Vector.hpp"
 #include "../CommonUtilities/Containers/GrowingArray.hpp"
 #include <tga2d/sprite/sprite.h>
+#include <assert.h>
+#include <functional>
 
 typedef CommonUtilities::Vector2<float> Vector2f;
 typedef CommonUtilities::Vector3<float> Vector3f;
