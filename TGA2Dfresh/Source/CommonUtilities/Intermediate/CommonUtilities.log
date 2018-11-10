@@ -1,5 +1,4 @@
 ﻿  stdafx.cpp
   InputHandler.cpp
   Timer.cpp
-  Generating Code...
-  CommonUtilities.vcxproj -> C:\Users\ACA_lokal\Documents\GitHub\Cool-game\TGA2Dfresh\Source\..\Lib\CommonUtilities_Debug.lib
+  CommonUtilities.vcxproj -> C:\Users\ACA_lokal\Documents\GitHub\Cool-game\TGA2Dfresh\Source\..\Lib\CommonUtilities_Release.lib
