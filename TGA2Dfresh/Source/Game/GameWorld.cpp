@@ -57,12 +57,6 @@ void CGameWorld::Init(InputHandler* aInputHandler)
 
 	myPlayer = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));
 	myTestPickUp = new PickUpManager();
-	myPlayer = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));
-	myTestPickUp->SpawnPickUp();
-
-
-	myPlayer = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));
-	myTestPickUp = new PickUpManager();
 	myTestPickUp->SpawnPickUp();
 }
 

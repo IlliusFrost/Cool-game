@@ -10,6 +10,7 @@ Player::Player(Vector2f aPosition, Sprite aSprite)
 {
 	myPosition = aPosition;
 	mySprite = aSprite;
+	mySprite->SetPivot({ 0.5f,0.5f });
 	myCircleCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.01f, CollisionFlag::ePlayer);
 	myCircleCollider->SetCollisionEvent([]()
 	{
@@ -40,8 +41,8 @@ void Player::ModifyMass(int anAmountToModify)
 
 void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 {
-	
-	myVelocity.x = anInputHandler->GetXboxLeftStick(0).x * aTimeDelta;
+
+	myVelocity += (anInputHandler->GetXboxLeftStick(0) / 100.0f) * aTimeDelta;
 	if (anInputHandler->IsKeyDown(InputHandler::Keys::Left_Arrow))
 	{
 		myVelocity.x -= 0.1f * aTimeDelta;
@@ -59,7 +60,8 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 
 	//myVelocity.y -= 0.5f;
 	myPosition += myVelocity;
-	//mySprite->SetPosition({ myPosition.x, myPosition.y });
+	mySprite->SetPosition({ myPosition.x, myPosition.y });
+	myCircleCollider->SetPosition({myPosition.x, myPosition.y});
 
 	/*if (myVelocity.x >= 1)
 	{
