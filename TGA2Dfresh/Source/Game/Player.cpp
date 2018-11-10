@@ -131,8 +131,6 @@ if (isGrounded)
 	myData.myPosition += myData.myGravityVelocity;
 	myData.mySprite->SetPosition({ myData.myPosition.x, myData.myPosition.y });
 	myCircleCollider->SetPosition({ myData.myPosition.x, myData.myPosition.y});
-	myData.myGravityVelocity = { 0,0 };
-	myData.myVelocity = { 0,0 };
 
 }
 void Player::Draw()
