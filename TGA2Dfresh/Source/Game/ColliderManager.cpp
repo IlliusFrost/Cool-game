@@ -59,22 +59,25 @@ void ColliderManager::Update(float aDt)
 						{
 							myColliders[i]->CollisionEvent(myColliders[j]->myFlag);
 
-							/*if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
+							if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
 								myColliders[j]->myFlag == CollisionFlag::ePlanet)
 							{
 								myColliders[i]->myObjectData->myVelocity = { 0.f, 0.f };
 								myColliders[i]->myObjectData->isGrounded = true;
 							}
-							else */if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
+							if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
 								myColliders[j]->myFlag == CollisionFlag::eGravitationField)
 							{
 								Vector2f fieldPos = myColliders[j]->myObjectData->myPosition;
 								Vector2f playerPos = myColliders[i]->myObjectData->myPosition;
 								Vector2f delta = playerPos - fieldPos;
-								myColliders[i]->myObjectData->myGravityVelocity -= {(1 / (delta.x * delta.x)) * (aDt / 100.f), (1 / (delta.y * delta.y)) * (aDt / 100.f)};
 								delta.Normalize();
+								if (myColliders[i]->myObjectData->isGrounded == false)
+								{
+									myColliders[i]->myObjectData->myGravityVelocity -= (delta * aDt) / 15.f;
 
-								myColliders[i]->myObjectData->myGravityVelocity -= (delta * aDt) / 20.f;
+								}
+
 							}
 							else
 							{

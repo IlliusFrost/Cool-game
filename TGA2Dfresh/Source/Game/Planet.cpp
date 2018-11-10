@@ -16,7 +16,7 @@ void Planet::Init(const char* aString, Vector2f aPos)
 {
 	myPlanetData.mySprite = new Tga2D::CSprite(aString);
 	myPlanetData.mySprite->SetPivot({ 0.5f, 0.5f });
-	myPlanetData.myRadius = .03f;
+	myPlanetData.myRadius = .041f;
 	myPlanetData.myPosition = aPos;
 	myFieldData.mySprite = new Tga2D::CSprite(aString);
 	myFieldData.mySprite->SetPivot({ 0.5f, 0.5f });

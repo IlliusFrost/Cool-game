@@ -23,7 +23,7 @@ Player::Player(Vector2f aPosition, Sprite aSprite)
 	myData.myVelocityCap = 0.025f;
 	myData.myVelocityIncrement = 0.001f;
 
-	myCircleCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.03f, CollisionFlag::ePlayer, &myData);
+	myCircleCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.012f, CollisionFlag::ePlayer, &myData);
 	myCircleCollider->SetCollisionEvent([this]()
 	{
 		//std::cout << "Player Collided with pickup and gained 5 mass! Player now has " << myMass << " mass." << std::endl;
