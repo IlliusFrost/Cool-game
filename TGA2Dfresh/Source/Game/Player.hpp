@@ -16,6 +16,7 @@ public:
 	void Update(InputHandler* anInputHandler, float aTimeDelta);
 	void Draw();
 	int GetMass();
+	void ModifyMass(int anAmountToModify);
 	Vector2f GetPosition();
 private:
 	Vector2f myPosition = { 0, 0 };

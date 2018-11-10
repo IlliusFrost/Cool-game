@@ -8,6 +8,7 @@
 #include <iostream>
 #include "Player.hpp"
 #include "StateStack.h"
+#include "Pickup.h"
 
 CGameWorld::CGameWorld()
 {
@@ -19,6 +20,8 @@ CGameWorld::~CGameWorld()
 {
 	SAFE_DELETE(myTga2dLogoSprite);
 	SAFE_DELETE(myStateStack);
+	SAFE_DELETE(myTestPlanet);
+	SAFE_DELETE(myTestPickUp);
 	SAFE_DELETE(myPlanetManager);
 }
 
@@ -32,6 +35,9 @@ void CGameWorld::Init(InputHandler* aInputHandler)
 	myTga2dLogoSprite->SetPivot({ 0.5f, 0.5f });
 	myTga2dLogoSprite->SetPosition({ 0.5f, 0.5f });
 
+	myTestPlanet = new Planet(Vector2f(0.25f, 0.25f), new Tga2D::CSprite("sprites/PlanetRed.dds"));
+	myPlayer = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));
+	myTestPickUp =new PickUp(Vector2f(0.5f, 0.5f), new Tga2D::CSprite("sprites/power.png"));
 	myPlayer = Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));
 }
 
@@ -59,6 +65,11 @@ void CGameWorld::Update(float aTimeDelta)
 		Tga2D::CEngine::Shutdown();
 	}
 	myTga2dLogoSprite->Render();
+	myPlayer->Update(myInputHandler, aTimeDelta);
+	myPlayer->Draw();
+	myTestPickUp->Draw();
+	//myTestPlanet->Render();
+	//myTga2dLogoSprite->Render();
 	myPlayer.Update(myInputHandler, aTimeDelta);
 	myPlayer.Draw();
 	myPlanetManager->Update();
