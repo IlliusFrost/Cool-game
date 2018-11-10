@@ -3,9 +3,6 @@
 
 class StateStack;
 class Player;
-class PlayerController;
-class EntitySystem;
-class CollisonManager;
 
 enum class Level
 {
@@ -13,7 +10,12 @@ enum class Level
 	Level2,
 	Level3
 };
-
+class InputHandler;
+class StateStack;
+class PickUpManager;
+class Player;
+class PlanetManager;
+class Planet;
 class PlayState : public State
 {
 public:
@@ -25,7 +27,7 @@ public:
 		Level3
 	};
 public:
-	PlayState(StateStack* aStateStack);
+	PlayState(StateStack* aStateStack, InputHandler* aInputHandler);
 	~PlayState();
 
 	void Init() override;
@@ -35,10 +37,15 @@ public:
 	bool PassThroughRender() const override;
 	bool PassThroughUpdate() const override;
 private:
-	StateStack* myStateStack;
-
 	Level myLevel;
 
 	int myStartSplineIndex;
+
+	Tga2D::CSprite* myTga2dLogoSprite;
+	InputHandler* myInputHandler;
+	StateStack* myStateStack;
+	Player* myPlayer;
+	PickUpManager* myTestPickUp;
+	PlanetManager* myPlanetManager;
 };
 

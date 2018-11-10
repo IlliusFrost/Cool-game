@@ -9,6 +9,7 @@ class PickUpManager;
 class Player;
 class PlanetManager;
 class Planet;
+class PlayState;
 class CGameWorld
 {
 public:

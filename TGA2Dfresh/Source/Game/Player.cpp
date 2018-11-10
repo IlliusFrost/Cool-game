@@ -17,7 +17,6 @@ Player::Player(Vector2f aPosition, Sprite aSprite)
 	{
 		std::cout << "Player Collider!" << std::endl;
 	});
-	//myCircleCollider->AddFlag(CollisionFlag::ePickup);
 	ColliderManager::GetInstance()->RegisterCollider(myCircleCollider);
 }
 
