@@ -75,15 +75,19 @@ void ColliderManager::Update(float aDt)
 								if (myColliders[i]->myObjectData->isGrounded == false)
 								{
 									myColliders[i]->myObjectData->myGravityVelocity -= (delta * aDt) / 15.f;
-
 								}
-
+								else if (myColliders[i]->myObjectData->isGrounded == true)
+								{
+									myColliders[i]->myObjectData->myGravityVelocity += (delta * aDt);
+								}
 							}
 							else
 							{
 								myColliders[i]->myObjectData->myGravityVelocity = { 0.f, 0.f };
+
 							}
 						}
+					
 					for (int a = 0; a < myColliders[j]->myCanCollideWith.size(); a++)
 						if (myColliders[j]->myCanCollideWith[a] == myColliders[i]->myFlag)
 						{
