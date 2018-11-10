@@ -71,7 +71,6 @@ void ColliderManager::Update(float aDt)
 								Vector2f fieldPos = myColliders[j]->myObjectData->myPosition;
 								Vector2f playerPos = myColliders[i]->myObjectData->myPosition;
 								Vector2f delta = playerPos - fieldPos;
-								myColliders[i]->myObjectData->myGravityVelocity -= {(1 / (delta.x * delta.x)) * (aDt / 100.f), (1 / (delta.y * delta.y)) * (aDt / 100.f)};
 								delta.Normalize();
 
 								myColliders[i]->myObjectData->myGravityVelocity -= (delta * aDt) / 20.f;
