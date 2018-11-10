@@ -60,3 +60,5 @@ TGA2Dfresh/Source/.vs/Application/v15/.suo
 *.idb
 TGA2Dfresh/Source/Game/Game.vcxproj.filters
 TGA2Dfresh/Source/Game/Game.vcxproj.filters
+*.idb
+*.idb
