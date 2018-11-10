@@ -23,9 +23,9 @@ CGameWorld::CGameWorld()
 
 CGameWorld::~CGameWorld() 
 {
-	SAFE_DELETE(myTga2dLogoSprite);
-	//SAFE_DELETE(myStateStack);
 	ColliderManager::Destroy();
+	SAFE_DELETE(myTga2dLogoSprite);
+	SAFE_DELETE(myStateStack);
 	SAFE_DELETE(myTestPickUp);
 	SAFE_DELETE(myPlanetManager);
 }

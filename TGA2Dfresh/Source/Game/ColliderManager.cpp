@@ -55,12 +55,12 @@ void ColliderManager::Update(float aDt)
 				if (myColliders[i]->CollidesWith(*myColliders[j]))
 				{
 					for (int a = 0; a < myColliders[i]->myCanCollideWith.size(); a++)
-						if (myColliders[i]->myCanCollideWith[a] == myColliders[i]->myFlag)
-							myColliders[i]->CollisionEvent();
+						if (myColliders[i]->myCanCollideWith[a] == myColliders[j]->myFlag)
+							myColliders[i]->CollisionEvent(myColliders[j]->myFlag);
 
 					for (int a = 0; a < myColliders[i]->myCanCollideWith.size(); a++)
-						if (myColliders[i]->myCanCollideWith[a] == myColliders[i]->myFlag)
-							myColliders[j]->CollisionEvent();
+						if (myColliders[j]->myCanCollideWith[a] == myColliders[i]->myFlag)
+							myColliders[j]->CollisionEvent(myColliders[i]->myFlag);
 				}
 			}
 		}

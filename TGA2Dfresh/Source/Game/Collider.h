@@ -11,7 +11,7 @@ public:
 	virtual bool CollidesWith(CircleCollider aCircle) = 0;
 	virtual bool CollidesWith(Vector2f aPoint) = 0;
 
-	virtual void CollisionEvent() = 0;
+	virtual void CollisionEvent(CollisionFlag aFlag) = 0;
 protected:
 	CollisionFlag myFlag;
 };
