@@ -1,6 +1,7 @@
 #pragma once
 #include "Collider.h"
 #include "CollisionFlagEnum.h"
+#include <unordered_map>
 
 class CircleCollider : public Collider
 {
@@ -11,15 +12,15 @@ public:
 	bool CollidesWith(Vector2f aPoint) override;
 	bool CollidesWith(CircleCollider aCircle) override;
 
-	void SetCollisionEvent(std::function<void()> aFunc);
+	void SetCollisionEvent(std::function<void()> aFunc, CollisionFlag aFlag);
 	void SetPosition(Vector2f aPos);
 	void AddFlag(CollisionFlag aFlag);
 
 private:
-	void CollisionEvent() override;
+	void CollisionEvent(CollisionFlag aFlag) override;
 	std::vector<CollisionFlag> myCanCollideWith;
 	
 	Vector2f myPos;
 	float myRadius;
-	std::function<void()> myCollisionEvent;
+	std::unordered_map<CollisionFlag, std::function<void()>> myCollisionEvents;
 };

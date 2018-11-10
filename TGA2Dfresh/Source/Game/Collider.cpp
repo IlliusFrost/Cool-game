@@ -23,6 +23,6 @@ bool Collider::CollidesWith(Vector2f aPoint)
 	return false;
 }
 
-void Collider::CollisionEvent()
+void Collider::CollisionEvent(CollisionFlag aFlag)
 {
 }

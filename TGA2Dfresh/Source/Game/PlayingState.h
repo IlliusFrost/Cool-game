@@ -3,9 +3,6 @@
 
 class StateStack;
 class Player;
-class PlayerController;
-class EntitySystem;
-class CollisonManager;
 
 enum class Level
 {

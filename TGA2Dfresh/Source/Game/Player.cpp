@@ -15,9 +15,10 @@ Player::Player(Vector2f aPosition, Sprite aSprite)
 	myCircleCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.1f, CollisionFlag::ePlayer);
 	myCircleCollider->SetCollisionEvent([]()
 	{
-		std::cout << "Player Collider!" << std::endl;
-	});
-	//myCircleCollider->AddFlag(CollisionFlag::ePickup);
+		std::cout << "Player Collided with pickup!" << std::endl;
+		// myscore ++
+	}, CollisionFlag::ePickup);
+	myCircleCollider->AddFlag(CollisionFlag::ePickup);
 	ColliderManager::GetInstance()->RegisterCollider(myCircleCollider);
 }
 

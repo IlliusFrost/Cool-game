@@ -18,9 +18,10 @@ PickUp::PickUp(Vector2f aPosition, Sprite aSprite)
 	myCircleCollider = new CircleCollider(Vector2f(myPosition.x, myPosition.y), 0.1f, CollisionFlag::ePickup);
 	myCircleCollider->SetCollisionEvent([this]() 
 	{ 
-		std::cout << "Pickup Collider!" << std::endl; 
+		std::cout << "Pickup Collided with player!" << std::endl; 
+		// ta bort pickup
 		
-	});
+	}, CollisionFlag::ePlayer);
 	ColliderManager::GetInstance()->RegisterCollider(myCircleCollider);
 }
 

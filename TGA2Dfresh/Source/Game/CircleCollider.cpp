@@ -1,12 +1,14 @@
 #include "stdafx.h"
 #include "CircleCollider.hpp"
+#include "Player.hpp"
+#include "Planet.hpp"
+#include "Pickup.h"
 
 CircleCollider::CircleCollider(Vector2f aPos, float aRadius, CollisionFlag aFlag) : 
 	myPos	 (aPos),
 	myRadius (aRadius)
 {
 	myFlag = aFlag;
-	myCollisionEvent = []() {};
 }
 
 CircleCollider::~CircleCollider()
@@ -25,9 +27,9 @@ bool CircleCollider::CollidesWith(CircleCollider aCircle)
 	return delta.Length() < myRadius + aCircle.myRadius;
 }
 
-void CircleCollider::SetCollisionEvent(std::function<void()> aFunc)
+void CircleCollider::SetCollisionEvent(std::function<void()> aFunc, CollisionFlag aFlag)
 {
-	myCollisionEvent = aFunc;
+	myCollisionEvents[aFlag] = aFunc;
 }
 
 void CircleCollider::SetPosition(Vector2f aPos)
@@ -45,7 +47,7 @@ void CircleCollider::AddFlag(CollisionFlag aFlag)
 	myCanCollideWith.push_back(aFlag);
 }
 
-void CircleCollider::CollisionEvent()
+void CircleCollider::CollisionEvent(CollisionFlag aFlag)
 {
-	myCollisionEvent();
+	myCollisionEvents[aFlag]();
 }
