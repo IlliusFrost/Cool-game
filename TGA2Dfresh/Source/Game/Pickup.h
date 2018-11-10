@@ -10,11 +10,12 @@ class PickUp
 {
 public:
 	void Draw();
-	void OnPickUp(Player* aPlayerPickingUp);
 	PickUp(Vector2f aPosition, Sprite aSprite);
-	PickUp();
+	~PickUp();
+	bool GetIfIsRemoved();
 private:
 	Vector2f myPosition;
 	CircleCollider* myCircleCollider;
 	Sprite mySprite;
+	bool isRemoved = false; 
 };

@@ -22,7 +22,7 @@ private:
 	Vector2f myPosition = { 0, 0 };
 	Vector2f myVelocity = { 0,0 };
 	Sprite mySprite;
-	int myMass;
-	bool isGrounded;
+	int myMass = 0;
+	bool isGrounded = false;
 	CircleCollider* myCircleCollider;
 };

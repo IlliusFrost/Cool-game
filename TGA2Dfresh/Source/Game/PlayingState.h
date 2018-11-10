@@ -25,7 +25,5 @@ private:
 	PickUpManager* myTestPickUp;
 	PlanetManager* myPlanetManager;
 
-	Player* myPlayer;
-
 };
 
