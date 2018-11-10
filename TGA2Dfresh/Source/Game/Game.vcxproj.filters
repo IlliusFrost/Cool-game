@@ -4,6 +4,21 @@
     <Filter Include="Precompiled">
       <UniqueIdentifier>{b07bafa4-d21c-4674-8f50-96a0b05e15ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{d3a7cdb0-a1b6-4dd2-b45f-2f5864c0b897}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{041737fd-b8f6-4d66-b7ba-3e0c818bb1bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateStack">
+      <UniqueIdentifier>{0cc9184e-49ca-41cc-8691-efae7a0133f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{e9652022-02a9-4769-9bb4-c56e058fa12b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{0db0592e-0c0e-4cab-bbc0-e935b78bafe4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -13,9 +28,35 @@
       <Filter>Precompiled</Filter>
     </ClInclude>
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GameWorld.h" />
     <ClInclude Include="resource.h">
       <Filter>Precompiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollider.hpp">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>StateStack</Filter>
+    </ClInclude>
+    <ClInclude Include="StateStack.h">
+      <Filter>StateStack</Filter>
+    </ClInclude>
+    <ClInclude Include="StateStackProxy.h">
+      <Filter>StateStack</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.hpp">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Planet.hpp">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameWorld.h">
+      <Filter>States</Filter>
     </ClInclude>
     <ClInclude Include="Planet.hpp" />
     <ClInclude Include="CircleCollider.hpp" />
@@ -24,12 +65,37 @@
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="StateStackProxy.h" />
     <ClInclude Include="Pickup.h" />
+    <ClInclude Include="PlanetManager.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Precompiled</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Collider.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCollider.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>StateStack</Filter>
+    </ClCompile>
+    <ClCompile Include="StateStack.cpp">
+      <Filter>StateStack</Filter>
+    </ClCompile>
+    <ClCompile Include="StateStackProxy.cpp">
+      <Filter>StateStack</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Planet.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
     <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="Planet.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
@@ -38,5 +104,9 @@
     <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="StateStackProxy.cpp" />
     <ClCompile Include="Pickup.cpp" />
+    <ClCompile Include="PlanetManager.cpp" />
+    <ClCompile Include="GameWorld.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

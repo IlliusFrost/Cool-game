@@ -4,14 +4,10 @@
 
 Planet::Planet()
 {
-
 }
-
-
 
 Planet::~Planet()
 {
-	SAFE_DELETE(myCollider);
 	SAFE_DELETE(mySprite);
 }
 
@@ -37,4 +33,3 @@ Vector2f Planet::GetPos()
 {
 	return myPos;
 }
-

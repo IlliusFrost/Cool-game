@@ -51,7 +51,7 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 
 	//myVelocity.y -= 0.5f;
 	myPosition += myVelocity;
-	mySprite->SetPosition({ myPosition.x, myPosition.y });
+	//mySprite->SetPosition({ myPosition.x, myPosition.y });
 
 	/*if (myVelocity.x >= 1)
 	{
@@ -80,5 +80,5 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 }
 void Player::Draw()
 {
-	mySprite->Render();
+	//mySprite->Render();
 }
