@@ -33,9 +33,10 @@ Player::Player(Vector2f aPosition, Sprite aSprite)
 	{
 		std::cout << "Player Collided with field!" << std::endl;
 	}, CollisionFlag::eGravitationField);
-	myCircleCollider->SetCollisionEvent([]()
+	myCircleCollider->SetCollisionEvent([this]()
 	{
 		std::cout << "Player Collided with planet!" << std::endl;
+		isGrounded = true;
 	}, CollisionFlag::ePlanet);
 	myCircleCollider->AddFlag(CollisionFlag::ePickup);
 	myCircleCollider->AddFlag(CollisionFlag::ePlanet);
@@ -65,8 +66,11 @@ void Player::ModifyMass(int anAmountToModify)
 
 void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 {
-
-	myData.myVelocity += (anInputHandler->GetXboxLeftStick(0) / 10.0f) * aTimeDelta;
+	if (isGrounded)
+	{
+		myData.myVelocity += (anInputHandler->GetXboxLeftStick(0) / 10.0f) * aTimeDelta;
+	}
+	
 	Vector2f delta = myData.myPosition - myData.myVelocity;
 
 	if (myData.myVelocity.Length() < 0.1f)
@@ -86,9 +90,10 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 			myData.myVelocity.y += myData.myVelocityIncrement * aTimeDelta / 3;
 		}
 
-		if (anInputHandler->IsKeyDown(InputHandler::Keys::W))
+		if (anInputHandler->XboxPressed(InputHandler::XboxButton::A,0) && isGrounded == true)
 		{
-			myData.myVelocity.y -= myData.myVelocityIncrement * aTimeDelta / 3;
+			myData.myVelocity += Vector2f{0.01f,0.01f};
+			isGrounded = false;
 		}
 	}
 
@@ -101,36 +106,12 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 		myData.myGravityVelocity = { 0.f, 0.f };
 	}
 
-	//myVelocity.y -= 0.5f;
 	myData.myPosition += myData.myVelocity;
 	myData.myPosition += myData.myGravityVelocity;
 	myData.mySprite->SetPosition({ myData.myPosition.x, myData.myPosition.y });
 	myCircleCollider->SetPosition({ myData.myPosition.x, myData.myPosition.y});
 
-	/*if (myVelocity.x >= 1)
-	{
-		myVelocity.x -= 0.001;
-	}
-	else if (myVelocity.x > 0 || myVelocity.x <0 && myVelocity.x > -1)
-	{
-		myVelocity.x = 0;
-	}
-	else if (myVelocity.x <= -1)
-	{
-		myVelocity.x += 0.001;
-	}
-	if (myVelocity.y >= 1)
-	{
-		myVelocity.y -= 0.001;
-	}
-	else if (myVelocity.y > 0 || myVelocity.y <0 && myVelocity.y > -1)
-	{
-		myVelocity.y = 0;
-	}
-	else if (myVelocity.y <= -1)
-	{
-		myVelocity.y += 0.001;
-	}*/
+
 }
 void Player::Draw()
 {
