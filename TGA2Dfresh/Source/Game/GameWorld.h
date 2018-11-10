@@ -20,9 +20,7 @@ private:
 	Tga2D::CSprite* myTga2dLogoSprite;
 	InputHandler* myInputHandler;
 	StateStack* myStateStack;
-	Planet* myTestPlanet;
 	Player* myPlayer;
 	PickUp* myTestPickUp;
 	PlanetManager* myPlanetManager;
-	Player myPlayer;
 };

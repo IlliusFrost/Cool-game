@@ -10,7 +10,7 @@ public:
 	~PlanetManager();
 	void InitPlanets();
 	void Update();
-
+	void PrintPlanetsData();
 private:
 	std::array<Planet*, 5> myPlanets;
 	const std::array<std::string, 5> mySpriteLocations = {"sprites/PlanetBlue.png", "sprites/PlanetGreen.png", "sprites/PlanetOrange.png", "sprites/PlanetPurple.png", "sprites/PlanetRed.png"};
