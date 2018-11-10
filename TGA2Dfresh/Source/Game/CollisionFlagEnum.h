@@ -4,5 +4,6 @@ enum class CollisionFlag
 {
 	ePlayer,
 	ePlanet,
+	eGravitationField,
 	ePickup
 };

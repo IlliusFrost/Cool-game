@@ -5,16 +5,16 @@
 #include "ColliderManager.h"
 void PickUp::Draw()
 {
-	mySprite->Render();
+	myData.mySprite->Render();
 }
 
 PickUp::PickUp(Vector2f aPosition, Sprite aSprite)
 {
-	myPosition = aPosition;
-	mySprite = aSprite;
-	mySprite->SetPivot({ 0.5f, 0.5f });
-	mySprite->SetPosition({ myPosition.x,myPosition.y });
-	myCircleCollider = new CircleCollider(Vector2f(myPosition.x, myPosition.y), 0.1f, CollisionFlag::ePickup);
+	myData.myPosition = aPosition;
+	myData.mySprite = aSprite;
+	myData.mySprite->SetPivot({ 0.5f, 0.5f });
+	myData.mySprite->SetPosition({ myData.myPosition.x,myData.myPosition.y });
+	myCircleCollider = new CircleCollider(Vector2f(myData.myPosition.x, myData.myPosition.y), 0.1f, CollisionFlag::ePickup, &myData);
 	myCircleCollider->SetCollisionEvent([this]() 
 	{ 
 		std::cout << "Pickup Collided with player!" << std::endl; 

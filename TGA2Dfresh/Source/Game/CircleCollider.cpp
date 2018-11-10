@@ -4,9 +4,10 @@
 #include "Planet.hpp"
 #include "Pickup.h"
 
-CircleCollider::CircleCollider(Vector2f aPos, float aRadius, CollisionFlag aFlag) : 
+CircleCollider::CircleCollider(Vector2f aPos, float aRadius, CollisionFlag aFlag, ObjectData* myData) :
 	myPos	 (aPos),
-	myRadius (aRadius)
+	myRadius (aRadius),
+	myObjectData(myData)
 {
 	myFlag = aFlag;
 }

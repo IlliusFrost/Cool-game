@@ -3,6 +3,7 @@
 #include <..\CommonUtilities\InputHandler.hpp>
 #include "CircleCollider.hpp"
 #include "stdafx.h"
+#include "GameObjectData.h"
 namespace Tga2D
 {
 	class CSprite;
@@ -19,10 +20,6 @@ public:
 	void ModifyMass(int anAmountToModify);
 	Vector2f GetPosition();
 private:
-	Vector2f myPosition = { 0, 0 };
-	Vector2f myVelocity = { 0,0 };
-	Sprite mySprite;
-	int myMass;
-	bool isGrounded;
 	CircleCollider* myCircleCollider;
+	ObjectData myData;
 };

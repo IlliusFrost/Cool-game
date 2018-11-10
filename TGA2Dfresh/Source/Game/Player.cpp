@@ -9,16 +9,27 @@
 
 Player::Player(Vector2f aPosition, Sprite aSprite)
 {
-	myPosition = aPosition;
-	mySprite = aSprite;
-	mySprite->SetPivot({ 0.5f,0.5f });
-	myCircleCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.1f, CollisionFlag::ePlayer);
+	myData.myPosition = aPosition;
+	myData.mySprite = aSprite;
+	myData.mySprite->SetPivot({ 0.5f,0.5f });
+
+	myCircleCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.1f, CollisionFlag::ePlayer, &myData);
 	myCircleCollider->SetCollisionEvent([]()
 	{
 		std::cout << "Player Collided with pickup!" << std::endl;
 		// myscore ++
 	}, CollisionFlag::ePickup);
+	myCircleCollider->SetCollisionEvent([]()
+	{
+		std::cout << "Player Collided with field!" << std::endl;
+	}, CollisionFlag::eGravitationField);
+	myCircleCollider->SetCollisionEvent([]()
+	{
+		std::cout << "Player Collided with planet!" << std::endl;
+	}, CollisionFlag::ePlanet);
 	myCircleCollider->AddFlag(CollisionFlag::ePickup);
+	myCircleCollider->AddFlag(CollisionFlag::ePlanet);
+	myCircleCollider->AddFlag(CollisionFlag::eGravitationField);
 	ColliderManager::GetInstance()->RegisterCollider(myCircleCollider);
 }
 
@@ -28,42 +39,65 @@ Player::Player()
 }
 int Player::GetMass()
 {
-	return myMass;
+	return myData.myMass;
 }
 
 Vector2f Player::GetPosition()
 {
-	return myPosition;
+	return myData.myPosition;
 }
 
 void Player::ModifyMass(int anAmountToModify)
 {
-	myMass += anAmountToModify;
+	myData.myMass += anAmountToModify;
 }
 
 void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 {
 
-	myVelocity += (anInputHandler->GetXboxLeftStick(0) / 100.0f) * aTimeDelta;
-	if (anInputHandler->IsKeyDown(InputHandler::Keys::Left_Arrow))
-	{
-		myVelocity.x -= 0.1f * aTimeDelta;
+	//myData.myVelocity += (anInputHandler->GetXboxLeftStick(0) / 100.0f) * aTimeDelta;
+	Vector2f delta = myData.myPosition - myData.myVelocity;
 
-	}
-	else if (anInputHandler->IsKeyDown(InputHandler::Keys::Right_Arrow))
+	if (myData.myVelocity.Length() < 0.1f)
 	{
-		myVelocity.x += 0.1f * aTimeDelta;
+		if (anInputHandler->IsKeyDown(InputHandler::Keys::A))
+		{
+			myData.myVelocity.x -= 0.1f * aTimeDelta / 3;
+
+		}
+		else if (anInputHandler->IsKeyDown(InputHandler::Keys::D))
+		{
+			myData.myVelocity.x += 0.1f * aTimeDelta / 3;
+		}
+
+		else if (anInputHandler->IsKeyDown(InputHandler::Keys::S))
+		{
+			myData.myVelocity.y += 0.1f * aTimeDelta / 3;
+		}
+
+		else if (anInputHandler->IsKeyDown(InputHandler::Keys::W))
+		{
+			myData.myVelocity.y -= 0.1f * aTimeDelta / 3;
+		}
 	}
 
 	if (anInputHandler->IsKeyDown(InputHandler::Keys::Spacebar))
 	{
-		myVelocity.y = 10;
+		myData.myPosition = { 0.5f, 0.5f };
+	}
+
+	if (anInputHandler->IsKeyDown(InputHandler::Mouse::LeftMouseButton))
+	{
+		float mousePosX = static_cast<float>(anInputHandler->GetMousePosX()) / Tga2D::CEngine::GetInstance()->GetWindowSize().x;
+		float mousePosY = static_cast<float>(anInputHandler->GetMousePosY()) / Tga2D::CEngine::GetInstance()->GetWindowSize().y;
+		myData.myPosition = { mousePosX, mousePosY };
+		myData.myVelocity = { 0.f, 0.f };
 	}
 
 	//myVelocity.y -= 0.5f;
-	myPosition += myVelocity;
-	mySprite->SetPosition({ myPosition.x, myPosition.y });
-	myCircleCollider->SetPosition({myPosition.x, myPosition.y});
+	myData.myPosition += myData.myVelocity;
+	myData.mySprite->SetPosition({ myData.myPosition.x, myData.myPosition.y });
+	myCircleCollider->SetPosition({ myData.myPosition.x, myData.myPosition.y});
 
 	/*if (myVelocity.x >= 1)
 	{
@@ -92,5 +126,5 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 }
 void Player::Draw()
 {
-	mySprite->Render();
+	myData.mySprite->Render();
 }
