@@ -33,7 +33,7 @@ void CGameWorld::Init(InputHandler* aInputHandler)
 	ColliderManager::Create();
 	ColliderManager::GetInstance()->Init();
 
-	CircleCollider* collider1 = new CircleCollider(Vector2f( 0.5f, 0.5f ), 0.1f);
+	CircleCollider* collider1 = new CircleCollider(Vector2f(0.5f, 0.5f), 0.1f);
 	CircleCollider* collider2 = new CircleCollider(Vector2f(0.3f, 0.5f), 0.1f);
 
 	collider1->SetCollisionEvent([]() { std::cout << "<collider1> collided with <collider2>!" << std::endl; });
@@ -53,7 +53,7 @@ void CGameWorld::Init(InputHandler* aInputHandler)
 	myPlayer = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/dude.png"));
 	myTestPickUp = new PickUp(Vector2f(0.5f, 0.5f), new Tga2D::CSprite("sprites/power.png"));
 
-
+}
 
 void CGameWorld::Update(float aTimeDelta)
 {
