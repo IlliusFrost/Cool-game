@@ -68,14 +68,14 @@ void ColliderManager::Update(float aDt)
 							else if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
 								myColliders[j]->myFlag == CollisionFlag::eGravitationField)
 							{
-								Vector2f fieldPos = myColliders[j]->myPos;
-								Vector2f playerPos = myColliders[i]->myPos;
+								Vector2f fieldPos = myColliders[j]->myObjectData->myPosition;
+								Vector2f playerPos = myColliders[i]->myObjectData->myPosition;
 								Vector2f delta = playerPos - fieldPos;
-								myColliders[i]->myObjectData->myGravityVelocity -= delta * (aDt / 100.f);
+								myColliders[i]->myObjectData->myGravityVelocity -= {(1 / (delta.x * delta.x)) * (aDt / 100.f), (1 / (delta.y * delta.y)) * (aDt / 100.f)};
 							}
 							else
 							{
-
+								myColliders[i]->myObjectData->myGravityVelocity = { 0.f, 0.f };
 							}
 						}
 					for (int a = 0; a < myColliders[j]->myCanCollideWith.size(); a++)
