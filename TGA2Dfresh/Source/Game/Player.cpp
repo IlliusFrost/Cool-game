@@ -17,21 +17,21 @@ Player::Player(Vector2f aPosition, Sprite aSprite)
 	myData.mySprite->SetPivot({ 0.5f,0.5f });
 
 	myData.myGravityVelocity = { 0.f, 0.f };
-	myData.myGravityVelocityCap = 0.1f;
-	myData.myGravityVelocityIncrement = 0.01f;
+	myData.myGravityVelocityCap = 0.025f;
+	myData.myGravityVelocityIncrement = 0.001f;
 
-	myData.myVelocityCap = 0.1f;
-	myData.myVelocityIncrement = 0.01f;
+	myData.myVelocityCap = 0.025f;
+	myData.myVelocityIncrement = 0.001f;
 
 	myCircleCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.03f, CollisionFlag::ePlayer, &myData);
 	myCircleCollider->SetCollisionEvent([this]()
 	{
-		std::cout << "Player Collided with pickup and gained 5 mass! Player now has " << myMass << " mass." << std::endl;
+		//std::cout << "Player Collided with pickup and gained 5 mass! Player now has " << myMass << " mass." << std::endl;
 		myMass += 5;
 	}, CollisionFlag::ePickup);
 	myCircleCollider->SetCollisionEvent([]()
 	{
-		std::cout << "Player Collided with field!" << std::endl;
+		//std::cout << "Player Collided with field!" << std::endl;
 	}, CollisionFlag::eGravitationField);
 	myCircleCollider->SetCollisionEvent([this]()
 	{
@@ -66,11 +66,15 @@ void Player::ModifyMass(int anAmountToModify)
 
 void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 {
-	if (isGrounded)
-	{
-		myData.myVelocity += (anInputHandler->GetXboxLeftStick(0) / 10.0f) * aTimeDelta;
-	}
-	
+
+
+#ifndef _DEBUG
+if (isGrounded)
+{
+	myData.myVelocity += (anInputHandler->GetXboxLeftStick(0) / 10.0f) * aTimeDelta;
+}
+#endif
+
 	Vector2f delta = myData.myPosition - myData.myVelocity;
 
 	if (myData.myVelocity.Length() < 0.1f)
@@ -106,11 +110,29 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 		myData.myGravityVelocity = { 0.f, 0.f };
 	}
 
+	if (myData.myVelocity.x > myData.myVelocityCap)
+		myData.myVelocity.x = myData.myVelocityCap;
+	if (myData.myVelocity.y > myData.myVelocityCap)
+		myData.myVelocity.y = myData.myVelocityCap;
+	if (myData.myGravityVelocity.x > myData.myVelocityCap)
+		myData.myGravityVelocity.x = myData.myVelocityCap;
+	if (myData.myGravityVelocity.y > myData.myVelocityCap)
+		myData.myGravityVelocity.y = myData.myVelocityCap;
+	if (myData.myVelocity.x < -myData.myVelocityCap)
+		myData.myVelocity.x = -myData.myVelocityCap;
+	if (myData.myVelocity.y < -myData.myVelocityCap)
+		myData.myVelocity.y = -myData.myVelocityCap;
+	if (myData.myGravityVelocity.x < -myData.myVelocityCap)
+		myData.myGravityVelocity.x = -myData.myVelocityCap;
+	if (myData.myGravityVelocity.y < -myData.myVelocityCap)
+		myData.myGravityVelocity.y = -myData.myVelocityCap;
+
 	myData.myPosition += myData.myVelocity;
 	myData.myPosition += myData.myGravityVelocity;
 	myData.mySprite->SetPosition({ myData.myPosition.x, myData.myPosition.y });
 	myCircleCollider->SetPosition({ myData.myPosition.x, myData.myPosition.y});
-
+	myData.myGravityVelocity = { 0,0 };
+	myData.myVelocity = { 0,0 };
 
 }
 void Player::Draw()
