@@ -2,14 +2,11 @@
 #include "Planet.hpp"
 #include "CircleCollider.hpp"
 
-Planet::Planet(Vector2f aPos, Sprite aSprite)
+Planet::Planet()
 {
-	myCollider = new CircleCollider();
-	mySprite = aSprite;
-	myPos = aPos;
-	mySprite->SetPivot({ 0.5f, 0.5f });
-	mySprite->SetPosition({ myPos.x, myPos.y });
+
 }
+
 
 
 Planet::~Planet()
@@ -18,6 +15,14 @@ Planet::~Planet()
 	SAFE_DELETE(mySprite);
 }
 
+void Planet::Init(const char* aString, Vector2f aPos)
+{
+	mySprite = new Tga2D::CSprite(aString);
+	mySprite->SetPivot({ 0.5f, 0.5f });
+	mySprite->SetPosition({ myPos.x, myPos.y });
+	myCollider = new CircleCollider();
+	myPos = aPos;
+}
 void Planet::Update()
 {
 	Draw();

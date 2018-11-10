@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "PlanetManager.hpp"
 #include "Planet.hpp"
-
+#include <iostream>
 PlanetManager::PlanetManager()
 {
 
@@ -19,8 +19,11 @@ void PlanetManager::InitPlanets()
 {
 	for (int i = 0; i < myPlanets.size(); i++)
 	{
-		myPlanets[i] = new Planet(myPlanetPositions[i], myPlanetSprites[i]);
+		
+		myPlanets[i] = new Planet();
+		myPlanets[i]->Init(mySpriteLocations[i].c_str(), myPlanetPositions[i]);
 	}
+
 }
 
 void PlanetManager::Update()
