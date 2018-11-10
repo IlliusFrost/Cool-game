@@ -68,30 +68,12 @@ void ColliderManager::Update(float aDt)
 							else */if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
 								myColliders[j]->myFlag == CollisionFlag::eGravitationField)
 							{
-								Vector2f fieldPos = myColliders[j]->myPos;
-								Vector2f playerPos = myColliders[i]->myPos;
+								Vector2f fieldPos = myColliders[j]->myObjectData->myPosition;
+								Vector2f playerPos = myColliders[i]->myObjectData->myPosition;
 								Vector2f delta = playerPos - fieldPos;
 								delta.Normalize();
 
-								if (myColliders[i]->myObjectData->myGravityVelocity.x < myColliders[i]->myObjectData->myGravityVelocityCap)
-								{
-									myColliders[i]->myObjectData->myGravityVelocity.x -= (delta.x * aDt) / 30.f;
-									myColliders[i]->myObjectData->myVelocity *= .95f;
-								}
-								else
-								{
-									myColliders[i]->myObjectData->myGravityVelocity.x = myColliders[i]->myObjectData->myGravityVelocityCap;
-								}
-
-								if (myColliders[i]->myObjectData->myGravityVelocity.y < myColliders[i]->myObjectData->myGravityVelocityCap)
-								{
-									myColliders[i]->myObjectData->myGravityVelocity.y -= (delta.y * aDt) / 30.f;
-									myColliders[i]->myObjectData->myVelocity *= .95f;
-								}
-								else
-								{
-									myColliders[i]->myObjectData->myGravityVelocity.y = myColliders[i]->myObjectData->myGravityVelocityCap;
-								}
+								myColliders[i]->myObjectData->myGravityVelocity -= (delta * aDt) / 20.f;
 							}
 							else
 							{
