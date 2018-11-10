@@ -13,7 +13,6 @@ void PickUpManager::Update()
 
 		for (int i = 0; i < myPickUps.size(); ++i)
 		{
-			std::cout << myPickUps.size() << " " << i << std::endl;
 			if (myPickUps[i]->GetIfIsRemoved())
 			{
 				ColliderManager::GetInstance()->RemoveCollider(myPickUps[i]->GetCollider());

@@ -23,6 +23,7 @@ PlayState::PlayState(StateStack* aStateStack, InputHandler* aInputHandler)
 
 PlayState::~PlayState()
 {
+
 }
 
 void PlayState::Init()

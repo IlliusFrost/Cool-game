@@ -36,7 +36,7 @@ Player::Player(Vector2f aPosition, Sprite aSprite)
 	myCircleCollider->SetCollisionEvent([this]()
 	{
 		//std::cout << "Player Collided with planet!" << std::endl;
-		std::cout << "Player Collided with planet!" << std::endl;
+		std::cout << "Player Collided with planet! and is grounded!" << std::endl;
 
 		isGrounded = true;
 	}, CollisionFlag::ePlanet);
@@ -69,7 +69,10 @@ void Player::ModifyMass(int anAmountToModify)
 void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 {
 #ifndef _DEBUG
-	myData.myVelocity += (anInputHandler->GetXboxLeftStick(0) / 10.0f) * aTimeDelta / 100.f;
+	if (isGrounded)
+	{
+		myData.myVelocity += (anInputHandler->GetXboxLeftStick(0) / 10.0f) * aTimeDelta / 100.f;
+	}
 #endif
 
 	Vector2f delta = myData.myPosition - myData.myVelocity;
@@ -98,6 +101,7 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 			jumpVector = { jumpVector.x / 2,jumpVector.y / 5 };
 			myData.myVelocity += jumpVector;
 			isGrounded = false;
+			std::cout << "Player is no longer grounded!" << std::endl;
 		}
 	}
 
@@ -108,6 +112,7 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 		myData.myPosition = { mousePosX, mousePosY };
 		myData.myVelocity = { 0.f, 0.f };
 		myData.myGravityVelocity = { 0.f, 0.f };
+		isGrounded = false;
 	}
 
 	if (myData.myVelocity.x > myData.myVelocityCap)
