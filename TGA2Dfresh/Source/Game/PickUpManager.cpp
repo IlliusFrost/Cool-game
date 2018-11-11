@@ -64,7 +64,7 @@ void PickUpManager::SecondPhase()
 			myPickUps.erase(myPickUps.begin() + i);
 		}
 }
-void PickUpManager::SpawnPickUp(Tga2D::CCustomShader* aCustomShader)
+void PickUpManager::SpawnPickUp()
 {
 	Vector2f aPosition = { 0.f,0.f };
 	Vector2f aDirection = { 0.f,0.f };
@@ -97,5 +97,5 @@ void PickUpManager::SpawnPickUp(Tga2D::CCustomShader* aCustomShader)
 		aDirection.y = -0.001f;
 		aDirection.x = 0.f;
 	}
-	myPickUps.insert(myPickUps.begin(), new PickUp(aPosition, new Tga2D::CSprite("sprites/SpaceJunk.png"),{ aDirection.x, aDirection.y }, aCustomShader));
+	myPickUps.insert(myPickUps.begin(), new PickUp(aPosition, new Tga2D::CSprite("sprites/SpaceJunk.png"),{ aDirection.x, aDirection.y }));
 }

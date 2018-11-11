@@ -20,16 +20,12 @@ CircleCollider::~CircleCollider()
 bool CircleCollider::CollidesWith(Vector2f aPoint)
 {
 	Vector2f delta = myPos - aPoint;
-	delta.x /= Tga2D::CEngine::GetInstance()->GetWindowRatio() / 2;
-	delta.y *= Tga2D::CEngine::GetInstance()->GetWindowRatioInversed();
 	return delta.Length() < myRadius;
 }
 
 bool CircleCollider::CollidesWith(CircleCollider aCircle)
 {
 	Vector2f delta = myPos - aCircle.myPos;
-	delta.x /= Tga2D::CEngine::GetInstance()->GetWindowRatio() / 2;
-	delta.y *= Tga2D::CEngine::GetInstance()->GetWindowRatioInversed();
 	return delta.Length() < (myRadius + aCircle.myRadius);
 }
 void CircleCollider::SetRadius(float aNewRadius)

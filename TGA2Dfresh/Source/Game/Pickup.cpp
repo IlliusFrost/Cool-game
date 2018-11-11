@@ -30,7 +30,7 @@ ObjectData PickUp::GetData()
 {
 	return myData;
 }
-PickUp::PickUp(Vector2f aPosition, Sprite aSprite, Vector2f aDirection, Tga2D::CCustomShader* aCustomShader)
+PickUp::PickUp(Vector2f aPosition, Sprite aSprite, Vector2f aDirection)
 {
 	myData.myPosition = aPosition;
 	myData.mySprite = aSprite;
@@ -39,7 +39,6 @@ PickUp::PickUp(Vector2f aPosition, Sprite aSprite, Vector2f aDirection, Tga2D::C
 	myData.myPosition += myData.myVelocity;
 	myData.mySprite->SetPivot({ 0.5f, 0.5f });
 	myData.mySprite->SetPosition({ myData.myPosition.x,myData.myPosition.y });
-	myData.mySprite->SetCustomShader(aCustomShader);
 	myCircleCollider = new CircleCollider(Vector2f(myData.myPosition.x, myData.myPosition.y), 0.01f, CollisionFlag::ePickup, &myData);
 	myCircleCollider->SetCollisionEvent([this]() 
 	{ 

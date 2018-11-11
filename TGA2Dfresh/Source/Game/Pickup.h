@@ -13,7 +13,7 @@ class PickUp
 public:
 	void Draw();
 	void Update(float aDeltaTime);
-	PickUp(Vector2f aPosition, Sprite aSprite,Vector2f aDirection, Tga2D::CCustomShader* aCustomShader);
+	PickUp(Vector2f aPosition, Sprite aSprite,Vector2f aDirection);
 	~PickUp();
 	CircleCollider* GetCollider();
 	ObjectData GetData();
