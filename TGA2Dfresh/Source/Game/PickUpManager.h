@@ -9,9 +9,11 @@ public:
 	void Update(float aDeltaTime);
 	void Draw();
 	void DeletePickUp(int aPickUpIndex);
-	void SpawnPickUp(Vector2f aPosition);
+	void SpawnPickUp();
 	PickUpManager();
 private:
 	std::vector<PickUp*> myPickUps = {};
 	bool isDoneLooping = false;
+	float mySpawnDelay = 0.5f;
+	float mySpawnTimer = 0;
 };

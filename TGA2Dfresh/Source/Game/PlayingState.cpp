@@ -43,12 +43,6 @@ void PlayState::Init()
 	myPlayer3 = new Player(Vector2f(0.1f, 0.9f), new Tga2D::CSprite("sprites/PlayerThree.png"), 2);
 	myPlayer4 = new Player(Vector2f(0.9f, 0.1f), new Tga2D::CSprite("sprites/PlayerFour.png"), 3);
 	myPickUpManager = new PickUpManager();
-	myPickUpManager->SpawnPickUp(Vector2f{0.2f,0.2f});
-	myPickUpManager->SpawnPickUp(Vector2f{0.3f,0.3f});
-	myPickUpManager->SpawnPickUp(Vector2f{0.4f,0.4f});
-	myPickUpManager->SpawnPickUp(Vector2f{ 0.5f,0.4f });
-	myPickUpManager->SpawnPickUp(Vector2f{ 0.6f,0.2f });
-	myPickUpManager->SpawnPickUp(Vector2f{ 0.7f,0.8f });
 	myUIManager = new UIManager();
 }
 
