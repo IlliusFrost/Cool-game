@@ -51,7 +51,7 @@ void PlayState::Init()
 	myPlayer2 = new Player(Vector2f(0.9f, 0.9f), new Tga2D::CSprite("sprites/PlayerTwo.png"), 1, myCustomShader);
 	myPlayer3 = new Player(Vector2f(0.1f, 0.9f), new Tga2D::CSprite("sprites/PlayerThree.png"), 2, myCustomShader);
 	myPlayer4 = new Player(Vector2f(0.9f, 0.1f), new Tga2D::CSprite("sprites/PlayerFour.png"), 3, myCustomShader);
-	myPickUpManager = new PickUpManager(myCustomShader);
+	myPickUpManager = new PickUpManager();
 	myUIManager = new UIManager();
 }
 

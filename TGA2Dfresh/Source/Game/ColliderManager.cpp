@@ -47,7 +47,7 @@ void ColliderManager::Update(float aDt)
 	aDt;
 	for (unsigned short i = 0; i < myColliders.Size(); i++)
 	{
-		//if (myShouldRenderColliders)
+		if (myShouldRenderColliders)
 			Tga2D::CDebugDrawer::DrawCircle({ myColliders[i]->myPos.x, myColliders[i]->myPos.y }, myColliders[i]->myRadius);
 		for (unsigned short j = 0; j < myColliders.Size(); j++)
 		{
