@@ -8,12 +8,13 @@ namespace Tga2D
 {
 	class CSprite;
 }
+class UIManager;
 class Player
 {
 public:
 	Player(Vector2f aPosition, Sprite aSprite, unsigned int aControlledID);
 	Player();
-	void Update(InputHandler* anInputHandler, float aTimeDelta);
+	void Update(InputHandler* anInputHandler, float aTimeDelta, UIManager* aUIManager);
 	void Draw();
 	int GetMass();
 	void ModifyMass(int anAmountToModify);

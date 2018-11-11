@@ -4,6 +4,7 @@
 #include <iostream>
 #include "ColliderManager.h"
 #include "Player.hpp"
+#include "UI.h"
 #include "CircleCollider.hpp"
 
 
@@ -13,7 +14,6 @@ Player::Player(Vector2f aPosition, Sprite aSprite, unsigned int aControlledID)
 	myData.myPosition = aPosition;
 	myData.mySprite = aSprite;
 	myData.mySprite->SetPivot({ 0.5f,0.5f });
-	myData.mySprite->SetPivot({ 0.5f,0.5f });
 
 	myData.myVelocityCap = 0.001f;
 	myData.myVelocityIncrement = 0.001f;
@@ -21,17 +21,13 @@ Player::Player(Vector2f aPosition, Sprite aSprite, unsigned int aControlledID)
 	myCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.020f, CollisionFlag::ePlayer, &myData);
 	myCollider->SetCollisionEvent([this]()
 	{
-		//std::cout << "Player Collided with pickup and gained 5 mass! Player now has " << myMass << " mass." << std::endl;
+		ModifyMass(1);
 	}, CollisionFlag::ePickup);
 	myCollider->SetCollisionEvent([]()
 	{
-		//std::cout << "Player Collided with field!" << std::endl;
 	}, CollisionFlag::eGravitationField);
 	myCollider->SetCollisionEvent([this]()
 	{
-		//std::cout << "Player Collided with planet!" << std::endl;
-		std::cout << "Player Collided with planet! and is grounded!" << std::endl;
-
 	}, CollisionFlag::ePlanet);
 	myCollider->SetCollisionEvent([this]()
 	{
@@ -60,15 +56,12 @@ Vector2f Player::GetPosition()
 void Player::ModifyMass(int anAmountToModify)
 {
 	myData.myMass += anAmountToModify;
+	std::cout << anAmountToModify << " " << myData.myMass;
 }
 
 
-void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
+void Player::Update(InputHandler* anInputHandler, float aTimeDelta, UIManager* aUIManager)
 {
-#ifndef _DEBUG
-	//myData.myVelocity += (anInputHandler->GetXboxLeftStick(0) / 10.0f) * aTimeDelta / 100.f;
-#endif
-
 	if (anInputHandler->IsKeyPressed(InputHandler::Keys::W) || anInputHandler->XboxPressed(InputHandler::XboxButton::A, myData.myControllerData))
 	{
 		myData.myVelocity.x += aTimeDelta * cosf(myData.mySprite->GetRotation()) * Tga2D::CEngine::GetInstance()->GetWindowRatioInversed();
@@ -79,6 +72,8 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 	{
 		myData.mySprite->SetRotation(myData.mySprite->GetRotation() - 10.f * aTimeDelta * anInputHandler->GetXboxLeftStick(myData.myControllerData).Length());
 	}
+
+	aUIManager->SetPlayerScoreImage(myData.myMass);
 
 	if (anInputHandler->IsKeyDown(InputHandler::Keys::D) || anInputHandler->GetXboxLeftStick(myData.myControllerData).x > 0.f)
 	{

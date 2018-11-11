@@ -14,6 +14,7 @@
 #include "Planet.hpp"
 #include "PlayingState.h"
 #include "PickUpManager.h"
+#include "UI.h"
 
 PlayState::PlayState(StateStack* aStateStack, InputHandler* aInputHandler)
 {
@@ -37,49 +38,42 @@ void PlayState::Init()
 	myTga2dLogoSprite = new Tga2D::CSprite("sprites/tga_logo.dds");
 	myTga2dLogoSprite->SetPivot({ 0.5f, 0.5f });
 	myTga2dLogoSprite->SetPosition({ 0.5f, 0.5f });
-
 	myPlayer1 = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/PlayerOne.png"), 0);
 	myPlayer2 = new Player(Vector2f(0.9f, 0.9f), new Tga2D::CSprite("sprites/PlayerTwo.png"), 1);
 	myPlayer3 = new Player(Vector2f(0.1f, 0.9f), new Tga2D::CSprite("sprites/PlayerThree.png"), 2);
 	myPlayer4 = new Player(Vector2f(0.9f, 0.1f), new Tga2D::CSprite("sprites/PlayerFour.png"), 3);
-	myTestPickUp = new PickUpManager();
-	myTestPickUp->SpawnPickUp();
+	myPickUpManager = new PickUpManager();
+	myPickUpManager->SpawnPickUp(Vector2f{0.2f,0.2f});
+	myPickUpManager->SpawnPickUp(Vector2f{0.3f,0.3f});
+	myPickUpManager->SpawnPickUp(Vector2f{0.4f,0.4f});
+	myPickUpManager->SpawnPickUp(Vector2f{ 0.5f,0.4f });
+	myPickUpManager->SpawnPickUp(Vector2f{ 0.6f,0.2f });
+	myPickUpManager->SpawnPickUp(Vector2f{ 0.7f,0.8f });
+	myUIManager = new UIManager();
 }
 
 bool PlayState::Update(float aDeltaTime)
 {
-	/*if (myInputHandler->IsKeyDown(InputHandler::Mouse::LeftMouseButton))
-	{
-		float mousePosX = static_cast<float>(myInputHandler->GetMousePosX()) / Tga2D::CEngine::GetInstance()->GetWindowSize().x;
-		float mousePosY = static_cast<float>(myInputHandler->GetMousePosY()) / Tga2D::CEngine::GetInstance()->GetWindowSize().y;
-		myTga2dLogoSprite->SetPosition({ mousePosX, mousePosY });
-	}
-
-	Vector2f leftstickVal = myInputHandler->GetXboxLeftStick(0) * aDeltaTime;
-	leftstickVal += {myTga2dLogoSprite->GetPosition().x, myTga2dLogoSprite->GetPosition().y};
-	myTga2dLogoSprite->SetPosition({ leftstickVal.x, leftstickVal.y });*/
-
-	//std::cout << myInputHandler->GetXboxLeftStick(0).x << " : " << myInputHandler->GetXboxLeftStick(0).y << std::endl;
-
 	if (GetAsyncKeyState(VK_ESCAPE))
 	{
 		Tga2D::CEngine::Shutdown();
 	}
-	//myTga2dLogoSprite->Render();
 
-	myPlayer1->Update(myInputHandler, aDeltaTime);
+	myPlayer1->Update(myInputHandler, aDeltaTime, myUIManager);
 	myPlayer1->Draw();
-	myPlayer2->Update(myInputHandler, aDeltaTime);
+	myPlayer2->Update(myInputHandler, aDeltaTime, myUIManager);
 	myPlayer2->Draw();
-	myPlayer3->Update(myInputHandler, aDeltaTime);
+	myPlayer3->Update(myInputHandler, aDeltaTime, myUIManager);
 	myPlayer3->Draw();
-	myPlayer4->Update(myInputHandler, aDeltaTime);
+	myPlayer4->Update(myInputHandler, aDeltaTime, myUIManager);
 	myPlayer4->Draw();
 	myPlanetManager->Update();
 	//myPlanetManager->PrintPlanetsData();
-	myTestPickUp->Update();
-	myTestPickUp->Draw();
+	myPickUpManager->Update(aDeltaTime);
+	myPickUpManager->Draw();
 	ColliderManager::GetInstance()->Update(aDeltaTime);
+	myUIManager->Update();
+	myUIManager->Draw();
 	return true;
 }
 

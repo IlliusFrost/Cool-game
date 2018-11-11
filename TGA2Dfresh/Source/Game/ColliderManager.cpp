@@ -64,6 +64,7 @@ void ColliderManager::Update(float aDt)
 								myColliders[j]->myFlag == CollisionFlag::eGravitationField)
 							{
 								Vector2f delta = myColliders[j]->myObjectData->myPosition - myColliders[i]->myObjectData->myPosition;
+
 							}
 							if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
 								myColliders[j]->myFlag == CollisionFlag::ePlayer)

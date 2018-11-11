@@ -12,8 +12,9 @@ struct ObjectData
 	float myVelocityCap;
 	float myRadius;
 	float myRotation;
-	int myMass;
 	unsigned int myControllerData;
-	bool isGrounded;
+	int myMass = 0;
 	bool isJumping;
+	bool isGrounded;
+	bool isMarkedForDelete = false;
 };
