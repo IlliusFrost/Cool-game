@@ -3,6 +3,7 @@
 #include "Pickup.h"
 #include "ColliderManager.h"
 #include "CircleCollider.hpp"
+#include "GameObjectData.h"
 PickUpManager::PickUpManager()
 {
 
@@ -13,8 +14,9 @@ void PickUpManager::Update()
 
 		for (int i = 0; i < myPickUps.size(); ++i)
 		{
-			if (myPickUps[i]->GetIfIsRemoved())
+			if (myPickUps[i]->GetData().isMarkedForDelete)
 			{
+				std::cout << "Removing PickUP!" << std::endl;
 				ColliderManager::GetInstance()->RemoveCollider(myPickUps[i]->GetCollider());
 				myPickUps.erase(myPickUps.begin() + i);
 				myPickUps.shrink_to_fit();
@@ -38,7 +40,7 @@ void PickUpManager::DeletePickUp(int aPickUpIndex)
 	myPickUps.erase(myPickUps.begin() + aPickUpIndex);
 	SAFE_DELETE(thePickUpToDelete);
 }
-void PickUpManager::SpawnPickUp()
+void PickUpManager::SpawnPickUp(Vector2f aPosition)
 {
-	myPickUps.insert(myPickUps.begin(),new PickUp(Vector2f{ 0.5f,0.5f }, new Tga2D::CSprite("sprites/power.png")));
+	myPickUps.insert(myPickUps.begin(),new PickUp(aPosition, new Tga2D::CSprite("sprites/power.png")));
 }

@@ -4,14 +4,15 @@
 #include <iostream>
 #include "ColliderManager.h"
 #include "Player.hpp"
+#include "UI.h"
 #include "CircleCollider.hpp"
 
 
 Player::Player(Vector2f aPosition, Sprite aSprite)
 {
-	myPosition = aPosition;
-	mySprite = aSprite;
-	mySprite->SetPivot({ 0.5f,0.5f });
+	myData.myPosition = aPosition;
+	myData.mySprite = aSprite;
+	myData.mySprite->SetPivot({ 0.5f,0.5f });
 	myData.myPosition = aPosition;
 	myData.mySprite = aSprite;
 	myData.mySprite->SetPivot({ 0.5f,0.5f });
@@ -26,19 +27,15 @@ Player::Player(Vector2f aPosition, Sprite aSprite)
 	myCircleCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.020f, CollisionFlag::ePlayer, &myData);
 	myCircleCollider->SetCollisionEvent([this]()
 	{
-		//std::cout << "Player Collided with pickup and gained 5 mass! Player now has " << myMass << " mass." << std::endl;
-		myMass += 5;
+		ModifyMass(1);
 	}, CollisionFlag::ePickup);
 	myCircleCollider->SetCollisionEvent([]()
 	{
-		//std::cout << "Player Collided with field!" << std::endl;
 	}, CollisionFlag::eGravitationField);
 	myCircleCollider->SetCollisionEvent([this]()
 	{
-		//std::cout << "Player Collided with planet!" << std::endl;
-		std::cout << "Player Collided with planet! and is grounded!" << std::endl;
 
-		isGrounded = true;
+		myData.isGrounded = true;
 	}, CollisionFlag::ePlanet);
 	myCircleCollider->AddFlag(CollisionFlag::ePickup);
 	myCircleCollider->AddFlag(CollisionFlag::ePlanet);
@@ -63,17 +60,20 @@ Vector2f Player::GetPosition()
 void Player::ModifyMass(int anAmountToModify)
 {
 	myData.myMass += anAmountToModify;
+	std::cout << anAmountToModify << " " << myData.myMass;
 }
 
 
-void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
+void Player::Update(InputHandler* anInputHandler, float aTimeDelta, UIManager* aUIManager)
 {
 #ifndef _DEBUG
-	if (isGrounded)
+	if (myData.isGrounded)
 	{
 		myData.myVelocity += (anInputHandler->GetXboxLeftStick(0) / 10.0f) * aTimeDelta / 100.f;
 	}
 #endif
+
+	aUIManager->SetPlayerScoreImage(myData.myMass);
 
 	Vector2f delta = myData.myPosition - myData.myVelocity;
 
@@ -94,13 +94,13 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 			myData.myVelocity.y += myData.myVelocityIncrement * aTimeDelta / 3;
 		}
 
-		if (anInputHandler->XboxPressed(InputHandler::XboxButton::A,0) && isGrounded == true)
+		if (anInputHandler->XboxPressed(InputHandler::XboxButton::A,0) && myData.isGrounded == true)
 		{
 			Vector2f jumpVector = (myData.myPosition - myData.latestCollideObjectPosition);
 			jumpVector = jumpVector.GetNormalized();
-			jumpVector = { jumpVector.x / 2,jumpVector.y / 5 };
+			jumpVector = { jumpVector.x / 100,jumpVector.y / 100 };
 			myData.myVelocity += jumpVector;
-			isGrounded = false;
+			myData.isGrounded = false;
 			std::cout << "Player is no longer grounded!" << std::endl;
 		}
 	}

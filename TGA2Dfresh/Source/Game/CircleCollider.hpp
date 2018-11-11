@@ -16,7 +16,6 @@ public:
 	void SetCollisionEvent(std::function<void()> aFunc, CollisionFlag aFlag);
 	void SetPosition(Vector2f aPos);
 	void AddFlag(CollisionFlag aFlag);
-
 private:
 	void CollisionEvent(CollisionFlag aFlag) override;
 	std::vector<CollisionFlag> myCanCollideWith;

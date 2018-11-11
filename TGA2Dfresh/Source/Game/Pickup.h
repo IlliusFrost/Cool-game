@@ -13,11 +13,10 @@ public:
 	void Draw();
 	PickUp(Vector2f aPosition, Sprite aSprite);
 	~PickUp();
-	bool GetIfIsRemoved();
 	CircleCollider* GetCollider();
+	ObjectData GetData();
 private:
 	CircleCollider* myCircleCollider;
 	Sprite mySprite;
-	bool isRemoved = false; 
 	ObjectData myData;
 };

@@ -15,4 +15,5 @@ struct ObjectData
 	float myRadius;
 	int myMass;
 	bool isGrounded;
+	bool isMarkedForDelete;
 };

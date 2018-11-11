@@ -5,6 +5,7 @@ class InputHandler;
 class StateStack;
 class PickUpManager;
 class Player;
+class UIManager;
 class PlayState : public State
 {
 public:
@@ -22,6 +23,7 @@ private:
 	InputHandler* myInputHandler;
 	StateStack* myStateStack;
 	Player* myPlayer;
-	PickUpManager* myTestPickUp;
+	PickUpManager* myPickUpManager;
 	PlanetManager* myPlanetManager;
+	UIManager* myUIManager;
 };

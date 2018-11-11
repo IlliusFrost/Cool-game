@@ -14,6 +14,7 @@
 #include "Planet.hpp"
 #include "PlayingState.h"
 #include "PickUpManager.h"
+#include "UI.h"
 
 PlayState::PlayState(StateStack* aStateStack, InputHandler* aInputHandler)
 {
@@ -39,8 +40,12 @@ void PlayState::Init()
 	myTga2dLogoSprite->SetPosition({ 0.5f, 0.5f });
 
 	myPlayer = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/PlayerOne.png"));
-	myTestPickUp = new PickUpManager();
-	myTestPickUp->SpawnPickUp();
+	myPickUpManager = new PickUpManager();
+	myPickUpManager->SpawnPickUp(Vector2f{0.2f,0.2f});
+	myPickUpManager->SpawnPickUp(Vector2f{0.3f,0.3f});
+	myPickUpManager->SpawnPickUp(Vector2f{0.4f,0.4f});
+
+	myUIManager = new UIManager();
 }
 
 bool PlayState::Update(float aDeltaTime)
@@ -64,13 +69,15 @@ bool PlayState::Update(float aDeltaTime)
 	}
 	//myTga2dLogoSprite->Render();
 
-	myPlayer->Update(myInputHandler, aDeltaTime);
+	myPlayer->Update(myInputHandler, aDeltaTime,myUIManager);
 	myPlayer->Draw();
 	myPlanetManager->Update();
 	//myPlanetManager->PrintPlanetsData();
-	myTestPickUp->Update();
-	myTestPickUp->Draw();
+	myPickUpManager->Update();
+	myPickUpManager->Draw();
 	ColliderManager::GetInstance()->Update(aDeltaTime);
+	myUIManager->Update();
+	myUIManager->Draw();
 	return true;
 }
 

@@ -52,7 +52,6 @@ void CircleCollider::AddFlag(CollisionFlag aFlag)
 	}
 	myCanCollideWith.push_back(aFlag);
 }
-
 void CircleCollider::CollisionEvent(CollisionFlag aFlag)
 {
 	myCollisionEvents[aFlag]();
