@@ -73,8 +73,8 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta, UIManager* a
 	{
 		if (anInputHandler->IsKeyPressed(InputHandler::Keys::W) || anInputHandler->XboxPressed(InputHandler::XboxButton::A, myData.myControllerData))
 		{
-			myData.myVelocity.x += aTimeDelta * cosf(myData.mySprite->GetRotation()) * Tga2D::CEngine::GetInstance()->GetWindowRatioInversed();
-			myData.myVelocity.y += aTimeDelta * sinf(myData.mySprite->GetRotation());
+			myData.myVelocity.x += (aTimeDelta / 2) * cosf(myData.mySprite->GetRotation()) * Tga2D::CEngine::GetInstance()->GetWindowRatioInversed();
+			myData.myVelocity.y += (aTimeDelta / 2) * sinf(myData.mySprite->GetRotation());
 		}
 		myData.mySprite->SetRotation((std::atan2(anInputHandler->GetXboxLeftStick(myData.myControllerData).x, anInputHandler->GetXboxLeftStick(myData.myControllerData).y) - 3.14f / 2) * -1);
 		/*if (anInputHandler->IsKeyDown(InputHandler::Keys::A) || anInputHandler->GetXboxLeftStick(myData.myControllerData).x < 0.f)

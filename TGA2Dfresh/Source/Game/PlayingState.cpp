@@ -24,7 +24,6 @@ PlayState::PlayState(StateStack* aStateStack, InputHandler* aInputHandler)
 
 PlayState::~PlayState()
 {
-
 }
 
 void PlayState::Init()
@@ -65,13 +64,11 @@ bool PlayState::Update(float aDeltaTime)
 	myPickUpManager->Update(aDeltaTime);
 	myPickUpManager->Draw();
 
-
-
-	ColliderManager::GetInstance()->Update(aDeltaTime);
-
 	myBG->Render();
 
 	myPlanetManager->Update();
+
+	ColliderManager::GetInstance()->Update(aDeltaTime);
 
 	myPlayer1->Update(myInputHandler, aDeltaTime, myUIManager);
 	myPlayer2->Update(myInputHandler, aDeltaTime, myUIManager);
