@@ -73,29 +73,29 @@ void PickUpManager::SpawnPickUp()
 	{
 		aPosition.x = 1.2f;
 		aPosition.y = static_cast<float>(CommonUtilities::GenerateRandomNr(0, 10)) / 10;
-		aDirection.x = -0.001f;
-		aDirection.y = 0.f;
+		aDirection.x = -0.0005f;
+		aDirection.y = static_cast<float>(CommonUtilities::GenerateRandomNr(-5, 5))/10000;
 	}
 	else if(random == 1)
 	{
 		aPosition.x = -0.2f;
 		aPosition.y = static_cast<float>(CommonUtilities::GenerateRandomNr(0, 10)) / 10;
-		aDirection.x = 0.001f;
-		aDirection.y = 0.f;
+		aDirection.x = 0.0005f;
+		aDirection.y = static_cast<float>(CommonUtilities::GenerateRandomNr(-5, 5)) / 10000;
 	}
 	else if (random == 2)
 	{
 		aPosition.y = -0.2f;
 		aPosition.x = static_cast<float>(CommonUtilities::GenerateRandomNr(0, 10)) / 10;
-		aDirection.y = 0.001f;
-		aDirection.x = 0.f;
+		aDirection.y = 0.0005f;
+		aDirection.x = static_cast<float>(CommonUtilities::GenerateRandomNr(-5, 5)) / 10000;
 	}
 	else
 	{
 		aPosition.y = 1.2f;
 		aPosition.x = static_cast<float>(CommonUtilities::GenerateRandomNr(0, 10)) / 10;
-		aDirection.y = -0.001f;
-		aDirection.x = 0.f;
+		aDirection.y = -0.0005f;
+		aDirection.x = static_cast<float>(CommonUtilities::GenerateRandomNr(-5, 5)) / 10000;
 	}
 	myPickUps.insert(myPickUps.begin(), new PickUp(aPosition, new Tga2D::CSprite("sprites/SpaceJunk.png"),{ aDirection.x, aDirection.y }));
 }
