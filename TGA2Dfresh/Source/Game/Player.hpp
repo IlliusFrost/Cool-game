@@ -12,7 +12,7 @@ class UIManager;
 class Player
 {
 public:
-	Player(Vector2f aPosition, Sprite aSprite, unsigned int aControlledID);
+	Player(Vector2f aPosition, Sprite aSprite, unsigned int aControlledID, Tga2D::CCustomShader* aCustomShader);
 	Player();
 	void Update(InputHandler* anInputHandler, float aTimeDelta, UIManager* aUIManager);
 	void Draw();

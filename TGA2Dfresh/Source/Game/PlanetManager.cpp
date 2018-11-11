@@ -16,13 +16,13 @@ PlanetManager::~PlanetManager()
 	}
 }
 
-void PlanetManager::InitPlanets()
+void PlanetManager::InitPlanets(Tga2D::CCustomShader* aCustomShader)
 {
 	for (int i = 0; i < myPlanets.size(); i++)
 	{
 		
 		myPlanets[i] = new Planet();
-		myPlanets[i]->Init(mySpriteLocations[i].c_str(), myPlanetPositions[i]);
+		myPlanets[i]->Init(mySpriteLocations[i].c_str(), myPlanetPositions[i], aCustomShader);
 		std::cout << "Planet " << i + 1 << " PosX " << myPlanetPositions[i].x << " PosY " << myPlanetPositions[i].y << std::endl;
 	}
 

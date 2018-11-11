@@ -9,12 +9,13 @@
 #include <tga2d/shaders/customshader.h>
 
 
-Player::Player(Vector2f aPosition, Sprite aSprite, unsigned int aControlledID)
+Player::Player(Vector2f aPosition, Sprite aSprite, unsigned int aControlledID, Tga2D::CCustomShader* aCustomShader)
 {
 	myData.myControllerData = aControlledID;
 	myData.myPosition = aPosition;
 	myData.mySprite = aSprite;
 	myData.mySprite->SetPivot({ 0.5f,0.5f });
+	myData.mySprite->SetCustomShader(aCustomShader);
 
 	myData.myVelocityCap = 0.001f;
 	myData.myVelocityIncrement = 0.001f;

@@ -1,5 +1,6 @@
 #pragma once
 #include <array>
+#include <tga2d/shaders/customshader.h>
 
 class Planet;
 
@@ -8,7 +9,7 @@ class PlanetManager
 public:
 	PlanetManager();
 	~PlanetManager();
-	void InitPlanets();
+	void InitPlanets(Tga2D::CCustomShader* aCustomShader);
 	void Update();
 	void PrintPlanetsData();
 private:
