@@ -11,7 +11,7 @@ PickUpManager::PickUpManager()
 }
 void PickUpManager::Update(float aDeltaTime)
 {
-	if (mySpawnTimer <= 0 && myPickUps.size() <= 10)
+	if (mySpawnTimer <= 0 && myPickUps.size() <= 10 && isSpawning == true)
 	{
 		mySpawnTimer = mySpawnDelay;
 		SpawnPickUp();
@@ -53,6 +53,16 @@ void PickUpManager::DeletePickUp(int aPickUpIndex)
 	PickUp* thePickUpToDelete = myPickUps[aPickUpIndex];
 	myPickUps.erase(myPickUps.begin() + aPickUpIndex);
 	SAFE_DELETE(thePickUpToDelete);
+}
+void PickUpManager::SecondPhase()
+{
+	isSpawning = false;
+	for (int i = 0; i < myPickUps.size(); ++i)
+	{
+			std::cout << "Removing PickUP!" << std::endl;
+			ColliderManager::GetInstance()->RemoveCollider(myPickUps[i]->GetCollider());
+			myPickUps.erase(myPickUps.begin() + i);
+		}
 }
 void PickUpManager::SpawnPickUp( )
 {

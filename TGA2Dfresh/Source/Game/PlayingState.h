@@ -29,4 +29,5 @@ private:
 	PickUpManager* myPickUpManager;
 	PlanetManager* myPlanetManager;
 	UIManager* myUIManager;
+	bool gameSecondPhase = false;
 };

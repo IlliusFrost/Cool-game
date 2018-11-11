@@ -19,7 +19,10 @@ public:
 	int GetMass();
 	void ModifyMass(int anAmountToModify);
 	Vector2f GetPosition();
+	void SecondPhase();
 private:
 	ObjectData myData;
 	CircleCollider* myCollider;
+	bool isInSecondPhase = false;
+	bool isAlive = true;
 };

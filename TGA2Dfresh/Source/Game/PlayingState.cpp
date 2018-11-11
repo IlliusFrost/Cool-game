@@ -54,19 +54,34 @@ bool PlayState::Update(float aDeltaTime)
 	}
 
 	myPlayer1->Update(myInputHandler, aDeltaTime, myUIManager);
-	myPlayer1->Draw();
 	myPlayer2->Update(myInputHandler, aDeltaTime, myUIManager);
-	myPlayer2->Draw();
 	myPlayer3->Update(myInputHandler, aDeltaTime, myUIManager);
-	myPlayer3->Draw();
 	myPlayer4->Update(myInputHandler, aDeltaTime, myUIManager);
-	myPlayer4->Draw();
-	myPlanetManager->Update();
-	//myPlanetManager->PrintPlanetsData();
+
 	myPickUpManager->Update(aDeltaTime);
+	myUIManager->Update();
+	
+	myPlanetManager->Update();
+	myPlayer1->Draw();
+	myPlayer2->Draw();
+	myPlayer3->Draw();
+	myPlayer4->Draw();
+	if (myPlayer1->GetMass() >= 10 || myPlayer2->GetMass() >= 10 || myPlayer3->GetMass() >= 10 || myPlayer4->GetMass() >= 10)
+	{
+		if (gameSecondPhase == false)
+		{
+			gameSecondPhase = true;
+			myPickUpManager->SecondPhase();
+			myPlayer1->SecondPhase();
+			myPlayer2->SecondPhase();
+			myPlayer3->SecondPhase();
+			myPlayer4->SecondPhase();
+		}
+		
+	}
+	//myPlanetManager->PrintPlanetsData();	
 	myPickUpManager->Draw();
 	ColliderManager::GetInstance()->Update(aDeltaTime);
-	myUIManager->Update();
 	myUIManager->Draw();
 	return true;
 }

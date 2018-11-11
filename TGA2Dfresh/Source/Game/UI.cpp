@@ -36,7 +36,6 @@ void UIManager::Draw()
 		{
 			myPlayerScoreOutput[3]->SetPosition({ 0.01f,0.8f });
 		}
-		std::cout << myPlayerScoreOutput[i]->GetPosition().x << " " << myPlayerScoreOutput[i]->GetPosition().y << " "<< i<<  std::endl;
 		myPlayerScoreOutput[i]->Render();
 	}
 	
