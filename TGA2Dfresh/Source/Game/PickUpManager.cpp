@@ -73,28 +73,28 @@ void PickUpManager::SpawnPickUp( )
 	{
 		aPosition.x = 1.2f;
 		aPosition.y = static_cast<float>(CommonUtilities::GenerateRandomNr(0, 10)) / 10;
-		aDirection.x = -0.005f;
+		aDirection.x = -0.001f;
 		aDirection.y = 0.f;
 	}
 	else if(random == 1)
 	{
 		aPosition.x = -0.2f;
 		aPosition.y = static_cast<float>(CommonUtilities::GenerateRandomNr(0, 10)) / 10;
-		aDirection.x = 0.005f;
+		aDirection.x = 0.001f;
 		aDirection.y = 0.f;
 	}
 	else if (random == 2)
 	{
 		aPosition.y = -0.2f;
 		aPosition.x = static_cast<float>(CommonUtilities::GenerateRandomNr(0, 10)) / 10;
-		aDirection.y = 0.005f;
+		aDirection.y = 0.001f;
 		aDirection.x = 0.f;
 	}
 	else
 	{
 		aPosition.y = 1.2f;
 		aPosition.x = static_cast<float>(CommonUtilities::GenerateRandomNr(0, 10)) / 10;
-		aDirection.y = -0.005f;
+		aDirection.y = -0.001f;
 		aDirection.x = 0.f;
 	}
 	myPickUps.insert(myPickUps.begin(), new PickUp(aPosition, new Tga2D::CSprite("sprites/SpaceJunk.png"),{ aDirection.x, aDirection.y }));
