@@ -2,6 +2,7 @@
 #include "VersionNo.h"
 #include <string>
 #include <stringapiset.h>
+#include <tga2d/shaders/customshader.h>
 
 void Init();
 

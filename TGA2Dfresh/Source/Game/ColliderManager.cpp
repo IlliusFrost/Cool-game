@@ -83,7 +83,11 @@ void ColliderManager::Update(float aDt)
 								Vector2f delta = myColliders[j]->myObjectData->myPosition - myColliders[i]->myObjectData->myPosition;
 								delta.Normalize();
 								myColliders[j]->myObjectData->myVelocity += myColliders[i]->myObjectData->myVelocity;
-								myColliders[i]->myObjectData->myVelocity.x *= -.95f * aDt;
+								myColliders[i]->myObjectData->myVelocity *= -.95f * aDt;
+							}
+							if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
+								myColliders[j]->myFlag == CollisionFlag::ePickup)
+							{
 							}
 						}
 					

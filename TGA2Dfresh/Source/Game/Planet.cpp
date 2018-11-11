@@ -20,8 +20,8 @@ void Planet::Init(const char* aString, Vector2f aPos, Tga2D::CCustomShader* aCus
 	myPlanetData.myPosition = aPos;
 	myFieldData.mySprite = new Tga2D::CSprite("sprites/GravityField.png");
 	myFieldData.mySprite->SetPivot({ 0.5f, 0.5f });
-	myFieldData.mySprite->SetCustomShader(aCustomShader);
-	myPlanetData.mySprite->SetCustomShader(aCustomShader);
+	//myFieldData.mySprite->SetCustomShader(aCustomShader);
+	//myPlanetData.mySprite->SetCustomShader(aCustomShader);
 	myFieldData.myRadius = .18f;
 	myFieldData.myPosition = aPos;
 	myCollider = new CircleCollider(myPlanetData.myPosition, myPlanetData.myRadius,CollisionFlag::ePlanet, &myPlanetData);
