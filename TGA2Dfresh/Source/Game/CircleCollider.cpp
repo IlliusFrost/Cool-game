@@ -32,7 +32,10 @@ bool CircleCollider::CollidesWith(CircleCollider aCircle)
 	delta.y *= Tga2D::CEngine::GetInstance()->GetWindowRatioInversed();
 	return delta.Length() < (myRadius + aCircle.myRadius);
 }
-
+void CircleCollider::SetRadius(float aNewRadius)
+{
+	myRadius = aNewRadius;
+}
 void CircleCollider::SetCollisionEvent(std::function<void()> aFunc, CollisionFlag aFlag)
 {
 	myCollisionEvents[aFlag] = aFunc;

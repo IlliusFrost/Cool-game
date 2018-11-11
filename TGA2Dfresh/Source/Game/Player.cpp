@@ -58,6 +58,7 @@ void Player::ModifyMass(int anAmountToModify)
 {
 	myData.myMass += anAmountToModify;
 	myData.mySprite->SetSizeRelativeToImage({ 1 + static_cast<float>(myData.myMass)/10, 1 + static_cast<float>(myData.myMass)/10 });
+	myCollider->SetRadius(0.020f + (0.002*myData.myMass));
 	if (myData.myMass > 10)
 	{
 		myData.myMass = 10;
