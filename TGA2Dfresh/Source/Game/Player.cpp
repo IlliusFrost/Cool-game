@@ -16,8 +16,8 @@ Player::Player(Vector2f aPosition, Sprite aSprite, unsigned int aControlledID)
 	myData.mySprite = aSprite;
 	myData.mySprite->SetPivot({ 0.5f,0.5f });
 
-	myData.myVelocityCap = 0.001f;
-	myData.myVelocityIncrement = 0.001f;
+	myData.myVelocityCap = 0.0005f;
+	myData.myVelocityIncrement = 0.0005f;
 
 	myCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.020f, CollisionFlag::ePlayer, &myData);
 	myCollider->SetCollisionEvent([this]()
