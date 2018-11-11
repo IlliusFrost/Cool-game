@@ -73,7 +73,7 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta, UIManager* a
 		myData.mySprite->SetRotation(myData.mySprite->GetRotation() - 10.f * aTimeDelta * anInputHandler->GetXboxLeftStick(myData.myControllerData).Length());
 	}
 
-	aUIManager->SetPlayerScoreImage(myData.myMass);
+	aUIManager->SetPlayerScoreImage(myData.myMass,myData.myControllerData);
 
 	if (anInputHandler->IsKeyDown(InputHandler::Keys::D) || anInputHandler->GetXboxLeftStick(myData.myControllerData).x > 0.f)
 	{

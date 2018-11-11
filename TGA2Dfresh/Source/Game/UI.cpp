@@ -2,11 +2,11 @@
 
 #include "UI.h"
 
-void UIManager::SetPlayerScoreImage(int aPlayerScore)
+void UIManager::SetPlayerScoreImage(int aPlayerScore,int aPlayerID)
 {
 	if (aPlayerScore <= myPlayerScoreSprites.size())
 	{
-		myPlayerScoreOutput[0] = myPlayerScoreSprites[aPlayerScore];
+	myPlayerScoreOutput[aPlayerID] = myPlayerScoreSprites[aPlayerScore];
 	}
 	else
 	{
@@ -17,8 +17,26 @@ void UIManager::SetPlayerScoreImage(int aPlayerScore)
 
 void UIManager::Draw()
 {
+	
 	for (int i = 0; i < myPlayerScoreOutput.size(); ++i)
 	{
+		if (i == 0)
+		{
+			myPlayerScoreOutput[0]->SetPosition({ 0.01f,0.1f });
+		}
+		else if (i == 1)
+		{
+			myPlayerScoreOutput[1]->SetPosition({ 0.8f,0.1f });
+		}
+		else if (i == 2)
+		{
+			myPlayerScoreOutput[2]->SetPosition({ 0.8f,0.8f });
+		}
+		else
+		{
+			myPlayerScoreOutput[3]->SetPosition({ 0.01f,0.8f });
+		}
+		std::cout << myPlayerScoreOutput[i]->GetPosition().x << " " << myPlayerScoreOutput[i]->GetPosition().y << " "<< i<<  std::endl;
 		myPlayerScoreOutput[i]->Render();
 	}
 	
@@ -78,4 +96,10 @@ UIManager::UIManager()
 	myPlayerScoreSprites[10]->SetSizeRelativeToImage({ 2.f, 2.f });
 
 	myPlayerScoreOutput.insert(myPlayerScoreOutput.begin(), myPlayerScoreSprites[0]);
+	myPlayerScoreOutput.insert(myPlayerScoreOutput.begin(), myPlayerScoreSprites[0]);
+	myPlayerScoreOutput.insert(myPlayerScoreOutput.begin(), myPlayerScoreSprites[0]);
+	myPlayerScoreOutput.insert(myPlayerScoreOutput.begin(), myPlayerScoreSprites[0]);
+
+
+
 }
