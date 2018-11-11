@@ -82,6 +82,9 @@
     <ClInclude Include="GameObjectData.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -132,6 +135,9 @@
       <Filter>States</Filter>
     </ClCompile>
     <ClCompile Include="PickUpManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
   </ItemGroup>

@@ -11,7 +11,8 @@ class PickUp
 {
 public:
 	void Draw();
-	PickUp(Vector2f aPosition, Sprite aSprite);
+	void Update(float aDeltaTime);
+	PickUp(Vector2f aPosition, Sprite aSprite,Vector2f aDirection);
 	~PickUp();
 	CircleCollider* GetCollider();
 	ObjectData GetData();

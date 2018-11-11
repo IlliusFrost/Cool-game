@@ -13,7 +13,7 @@ struct ObjectData
 	float myVelocityIncrement;
 	float myVelocityCap;
 	float myRadius;
-	int myMass;
+	int myMass = 0;
 	bool isGrounded;
-	bool isMarkedForDelete;
+	bool isMarkedForDelete = false;
 };

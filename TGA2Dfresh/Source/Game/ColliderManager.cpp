@@ -50,7 +50,7 @@ void ColliderManager::Update(float aDt)
 			Tga2D::CDebugDrawer::DrawCircle({ myColliders[i]->myPos.x, myColliders[i]->myPos.y }, myColliders[i]->myRadius);
 		for (unsigned short j = 0; j < myColliders.Size(); j++)
 		{
-			if (myColliders[i] != myColliders[j] && !myColliders[i]->myObjectData->isMarkedForDelete && !myColliders[j]->myObjectData->isMarkedForDelete)
+			if (myColliders[i] != myColliders[j] /*&& !myColliders[i]->myObjectData->isMarkedForDelete && !myColliders[j]->myObjectData->isMarkedForDelete*/)
 			{
 				if (myColliders[i]->CollidesWith(*myColliders[j]))
 				{
@@ -108,5 +108,5 @@ void ColliderManager::RegisterCollider(CircleCollider * aCollider)
 
 void ColliderManager::RemoveCollider(CircleCollider * aCollider)
 {
-	myColliders.DeleteCyclic(aCollider);
+	myColliders.RemoveCyclic(aCollider);
 }
