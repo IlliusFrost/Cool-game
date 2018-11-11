@@ -12,7 +12,7 @@ public:
 	void Update();
 	void Draw();
 	UIManager();
-	void SetPlayerScoreImage(int aPlayerScore);
+	void SetPlayerScoreImage(int aPlayerScore, int aPlayerID);
 private:
 	std::vector<Sprite> myPlayerScoreSprites = {};
 	std::vector<Sprite> myPlayerScoreOutput = {};

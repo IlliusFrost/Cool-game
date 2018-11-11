@@ -32,4 +32,5 @@ private:
 	UIManager* myUIManager;
 	Tga2D::CCustomShader* myCustomShader;
 	Sprite myBG;
+	bool gameSecondPhase = false;
 };

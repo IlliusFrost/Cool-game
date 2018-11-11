@@ -68,3 +68,12 @@ TGA2Dfresh/Source/Game/Game.vcxproj.filters
 TGA2Dfresh/Source/CommonUtilities/Intermediate/CommonUtilities.idb
 *.idb
 *.pdb
+TGA2Dfresh/Source/CommonUtilities/Intermediate/CommonUtilities.tlog/Lib.command.1.tlog
+TGA2Dfresh/Source/CommonUtilities/Intermediate/CommonUtilities.tlog/Lib-link.write.1.tlog
+TGA2Dfresh/Source/CommonUtilities/Intermediate/CommonUtilities.tlog/CommonUtilities.lastbuildstate
+TGA2Dfresh/Source/CommonUtilities/Intermediate/CommonUtilities.tlog/CL.write.1.tlog
+TGA2Dfresh/Source/CommonUtilities/Intermediate/CommonUtilities.tlog/CL.read.1.tlog
+TGA2Dfresh/Source/CommonUtilities/Intermediate/CommonUtilities.tlog/CL.command.1.tlog
+TGA2Dfresh/Source/CommonUtilities/Intermediate/CommonUtilities.pdb
+TGA2Dfresh/Source/CommonUtilities/Intermediate/CommonUtilities.log
+TGA2Dfresh/Source/CommonUtilities/Intermediate/CommonUtilities.idb

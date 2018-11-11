@@ -12,7 +12,7 @@ void PickUp::Update(float aDeltaTime)
 	myData.myPosition += myData.myVelocity;
 	myData.mySprite->SetPosition({ myData.myPosition.x,myData.myPosition.y });
 	myCircleCollider->SetPosition({ myData.myPosition.x,myData.myPosition.y });
-	if (myData.myPosition.x > 1.1f || myData.myPosition.x < -0.1f || myData.myPosition.y > 1.1f || myData.myPosition.y < -0.1f)
+	if (myData.myPosition.x > 1.3f || myData.myPosition.x < -0.3f || myData.myPosition.y > 1.3f || myData.myPosition.y < -0.3f)
 	{
 		myData.isMarkedForDelete = true;
 	}
@@ -37,7 +37,7 @@ PickUp::PickUp(Vector2f aPosition, Sprite aSprite, Vector2f aDirection)
 	myData.myVelocity = aDirection;
 	myData.mySprite->SetPivot({ 0.5f, 0.5f });
 	myData.mySprite->SetPosition({ myData.myPosition.x,myData.myPosition.y });
-	myCircleCollider = new CircleCollider(Vector2f(myData.myPosition.x, myData.myPosition.y), 0.1f, CollisionFlag::ePickup, &myData);
+	myCircleCollider = new CircleCollider(Vector2f(myData.myPosition.x, myData.myPosition.y), 0.01f, CollisionFlag::ePickup, &myData);
 	myCircleCollider->SetCollisionEvent([this]() 
 	{ 
 		myData.isMarkedForDelete = true;

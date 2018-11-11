@@ -50,12 +50,6 @@ void PlayState::Init()
 	myPlayer3 = new Player(Vector2f(0.1f, 0.9f), new Tga2D::CSprite("sprites/PlayerThree.png"), 2);
 	myPlayer4 = new Player(Vector2f(0.9f, 0.1f), new Tga2D::CSprite("sprites/PlayerFour.png"), 3);
 	myPickUpManager = new PickUpManager();
-	myPickUpManager->SpawnPickUp(Vector2f{0.2f,0.2f});
-	myPickUpManager->SpawnPickUp(Vector2f{0.3f,0.3f});
-	myPickUpManager->SpawnPickUp(Vector2f{0.4f,0.4f});
-	myPickUpManager->SpawnPickUp(Vector2f{ 0.5f,0.4f });
-	myPickUpManager->SpawnPickUp(Vector2f{ 0.6f,0.2f });
-	myPickUpManager->SpawnPickUp(Vector2f{ 0.7f,0.8f });
 	myUIManager = new UIManager();
 }
 
@@ -77,13 +71,33 @@ bool PlayState::Update(float aDeltaTime)
 	myPlayer2->Update(myInputHandler, aDeltaTime, myUIManager);
 	myPlayer3->Update(myInputHandler, aDeltaTime, myUIManager);
 	myPlayer4->Update(myInputHandler, aDeltaTime, myUIManager);
+
+	myPickUpManager->Update(aDeltaTime);
+	myPickUpManager->Draw();
+	myUIManager->Update();
+	
+	myPlanetManager->Update();
 	myPlayer1->Draw();
 	myPlayer2->Draw();
 	myPlayer3->Draw();
 	myPlayer4->Draw();
 	//myPlanetManager->PrintPlanetsData();
+
+	if (myPlayer1->GetMass() >= 10 || myPlayer2->GetMass() >= 10 || myPlayer3->GetMass() >= 10 || myPlayer4->GetMass() >= 10)
+	{
+		if (gameSecondPhase == false)
+		{
+			gameSecondPhase = true;
+			myPickUpManager->SecondPhase();
+			myPlayer1->SecondPhase();
+			myPlayer2->SecondPhase();
+			myPlayer3->SecondPhase();
+			myPlayer4->SecondPhase();
+		}
+		
+	}
+	//myPlanetManager->PrintPlanetsData();	
 	ColliderManager::GetInstance()->Update(aDeltaTime);
-	myUIManager->Update();
 	myUIManager->Draw();
 
 	Tga2D::CEngine::GetInstance()->EndFrame();
