@@ -29,6 +29,13 @@ PlayState::~PlayState()
 
 void PlayState::Init()
 {
+	myBG = new Tga2D::CSprite("sprites/BG.png");
+	myBG->SetPivot({ 0.5f, 0.5f });
+	myCustomShader = new Tga2D::CCustomShader();
+	//myCustomShader->SetShaderdataFloat4(Tga2D::Vector4f(1600, 900, 0, 1), Tga2D::EShaderDataID_1); // Add some data to it
+	myCustomShader->Init("shaders/sprite_shader_vs.fx", "shaders/post_shader_ps.fx");
+	myBG->SetCustomShader(myCustomShader);
+
 	ColliderManager::Create();
 	ColliderManager::GetInstance()->Init();
 
@@ -58,22 +65,28 @@ bool PlayState::Update(float aDeltaTime)
 	{
 		Tga2D::CEngine::Shutdown();
 	}
-
-	myPlayer1->Update(myInputHandler, aDeltaTime, myUIManager);
-	myPlayer1->Draw();
-	myPlayer2->Update(myInputHandler, aDeltaTime, myUIManager);
-	myPlayer2->Draw();
-	myPlayer3->Update(myInputHandler, aDeltaTime, myUIManager);
-	myPlayer3->Draw();
-	myPlayer4->Update(myInputHandler, aDeltaTime, myUIManager);
-	myPlayer4->Draw();
 	myPlanetManager->Update();
-	//myPlanetManager->PrintPlanetsData();
 	myPickUpManager->Update(aDeltaTime);
 	myPickUpManager->Draw();
+
+
+	Tga2D::CEngine::GetInstance()->BeginFrame(Tga2D::CColor(0, 0, 0.3f, 1));
+
+	myBG->Render();
+	myPlayer1->Update(myInputHandler, aDeltaTime, myUIManager);
+	myPlayer2->Update(myInputHandler, aDeltaTime, myUIManager);
+	myPlayer3->Update(myInputHandler, aDeltaTime, myUIManager);
+	myPlayer4->Update(myInputHandler, aDeltaTime, myUIManager);
+	myPlayer1->Draw();
+	myPlayer2->Draw();
+	myPlayer3->Draw();
+	myPlayer4->Draw();
+	//myPlanetManager->PrintPlanetsData();
 	ColliderManager::GetInstance()->Update(aDeltaTime);
 	myUIManager->Update();
 	myUIManager->Draw();
+
+	Tga2D::CEngine::GetInstance()->EndFrame();
 	return true;
 }
 

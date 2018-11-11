@@ -38,7 +38,7 @@ void ColliderManager::Init()
 #ifdef _DEBUG
 	myShouldRenderColliders = true;
 #else
-	myShouldRenderColliders = true;
+	myShouldRenderColliders = false;
 #endif // _DEBUG
 }
 
@@ -59,18 +59,29 @@ void ColliderManager::Update(float aDt)
 						if (myColliders[i]->myCanCollideWith[a] == myColliders[j]->myFlag)
 						{
 							myColliders[i]->CollisionEvent(myColliders[j]->myFlag);
-
+							if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
+								myColliders[j]->myFlag == CollisionFlag::ePlanet)
+							{
+								Vector2f delta = myColliders[i]->myObjectData->myPosition - myColliders[j]->myObjectData->myPosition;
+								delta.x /= Tga2D::CEngine::GetInstance()->GetWindowRatio() / 2;
+								delta.y *= Tga2D::CEngine::GetInstance()->GetWindowRatioInversed();
+								if (delta.Length() < myColliders[j]->myObjectData->myRadius + myColliders[i]->myObjectData->myRadius)
+								{
+									myColliders[i]->myObjectData->myVelocity *= -.95f;
+									myColliders[i]->myObjectData->myVelocity -= delta * -aDt;
+								}
+							}
 							if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
 								myColliders[j]->myFlag == CollisionFlag::eGravitationField)
 							{
-								Vector2f delta = myColliders[j]->myObjectData->myPosition - myColliders[i]->myObjectData->myPosition;
-
+									Vector2f delta = myColliders[j]->myObjectData->myPosition - myColliders[i]->myObjectData->myPosition;
+									myColliders[i]->myObjectData->myVelocity += delta * (aDt / 100.f);
 							}
 							if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
 								myColliders[j]->myFlag == CollisionFlag::ePlayer)
 							{
 								myColliders[j]->myObjectData->myVelocity += myColliders[i]->myObjectData->myVelocity;
-								myColliders[i]->myObjectData->myVelocity *= -1.3f;
+								myColliders[i]->myObjectData->myVelocity *= -.95f;
 							}
 						}
 					

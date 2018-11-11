@@ -1,5 +1,6 @@
 #pragma once
 #include "State.h"
+#include <tga2d/shaders/customshader.h>
 
 class InputHandler;
 class StateStack;
@@ -29,4 +30,6 @@ private:
 	PickUpManager* myPickUpManager;
 	PlanetManager* myPlanetManager;
 	UIManager* myUIManager;
+	Tga2D::CCustomShader* myCustomShader;
+	Sprite myBG;
 };
