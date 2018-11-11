@@ -31,10 +31,12 @@ void PlayState::Init()
 {
 	myBG = new Tga2D::CSprite("sprites/BG.png");
 	myBG->SetPivot({ 0.5f, 0.5f });
+	myBG->SetPosition({ 0.5f, 0.5f });
 	myCustomShader = new Tga2D::CCustomShader();
-	//myCustomShader->SetShaderdataFloat4(Tga2D::Vector4f(1600, 900, 0, 1), Tga2D::EShaderDataID_1); // Add some data to it
+	myCustomShader->SetShaderdataFloat4(Tga2D::Vector4f(1600, 900, 0, 1), Tga2D::EShaderDataID_1);
 	myCustomShader->Init("shaders/sprite_shader_vs.fx", "shaders/post_shader_ps.fx");
 	myBG->SetCustomShader(myCustomShader);
+	myBG->SetSizeRelativeToScreen({ 16.f / 3.f, 1.f });
 
 	ColliderManager::Create();
 	ColliderManager::GetInstance()->Init();
@@ -42,7 +44,7 @@ void PlayState::Init()
 	myPlanetManager = new PlanetManager();
 	myPlanetManager->InitPlanets();
 	
-	myTga2dLogoSprite = new Tga2D::CSprite("sprites/tga_logo.dds");
+	myTga2dLogoSprite = new Tga2D::CSprite();
 	myTga2dLogoSprite->SetPivot({ 0.5f, 0.5f });
 	myTga2dLogoSprite->SetPosition({ 0.5f, 0.5f });
 	myPlayer1 = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/PlayerOne.png"), 0);
@@ -64,9 +66,11 @@ bool PlayState::Update(float aDeltaTime)
 	myPickUpManager->Draw();
 
 
-	Tga2D::CEngine::GetInstance()->BeginFrame(Tga2D::CColor(0, 0, 0.3f, 1));
 
-	myBG->Render();
+	ColliderManager::GetInstance()->Update(aDeltaTime);
+
+	myPlanetManager->Update();
+
 	myPlayer1->Update(myInputHandler, aDeltaTime, myUIManager);
 	myPlayer2->Update(myInputHandler, aDeltaTime, myUIManager);
 	myPlayer3->Update(myInputHandler, aDeltaTime, myUIManager);
@@ -76,7 +80,6 @@ bool PlayState::Update(float aDeltaTime)
 	myPickUpManager->Draw();
 	myUIManager->Update();
 	
-	myPlanetManager->Update();
 	myPlayer1->Draw();
 	myPlayer2->Draw();
 	myPlayer3->Draw();
@@ -94,13 +97,11 @@ bool PlayState::Update(float aDeltaTime)
 			myPlayer3->SecondPhase();
 			myPlayer4->SecondPhase();
 		}
-		
 	}
 	//myPlanetManager->PrintPlanetsData();	
-	ColliderManager::GetInstance()->Update(aDeltaTime);
 	myUIManager->Draw();
+	myBG->Render();
 
-	Tga2D::CEngine::GetInstance()->EndFrame();
 	return true;
 }
 

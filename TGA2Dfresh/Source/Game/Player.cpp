@@ -6,6 +6,7 @@
 #include "Player.hpp"
 #include "UI.h"
 #include "CircleCollider.hpp"
+#include <tga2d/shaders/customshader.h>
 
 
 Player::Player(Vector2f aPosition, Sprite aSprite, unsigned int aControlledID)
