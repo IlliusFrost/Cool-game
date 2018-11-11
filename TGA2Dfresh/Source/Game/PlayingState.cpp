@@ -38,7 +38,10 @@ void PlayState::Init()
 	myTga2dLogoSprite->SetPivot({ 0.5f, 0.5f });
 	myTga2dLogoSprite->SetPosition({ 0.5f, 0.5f });
 
-	myPlayer = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/PlayerOne.png"));
+	myPlayer1 = new Player(Vector2f(0.1f, 0.1f), new Tga2D::CSprite("sprites/PlayerOne.png"), 0);
+	myPlayer2 = new Player(Vector2f(0.9f, 0.9f), new Tga2D::CSprite("sprites/PlayerTwo.png"), 1);
+	myPlayer3 = new Player(Vector2f(0.1f, 0.9f), new Tga2D::CSprite("sprites/PlayerThree.png"), 2);
+	myPlayer4 = new Player(Vector2f(0.9f, 0.1f), new Tga2D::CSprite("sprites/PlayerFour.png"), 3);
 	myTestPickUp = new PickUpManager();
 	myTestPickUp->SpawnPickUp();
 }
@@ -64,8 +67,14 @@ bool PlayState::Update(float aDeltaTime)
 	}
 	//myTga2dLogoSprite->Render();
 
-	myPlayer->Update(myInputHandler, aDeltaTime);
-	myPlayer->Draw();
+	myPlayer1->Update(myInputHandler, aDeltaTime);
+	myPlayer1->Draw();
+	myPlayer2->Update(myInputHandler, aDeltaTime);
+	myPlayer2->Draw();
+	myPlayer3->Update(myInputHandler, aDeltaTime);
+	myPlayer3->Draw();
+	myPlayer4->Update(myInputHandler, aDeltaTime);
+	myPlayer4->Draw();
 	myPlanetManager->Update();
 	//myPlanetManager->PrintPlanetsData();
 	myTestPickUp->Update();

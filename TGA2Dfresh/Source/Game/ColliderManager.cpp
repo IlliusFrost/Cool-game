@@ -2,6 +2,7 @@
 #include "ColliderManager.h"
 #include "CircleCollider.hpp"
 #include <tga2d/drawers/debug_drawer.h>
+#include <cmath>
 
 ColliderManager* ColliderManager::ourInstance = nullptr;
 
@@ -60,29 +61,15 @@ void ColliderManager::Update(float aDt)
 							myColliders[i]->CollisionEvent(myColliders[j]->myFlag);
 
 							if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
-								myColliders[j]->myFlag == CollisionFlag::ePlanet)
-							{
-								myColliders[i]->myObjectData->isGrounded = true;
-							}
-							else if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
 								myColliders[j]->myFlag == CollisionFlag::eGravitationField)
 							{
-								Vector2f fieldPos = myColliders[j]->myObjectData->myPosition;
-								Vector2f playerPos = myColliders[i]->myObjectData->myPosition;
-								Vector2f delta = playerPos - fieldPos;
-								delta.Normalize();
-								if (myColliders[i]->myObjectData->isGrounded == false)
-								{
-									myColliders[i]->myObjectData->myGravityVelocity -= (delta * aDt) / 15.f;
-								}
-								else if (myColliders[i]->myObjectData->isGrounded == true)
-								{
-									myColliders[i]->myObjectData->myGravityVelocity += (delta * aDt);
-								}
+								Vector2f delta = myColliders[j]->myObjectData->myPosition - myColliders[i]->myObjectData->myPosition;
 							}
-							else
+							if (myColliders[i]->myFlag == CollisionFlag::ePlayer &&
+								myColliders[j]->myFlag == CollisionFlag::ePlayer)
 							{
-								myColliders[i]->myObjectData->myGravityVelocity = { 0.f, 0.f };
+								myColliders[j]->myObjectData->myVelocity += myColliders[i]->myObjectData->myVelocity;
+								myColliders[i]->myObjectData->myVelocity *= -1.3f;
 							}
 						}
 					
@@ -92,8 +79,6 @@ void ColliderManager::Update(float aDt)
 							myColliders[j]->CollisionEvent(myColliders[i]->myFlag);
 							myColliders[j]->myObjectData->latestCollideObjectPosition = myColliders[i]->myPos;
 							myColliders[i]->myObjectData->latestCollideObjectPosition = myColliders[j]->myPos;
-
-
 						}
 				}
 			}
@@ -108,5 +93,5 @@ void ColliderManager::RegisterCollider(CircleCollider * aCollider)
 
 void ColliderManager::RemoveCollider(CircleCollider * aCollider)
 {
-	myColliders.DeleteCyclic(aCollider);
+	myColliders.RemoveCyclic(aCollider);
 }

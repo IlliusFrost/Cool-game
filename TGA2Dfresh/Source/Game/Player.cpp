@@ -7,43 +7,40 @@
 #include "CircleCollider.hpp"
 
 
-Player::Player(Vector2f aPosition, Sprite aSprite)
+Player::Player(Vector2f aPosition, Sprite aSprite, unsigned int aControlledID)
 {
-	myPosition = aPosition;
-	mySprite = aSprite;
-	mySprite->SetPivot({ 0.5f,0.5f });
+	myData.myControllerData = aControlledID;
 	myData.myPosition = aPosition;
 	myData.mySprite = aSprite;
 	myData.mySprite->SetPivot({ 0.5f,0.5f });
+	myData.mySprite->SetPivot({ 0.5f,0.5f });
 
-	myData.myGravityVelocity = { 0.f, 0.f };
-	myData.myGravityVelocityCap = 0.025f;
-	myData.myGravityVelocityIncrement = 0.001f;
-
-	myData.myVelocityCap = 0.025f;
+	myData.myVelocityCap = 0.001f;
 	myData.myVelocityIncrement = 0.001f;
 
-	myCircleCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.020f, CollisionFlag::ePlayer, &myData);
-	myCircleCollider->SetCollisionEvent([this]()
+	myCollider = new CircleCollider(Vector2f(0.8f, 0.8f), 0.020f, CollisionFlag::ePlayer, &myData);
+	myCollider->SetCollisionEvent([this]()
 	{
 		//std::cout << "Player Collided with pickup and gained 5 mass! Player now has " << myMass << " mass." << std::endl;
-		myMass += 5;
 	}, CollisionFlag::ePickup);
-	myCircleCollider->SetCollisionEvent([]()
+	myCollider->SetCollisionEvent([]()
 	{
 		//std::cout << "Player Collided with field!" << std::endl;
 	}, CollisionFlag::eGravitationField);
-	myCircleCollider->SetCollisionEvent([this]()
+	myCollider->SetCollisionEvent([this]()
 	{
 		//std::cout << "Player Collided with planet!" << std::endl;
 		std::cout << "Player Collided with planet! and is grounded!" << std::endl;
 
-		isGrounded = true;
 	}, CollisionFlag::ePlanet);
-	myCircleCollider->AddFlag(CollisionFlag::ePickup);
-	myCircleCollider->AddFlag(CollisionFlag::ePlanet);
-	myCircleCollider->AddFlag(CollisionFlag::eGravitationField);
-	ColliderManager::GetInstance()->RegisterCollider(myCircleCollider);
+	myCollider->SetCollisionEvent([this]()
+	{
+	}, CollisionFlag::ePlayer);
+	myCollider->AddFlag(CollisionFlag::ePickup);
+	myCollider->AddFlag(CollisionFlag::ePlanet);
+	myCollider->AddFlag(CollisionFlag::eGravitationField);
+	myCollider->AddFlag(CollisionFlag::ePlayer);
+	ColliderManager::GetInstance()->RegisterCollider(myCollider);
 }
 
 Player::Player()
@@ -69,40 +66,23 @@ void Player::ModifyMass(int anAmountToModify)
 void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 {
 #ifndef _DEBUG
-	if (isGrounded)
-	{
-		myData.myVelocity += (anInputHandler->GetXboxLeftStick(0) / 10.0f) * aTimeDelta / 100.f;
-	}
+	//myData.myVelocity += (anInputHandler->GetXboxLeftStick(0) / 10.0f) * aTimeDelta / 100.f;
 #endif
 
-	Vector2f delta = myData.myPosition - myData.myVelocity;
-
-	if (myData.myVelocity.Length() < 0.1f)
+	if (anInputHandler->IsKeyPressed(InputHandler::Keys::W) || anInputHandler->XboxPressed(InputHandler::XboxButton::A, myData.myControllerData))
 	{
-		if (anInputHandler->IsKeyDown(InputHandler::Keys::A))
-		{
-			myData.myVelocity.x -= myData.myVelocityIncrement * aTimeDelta / 3;
+		myData.myVelocity.x += aTimeDelta * cosf(myData.mySprite->GetRotation()) * Tga2D::CEngine::GetInstance()->GetWindowRatioInversed();
+		myData.myVelocity.y += aTimeDelta * sinf(myData.mySprite->GetRotation());
 
-		}
-		if (anInputHandler->IsKeyDown(InputHandler::Keys::D))
-		{
-			myData.myVelocity.x += myData.myVelocityIncrement * aTimeDelta / 3;
-		}
+	}
+	if (anInputHandler->IsKeyDown(InputHandler::Keys::A) || anInputHandler->GetXboxLeftStick(myData.myControllerData).x < 0.f)
+	{
+		myData.mySprite->SetRotation(myData.mySprite->GetRotation() - 10.f * aTimeDelta * anInputHandler->GetXboxLeftStick(myData.myControllerData).Length());
+	}
 
-		if (anInputHandler->IsKeyDown(InputHandler::Keys::S))
-		{
-			myData.myVelocity.y += myData.myVelocityIncrement * aTimeDelta / 3;
-		}
-
-		if (anInputHandler->XboxPressed(InputHandler::XboxButton::A,0) && isGrounded == true)
-		{
-			Vector2f jumpVector = (myData.myPosition - myData.latestCollideObjectPosition);
-			jumpVector = jumpVector.GetNormalized();
-			jumpVector = { jumpVector.x / 2,jumpVector.y / 5 };
-			myData.myVelocity += jumpVector;
-			isGrounded = false;
-			std::cout << "Player is no longer grounded!" << std::endl;
-		}
+	if (anInputHandler->IsKeyDown(InputHandler::Keys::D) || anInputHandler->GetXboxLeftStick(myData.myControllerData).x > 0.f)
+	{
+		myData.mySprite->SetRotation(myData.mySprite->GetRotation() + 10.f * aTimeDelta * anInputHandler->GetXboxLeftStick(myData.myControllerData).Length());
 	}
 
 	if (anInputHandler->IsKeyDown(InputHandler::Mouse::LeftMouseButton))
@@ -111,36 +91,27 @@ void Player::Update(InputHandler* anInputHandler, float aTimeDelta)
 		float mousePosY = static_cast<float>(anInputHandler->GetMousePosY()) / Tga2D::CEngine::GetInstance()->GetWindowSize().y;
 		myData.myPosition = { mousePosX, mousePosY };
 		myData.mySprite->SetPosition({ myData.myPosition.x, myData.myPosition.y });
-		myCircleCollider->SetPosition({ myData.myPosition.x, myData.myPosition.y });
+		myCollider->SetPosition({ myData.myPosition.x, myData.myPosition.y });
 		myData.myVelocity = { 0.f, 0.f };
-		myData.myGravityVelocity = { 0.f, 0.f };
-		myData.isGrounded = false;
 	}
-	
 
-		if (myData.myVelocity.x > myData.myVelocityCap)
-			myData.myVelocity.x = myData.myVelocityCap;
-		if (myData.myVelocity.y > myData.myVelocityCap)
-			myData.myVelocity.y = myData.myVelocityCap;
-		if (myData.myGravityVelocity.x > myData.myVelocityCap)
-			myData.myGravityVelocity.x = myData.myVelocityCap;
-		if (myData.myGravityVelocity.y > myData.myVelocityCap)
-			myData.myGravityVelocity.y = myData.myVelocityCap;
-		if (myData.myVelocity.x < -myData.myVelocityCap)
-			myData.myVelocity.x = -myData.myVelocityCap;
-		if (myData.myVelocity.y < -myData.myVelocityCap)
-			myData.myVelocity.y = -myData.myVelocityCap;
-		if (myData.myGravityVelocity.x < -myData.myVelocityCap)
-			myData.myGravityVelocity.x = -myData.myVelocityCap;
-		if (myData.myGravityVelocity.y < -myData.myVelocityCap)
-			myData.myGravityVelocity.y = -myData.myVelocityCap;
+	if (myData.myPosition.x > 1.020f)
+		myData.myPosition.x = -0.020f;
+	if (myData.myPosition.y > 1.020f)
+		myData.myPosition.y = -0.020f;
+	if (myData.myPosition.x < -0.020f)
+		myData.myPosition.x = 1.020f;
+	if (myData.myPosition.y < -0.020f)
+		myData.myPosition.y = 1.020f;
 
-			myData.myPosition += myData.myVelocity;
-			myData.myPosition += myData.myGravityVelocity;
-			myData.mySprite->SetPosition({ myData.myPosition.x, myData.myPosition.y });
-			myCircleCollider->SetPosition({ myData.myPosition.x, myData.myPosition.y });
-	
+	myData.myPosition += myData.myVelocity;
+	myData.myPosition += myData.myGravitationalVelocity;
+	myData.mySprite->SetPosition({ myData.myPosition.x, myData.myPosition.y });
+	myCollider->SetPosition({ myData.myPosition.x, myData.myPosition.y });
+	myData.myVelocity.x *= 0.98f;
+	myData.myVelocity.y *= 0.98f;
 }
+
 void Player::Draw()
 {
 	myData.mySprite->Render();

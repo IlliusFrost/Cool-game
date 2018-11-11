@@ -92,6 +92,6 @@ void CGame::UpdateCallBack()
 {
 	myTimer.Update();
 	myGameWorld.Update(myTimer.GetDeltaTime());
-	myInputHandler.CheckForControllers();
 	myInputHandler.UpdateInputs();
+	myInputHandler.CheckForControllers();
 }
