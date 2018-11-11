@@ -57,7 +57,7 @@ Vector2f Player::GetPosition()
 void Player::ModifyMass(int anAmountToModify)
 {
 	myData.myMass += anAmountToModify;
-	myData.mySprite->SetSizeRelativeToImage({ static_cast<float>(myData.myMass), static_cast<float>(myData.myMass) });
+	myData.mySprite->SetSizeRelativeToImage({ 1 + static_cast<float>(myData.myMass)/10, 1 + static_cast<float>(myData.myMass)/10 });
 	if (myData.myMass > 10)
 	{
 		myData.myMass = 10;
