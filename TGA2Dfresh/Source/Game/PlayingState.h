@@ -30,7 +30,7 @@ private:
 	PickUpManager* myPickUpManager;
 	PlanetManager* myPlanetManager;
 	UIManager* myUIManager;
-	Tga2D::CCustomShader* myCustomShader;
+	Tga2D::CCustomShader* myCustomShader; 
 	Sprite myBG;
 	bool gameSecondPhase = false;
 };
